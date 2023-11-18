@@ -18,7 +18,7 @@ public class Starter extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Modern learning");
         stage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
-        stage.setScene(scene);
+
         stage.show();
     }
 
