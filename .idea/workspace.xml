@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="version 1.1">
+    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="version 1.2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/entities/N_Notifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/A_Arbeitsblatt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/A_Arbeitsblatt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/F_Fach.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/KF_Klassefach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/KF_Klassefach.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/KL_Klasse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +154,7 @@
       <workItem from="1700069766101" duration="1722000" />
       <workItem from="1700119566312" duration="1815000" />
       <workItem from="1700254331100" duration="3601000" />
-      <workItem from="1700320067737" duration="3503000" />
+      <workItem from="1700320067737" duration="7629000" />
     </task>
     <task id="LOCAL-00001" summary="spring boot firts commit">
       <created>1698429607749</created>
@@ -240,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700322721889</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="version 1.2">
+      <created>1700323632333</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1700323632333</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +330,7 @@
     <MESSAGE value="version 3" />
     <MESSAGE value="version 1" />
     <MESSAGE value="version 1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.1" />
+    <MESSAGE value="version 1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.2" />
   </component>
 </project>

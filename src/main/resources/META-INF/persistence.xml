@@ -7,10 +7,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class> entities.A_Arbeitsblatt</class>
         <class> entities.D_Dokumente</class>
-        <class> entities.F_Fach</class>
+        <class> entities.N_Notifications</class>
         <class> entities.K_Kalender</class>
         <class> entities.KF_Klassefach</class>
-        <class> entities.KL_Klasse</class>
+
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:Modernlearning.sqlite" />

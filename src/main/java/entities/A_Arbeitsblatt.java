@@ -10,25 +10,19 @@ public class A_Arbeitsblatt {
     private Integer A_ID;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="A_KL_Bez", referencedColumnName ="KL_Bez")
-    private KL_Klasse A_KL_Bez;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="A_F_Bez", referencedColumnName ="F_Bez")
-    private F_Fach f_Bez;
+    @JoinColumn(name="A_KF_Bez", referencedColumnName ="KF_Bez")
+    private KF_Klassefach A_KF_Bez;
 
     @Column(name = "A_Name")
     private String A_Name;
 
-    public A_Arbeitsblatt(Integer a_ID, KL_Klasse a_KL_Bez, F_Fach f_Bez, String a_Name) {
+    public A_Arbeitsblatt(Integer a_ID, KF_Klassefach a_KF_Bez, String a_Name) {
         A_ID = a_ID;
-        A_KL_Bez = a_KL_Bez;
-        this.f_Bez = f_Bez;
+        A_KF_Bez = a_KF_Bez;
         A_Name = a_Name;
     }
 
     public A_Arbeitsblatt() {
-
     }
 
     public Integer getA_ID() {
@@ -39,20 +33,12 @@ public class A_Arbeitsblatt {
         A_ID = a_ID;
     }
 
-    public KL_Klasse getA_KL_Bez() {
-        return A_KL_Bez;
+    public KF_Klassefach getA_KF_Bez() {
+        return A_KF_Bez;
     }
 
-    public void setA_KL_Bez(KL_Klasse a_KL_Bez) {
-        A_KL_Bez = a_KL_Bez;
-    }
-
-    public F_Fach getF_Bez() {
-        return f_Bez;
-    }
-
-    public void setF_Bez(F_Fach f_Bez) {
-        this.f_Bez = f_Bez;
+    public void setA_KF_Bez(KF_Klassefach a_KF_Bez) {
+        A_KF_Bez = a_KF_Bez;
     }
 
     public String getA_Name() {

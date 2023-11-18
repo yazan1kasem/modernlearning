@@ -5,37 +5,46 @@ import java.io.Serializable;
 @Entity(name = "KF_Klassefach")
 @Table(name = "KF_Klassefach")
 public class KF_Klassefach implements Serializable {
-
     @Id
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "KF_KL_Bez",referencedColumnName = "KL_Bez")
-    private KL_Klasse KF_KL_Bez;
-    @Id
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "KL_F_Bez", referencedColumnName="F_Bez")
-    private F_Fach KL_F_Bez;
+    @Column(name = "KF_BEZ", unique = true, nullable = false)
+    private String KF_BEZ;
 
-    public KF_Klassefach(KL_Klasse KF_KL_Bez, F_Fach KL_F_Bez) {
+    @Column(name = "KF_KL_Bez")
+    private String KF_KL_Bez;
+
+    @Column(name="KF_F_Bez")
+    private String KF_F_Bez;
+
+    public KF_Klassefach(String KF_BEZ, String KF_KL_Bez, String KF_F_Bez) {
+        this.KF_BEZ = KF_BEZ;
         this.KF_KL_Bez = KF_KL_Bez;
-        this.KL_F_Bez = KL_F_Bez;
+        this.KF_F_Bez = KF_F_Bez;
     }
 
     public KF_Klassefach() {
     }
 
-    public KL_Klasse getKF_KL_Bez() {
+    public String getKF_BEZ() {
+        return KF_BEZ;
+    }
+
+    public void setKF_BEZ(String KF_BEZ) {
+        this.KF_BEZ = KF_BEZ;
+    }
+
+    public String getKF_KL_Bez() {
         return KF_KL_Bez;
     }
 
-    public void setKF_KL_Bez(KL_Klasse KF_KL_Bez) {
+    public void setKF_KL_Bez(String KF_KL_Bez) {
         this.KF_KL_Bez = KF_KL_Bez;
     }
 
-    public F_Fach getKL_F_Bez() {
-        return KL_F_Bez;
+    public String getKF_F_Bez() {
+        return KF_F_Bez;
     }
 
-    public void setKL_F_Bez(F_Fach KL_F_Bez) {
-        this.KL_F_Bez = KL_F_Bez;
+    public void setKF_F_Bez(String KF_F_Bez) {
+        this.KF_F_Bez = KF_F_Bez;
     }
 }
