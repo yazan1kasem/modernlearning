@@ -1,0 +1,813 @@
+Index: ModernLearning/src/main/java/module-info.java
+===================================================================
+diff --git a/ModernLearning/src/main/java/module-info.java b/ModernLearning/src/main/java/module-info.java
+deleted file mode 100644
+--- a/ModernLearning/src/main/java/module-info.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,8 +0,0 @@
+-module modern.learning.modernlearning {
+-    requires javafx.controls;
+-    requires javafx.fxml;
+-
+-
+-    opens modern.learning.modernlearning to javafx.fxml;
+-    exports modern.learning.modernlearning;
+-}
+\ No newline at end of file
+Index: src/main/java/entities/D_Dokumente.java
+===================================================================
+diff --git a/src/main/java/entities/D_Dokumente.java b/src/main/java/entities/D_Dokumente.java
+deleted file mode 100644
+--- a/src/main/java/entities/D_Dokumente.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,38 +0,0 @@
+-package entities;
+-
+-import javax.persistence.*;
+-
+-@Entity
+-@Table(name = "D_Dokumente")
+-public class D_Dokumente {
+-    @Id
+-    @Column(name = "D_ID", unique = true, nullable = false)
+-    private int D_ID;
+-
+-    @Column(name = "D_Name")
+-    private String D_Name;
+-
+-    public D_Dokumente(int d_ID, String d_Name) {
+-        D_ID = d_ID;
+-        D_Name = d_Name;
+-    }
+-    public D_Dokumente() {
+-
+-    }
+-
+-    public int getD_ID() {
+-        return D_ID;
+-    }
+-
+-    public void setD_ID(int d_ID) {
+-        D_ID = d_ID;
+-    }
+-
+-    public String getD_Name() {
+-        return D_Name;
+-    }
+-
+-    public void setD_Name(String d_Name) {
+-        D_Name = d_Name;
+-    }
+-}
+Index: ModernLearning/src/main/java/modern/learning/modernlearning/HelloApplication.java
+===================================================================
+diff --git a/ModernLearning/src/main/java/modern/learning/modernlearning/HelloApplication.java b/ModernLearning/src/main/java/modern/learning/modernlearning/HelloApplication.java
+deleted file mode 100644
+--- a/ModernLearning/src/main/java/modern/learning/modernlearning/HelloApplication.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,23 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-import javafx.application.Application;
+-import javafx.fxml.FXMLLoader;
+-import javafx.scene.Scene;
+-import javafx.stage.Stage;
+-
+-import java.io.IOException;
+-
+-public class HelloApplication extends Application {
+-    @Override
+-    public void start(Stage stage) throws IOException {
+-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+-        stage.setTitle("Hello!");
+-        stage.setScene(scene);
+-        stage.show();
+-    }
+-
+-    public static void main(String[] args) {
+-        launch();
+-    }
+-}
+\ No newline at end of file
+Index: src/main/java/modern/learning/modernlearning/Kalender.java
+===================================================================
+diff --git a/src/main/java/modern/learning/modernlearning/Kalender.java b/src/main/java/modern/learning/modernlearning/Kalender.java
+deleted file mode 100644
+--- a/src/main/java/modern/learning/modernlearning/Kalender.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,4 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-public class Kalender {
+-}
+Index: src/main/resources/modern/learning/modernlearning/Dokumente.fxml
+===================================================================
+diff --git a/src/main/resources/modern/learning/modernlearning/Dokumente.fxml b/src/main/resources/modern/learning/modernlearning/Dokumente.fxml
+deleted file mode 100644
+--- a/src/main/resources/modern/learning/modernlearning/Dokumente.fxml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import java.lang.*?>
+-<?import java.util.*?>
+-<?import javafx.scene.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.layout.*?>
+-
+-<AnchorPane xmlns="http://javafx.com/javafx"
+-            xmlns:fx="http://javafx.com/fxml"
+-            fx:controller="modern.learning.modernlearning.Dokumente"
+-            prefHeight="400.0" prefWidth="600.0">
+-
+-</AnchorPane>
+Index: src/main/java/entities/KF_Klassefach.java
+===================================================================
+diff --git a/src/main/java/entities/KF_Klassefach.java b/src/main/java/entities/KF_Klassefach.java
+deleted file mode 100644
+--- a/src/main/java/entities/KF_Klassefach.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,41 +0,0 @@
+-package entities;
+-import javax.persistence.*;
+-import java.io.Serializable;
+-
+-@Entity(name = "KF_Klassefach")
+-@Table(name = "KF_Klassefach")
+-public class KF_Klassefach implements Serializable {
+-
+-    @Id
+-    @ManyToOne(fetch = FetchType.EAGER)
+-    @JoinColumn(name = "KF_KL_Bez",referencedColumnName = "KL_Bez")
+-    private KL_Klasse KF_KL_Bez;
+-    @Id
+-    @ManyToOne(fetch = FetchType.EAGER)
+-    @JoinColumn(name = "KL_F_Bez", referencedColumnName="F_Bez")
+-    private F_Fach KL_F_Bez;
+-
+-    public KF_Klassefach(KL_Klasse KF_KL_Bez, F_Fach KL_F_Bez) {
+-        this.KF_KL_Bez = KF_KL_Bez;
+-        this.KL_F_Bez = KL_F_Bez;
+-    }
+-
+-    public KF_Klassefach() {
+-    }
+-
+-    public KL_Klasse getKF_KL_Bez() {
+-        return KF_KL_Bez;
+-    }
+-
+-    public void setKF_KL_Bez(KL_Klasse KF_KL_Bez) {
+-        this.KF_KL_Bez = KF_KL_Bez;
+-    }
+-
+-    public F_Fach getKL_F_Bez() {
+-        return KL_F_Bez;
+-    }
+-
+-    public void setKL_F_Bez(F_Fach KL_F_Bez) {
+-        this.KL_F_Bez = KL_F_Bez;
+-    }
+-}
+Index: src/main/java/modern/learning/modernlearning/Klasse.java
+===================================================================
+diff --git a/src/main/java/modern/learning/modernlearning/Klasse.java b/src/main/java/modern/learning/modernlearning/Klasse.java
+deleted file mode 100644
+--- a/src/main/java/modern/learning/modernlearning/Klasse.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,4 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-public class Klasse {
+-}
+Index: ModernLearning/build/resources/main/modern/learning/modernlearning/hello-view.fxml
+===================================================================
+diff --git a/ModernLearning/build/resources/main/modern/learning/modernlearning/hello-view.fxml b/ModernLearning/build/resources/main/modern/learning/modernlearning/hello-view.fxml
+deleted file mode 100644
+--- a/ModernLearning/build/resources/main/modern/learning/modernlearning/hello-view.fxml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,16 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.geometry.Insets?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.layout.VBox?>
+-
+-<?import javafx.scene.control.Button?>
+-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+-      fx:controller="modern.learning.modernlearning.HelloController">
+-    <padding>
+-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+-    </padding>
+-
+-    <Label fx:id="welcomeText"/>
+-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+-</VBox>
+Index: src/main/java/entities/F_Fach.java
+===================================================================
+diff --git a/src/main/java/entities/F_Fach.java b/src/main/java/entities/F_Fach.java
+deleted file mode 100644
+--- a/src/main/java/entities/F_Fach.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,38 +0,0 @@
+-package entities;
+-
+-import javax.persistence.*;
+-
+-@Entity(name = "F_Fach")
+-@Table(name = "F_Fach")
+-public class F_Fach {
+-    @Id
+-    @Column(name = "F_Bez", unique = true, nullable = false)
+-    private String F_Bez;
+-
+-    @Column(name = "F_Name")
+-    private String F_Name;
+-
+-    public F_Fach(String f_Bez, String f_Name) {
+-        F_Bez = f_Bez;
+-        F_Name = f_Name;
+-    }
+-
+-    public F_Fach() {
+-    }
+-
+-    public String getF_Bez() {
+-        return F_Bez;
+-    }
+-
+-    public void setF_Bez(String f_Bez) {
+-        F_Bez = f_Bez;
+-    }
+-
+-    public String getF_Name() {
+-        return F_Name;
+-    }
+-
+-    public void setF_Name(String f_Name) {
+-        F_Name = f_Name;
+-    }
+-}
+Index: src/main/java/modern/learning/modernlearning/Dokumente.java
+===================================================================
+diff --git a/src/main/java/modern/learning/modernlearning/Dokumente.java b/src/main/java/modern/learning/modernlearning/Dokumente.java
+deleted file mode 100644
+--- a/src/main/java/modern/learning/modernlearning/Dokumente.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,4 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-public class Dokumente {
+-}
+Index: src/main/resources/modern/learning/modernlearning/Kalender.fxml
+===================================================================
+diff --git a/src/main/resources/modern/learning/modernlearning/Kalender.fxml b/src/main/resources/modern/learning/modernlearning/Kalender.fxml
+deleted file mode 100644
+--- a/src/main/resources/modern/learning/modernlearning/Kalender.fxml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import java.lang.*?>
+-<?import java.util.*?>
+-<?import javafx.scene.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.layout.*?>
+-
+-<AnchorPane xmlns="http://javafx.com/javafx"
+-            xmlns:fx="http://javafx.com/fxml"
+-            fx:controller="modern.learning.modernlearning.Kalender"
+-            prefHeight="400.0" prefWidth="600.0">
+-
+-</AnchorPane>
+Index: ModernLearning/settings.gradle
+===================================================================
+diff --git a/ModernLearning/settings.gradle b/ModernLearning/settings.gradle
+deleted file mode 100644
+--- a/ModernLearning/settings.gradle	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,1 +0,0 @@
+-rootProject.name = "ModernLearning"
+\ No newline at end of file
+Index: src/main/resources/META-INF/persistence.xml
+===================================================================
+diff --git a/src/main/resources/META-INF/persistence.xml b/src/main/resources/META-INF/persistence.xml
+deleted file mode 100644
+--- a/src/main/resources/META-INF/persistence.xml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,21 +0,0 @@
+-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+- http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+-             version="2.0">
+-    <persistence-unit name="Modernlearning" transaction-type="RESOURCE_LOCAL">
+-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+-        <class> entities.A_Arbeitsblatt</class>
+-        <class> entities.D_Dokumente</class>
+-        <class> entities.F_Fach</class>
+-        <class> entities.K_Kalender</class>
+-        <class> entities.KF_Klassefach</class>
+-        <class> entities.KL_Klasse</class>
+-        <properties>
+-            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:Modernlearning.sqlite" />
+-            <property name="javax.persistence.schema-generation.database.action" value="none" />
+-            <property name="hibernate.show_sql" value="true" />
+-        </properties>
+-    </persistence-unit>
+-</persistence>
+\ No newline at end of file
+Index: src/main/java/entities/A_Arbeitsblatt.java
+===================================================================
+diff --git a/src/main/java/entities/A_Arbeitsblatt.java b/src/main/java/entities/A_Arbeitsblatt.java
+deleted file mode 100644
+--- a/src/main/java/entities/A_Arbeitsblatt.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,65 +0,0 @@
+-package entities;
+-
+-import javax.persistence.*;
+-
+-@Entity (name = "A_Arbeitsblatt")
+-@Table (name = "A_Arbeitsblatt")
+-public class A_Arbeitsblatt {
+-    @Id
+-    @Column(name = "A_ID", unique = true, nullable = false)
+-    private Integer A_ID;
+-
+-    @ManyToOne(fetch = FetchType.EAGER)
+-    @JoinColumn(name="A_KL_Bez", referencedColumnName ="KL_Bez")
+-    private KL_Klasse A_KL_Bez;
+-
+-    @ManyToOne(fetch = FetchType.EAGER)
+-    @JoinColumn(name="A_F_Bez", referencedColumnName ="F_Bez")
+-    private F_Fach f_Bez;
+-
+-    @Column(name = "A_Name")
+-    private String A_Name;
+-
+-    public A_Arbeitsblatt(Integer a_ID, KL_Klasse a_KL_Bez, F_Fach f_Bez, String a_Name) {
+-        A_ID = a_ID;
+-        A_KL_Bez = a_KL_Bez;
+-        this.f_Bez = f_Bez;
+-        A_Name = a_Name;
+-    }
+-
+-    public A_Arbeitsblatt() {
+-
+-    }
+-
+-    public Integer getA_ID() {
+-        return A_ID;
+-    }
+-
+-    public void setA_ID(Integer a_ID) {
+-        A_ID = a_ID;
+-    }
+-
+-    public KL_Klasse getA_KL_Bez() {
+-        return A_KL_Bez;
+-    }
+-
+-    public void setA_KL_Bez(KL_Klasse a_KL_Bez) {
+-        A_KL_Bez = a_KL_Bez;
+-    }
+-
+-    public F_Fach getF_Bez() {
+-        return f_Bez;
+-    }
+-
+-    public void setF_Bez(F_Fach f_Bez) {
+-        this.f_Bez = f_Bez;
+-    }
+-
+-    public String getA_Name() {
+-        return A_Name;
+-    }
+-
+-    public void setA_Name(String a_Name) {
+-        A_Name = a_Name;
+-    }
+-}
+Index: src/main/java/entities/K_Kalender.java
+===================================================================
+diff --git a/src/main/java/entities/K_Kalender.java b/src/main/java/entities/K_Kalender.java
+deleted file mode 100644
+--- a/src/main/java/entities/K_Kalender.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,72 +0,0 @@
+-package entities;
+-import javax.persistence.*;
+-import java.util.Date;
+-
+-@Entity(name ="K_Kalender")
+-@Table(name = "K_Kalender")
+-public class K_Kalender {
+-    @Id
+-    @GeneratedValue(strategy = GenerationType.AUTO)
+-    @Column(name = "K_ID", unique = true, nullable = false)
+-    private int K_ID;
+-
+-    @Column(name = "K_Title")
+-    private String K_Title;
+-    @Column(name = "K_Beschreibung")
+-    private String K_Beschreibung;
+-    @Column(name = "K_Termin")
+-    private Date K_Termin;
+-    @Column(name = "K_Uhrzeit")
+-    private String K_Uhrzeit;
+-
+-    public K_Kalender(int k_ID, String k_Title, String k_Beschreibung, Date k_Termin, String k_Uhrzeit) {
+-        K_ID = k_ID;
+-        K_Title = k_Title;
+-        K_Beschreibung = k_Beschreibung;
+-        K_Termin = k_Termin;
+-        K_Uhrzeit = k_Uhrzeit;
+-    }
+-
+-    public K_Kalender() {
+-    }
+-
+-    public int getK_ID() {
+-        return K_ID;
+-    }
+-
+-    public void setK_ID(int k_ID) {
+-        K_ID = k_ID;
+-    }
+-
+-    public String getK_Title() {
+-        return K_Title;
+-    }
+-
+-    public void setK_Title(String k_Title) {
+-        K_Title = k_Title;
+-    }
+-
+-    public String getK_Beschreibung() {
+-        return K_Beschreibung;
+-    }
+-
+-    public void setK_Beschreibung(String k_Beschreibung) {
+-        K_Beschreibung = k_Beschreibung;
+-    }
+-
+-    public Date getK_Termin() {
+-        return K_Termin;
+-    }
+-
+-    public void setK_Termin(Date k_Termin) {
+-        K_Termin = k_Termin;
+-    }
+-
+-    public String getK_Uhrzeit() {
+-        return K_Uhrzeit;
+-    }
+-
+-    public void setK_Uhrzeit(String k_Uhrzeit) {
+-        K_Uhrzeit = k_Uhrzeit;
+-    }
+-}
+Index: src/main/resources/modern/learning/modernlearning/Fach.fxml
+===================================================================
+diff --git a/src/main/resources/modern/learning/modernlearning/Fach.fxml b/src/main/resources/modern/learning/modernlearning/Fach.fxml
+deleted file mode 100644
+--- a/src/main/resources/modern/learning/modernlearning/Fach.fxml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import java.lang.*?>
+-<?import java.util.*?>
+-<?import javafx.scene.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.layout.*?>
+-
+-<AnchorPane xmlns="http://javafx.com/javafx"
+-            xmlns:fx="http://javafx.com/fxml"
+-            fx:controller="modern.learning.modernlearning.Fach"
+-            prefHeight="400.0" prefWidth="600.0">
+-
+-</AnchorPane>
+Index: src/main/java/module-info.java
+===================================================================
+diff --git a/src/main/java/module-info.java b/src/main/java/module-info.java
+deleted file mode 100644
+--- a/src/main/java/module-info.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,18 +0,0 @@
+-module modern.learning.modernlearning {
+-    requires javafx.controls;
+-    requires javafx.fxml;
+-
+-
+-    requires java.sql;
+-    requires java.persistence;
+-    requires org.hibernate.orm.core;
+-    requires net.bytebuddy;
+-    requires com.fasterxml.classmate;
+-    requires java.xml.bind;
+-    requires java.desktop;
+-    requires org.jetbrains.annotations;
+-
+-    opens entities to org.hibernate.orm.core, javafx.base;
+-    opens modern.learning.modernlearning to javafx.fxml;
+-    exports modern.learning.modernlearning;
+-}
+\ No newline at end of file
+Index: ModernLearning/build.gradle
+===================================================================
+diff --git a/ModernLearning/build.gradle b/ModernLearning/build.gradle
+deleted file mode 100644
+--- a/ModernLearning/build.gradle	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,56 +0,0 @@
+-plugins {
+-    id 'java'
+-    id 'application'
+-    id 'org.openjfx.javafxplugin' version '0.0.13'
+-    id 'org.beryx.jlink' version '2.25.0'
+-}
+-
+-group 'Modern.Learning'
+-version '1.0-SNAPSHOT'
+-
+-repositories {
+-    mavenCentral()
+-}
+-
+-ext {
+-    junitVersion = '5.8.2'
+-}
+-
+-sourceCompatibility = '17'
+-targetCompatibility = '17'
+-
+-tasks.withType(JavaCompile) {
+-    options.encoding = 'UTF-8'
+-}
+-
+-application {
+-    mainModule = 'modern.learning.modernlearning'
+-    mainClass = 'modern.learning.modernlearning.HelloApplication'
+-}
+-
+-javafx {
+-    version = '17.0.2'
+-    modules = ['javafx.controls', 'javafx.fxml']
+-}
+-
+-dependencies {
+-
+-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+-}
+-
+-test {
+-    useJUnitPlatform()
+-}
+-
+-jlink {
+-    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+-    launcher {
+-        name = 'app'
+-    }
+-}
+-
+-jlinkZip {
+-    group = 'distribution'
+-}
+\ No newline at end of file
+Index: src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml
+===================================================================
+diff --git a/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml b/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml
+deleted file mode 100644
+--- a/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import java.lang.*?>
+-<?import java.util.*?>
+-<?import javafx.scene.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.layout.*?>
+-
+-<AnchorPane xmlns="http://javafx.com/javafx"
+-            xmlns:fx="http://javafx.com/fxml"
+-            fx:controller="modern.learning.modernlearning.Arbeitsblätter"
+-            prefHeight="400.0" prefWidth="600.0">
+-
+-</AnchorPane>
+Index: ModernLearning/ModernLearning.iml
+===================================================================
+diff --git a/ModernLearning/ModernLearning.iml b/ModernLearning/ModernLearning.iml
+deleted file mode 100644
+--- a/ModernLearning/ModernLearning.iml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$" />
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: ModernLearning/src/main/java/modern/learning/modernlearning/HelloController.java
+===================================================================
+diff --git a/ModernLearning/src/main/java/modern/learning/modernlearning/HelloController.java b/ModernLearning/src/main/java/modern/learning/modernlearning/HelloController.java
+deleted file mode 100644
+--- a/ModernLearning/src/main/java/modern/learning/modernlearning/HelloController.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,14 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-import javafx.fxml.FXML;
+-import javafx.scene.control.Label;
+-
+-public class HelloController {
+-    @FXML
+-    private Label welcomeText;
+-
+-    @FXML
+-    protected void onHelloButtonClick() {
+-        welcomeText.setText("Welcome to JavaFX Application!");
+-    }
+-}
+\ No newline at end of file
+Index: ModernLearning/gradle/wrapper/gradle-wrapper.properties
+===================================================================
+diff --git a/ModernLearning/gradle/wrapper/gradle-wrapper.properties b/ModernLearning/gradle/wrapper/gradle-wrapper.properties
+deleted file mode 100644
+--- a/ModernLearning/gradle/wrapper/gradle-wrapper.properties	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,5 +0,0 @@
+-distributionBase=GRADLE_USER_HOME
+-distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-bin.zip
+-zipStoreBase=GRADLE_USER_HOME
+-zipStorePath=wrapper/dists
+Index: ModernLearning/build/tmp/jar/MANIFEST.MF
+===================================================================
+diff --git a/ModernLearning/build/tmp/jar/MANIFEST.MF b/ModernLearning/build/tmp/jar/MANIFEST.MF
+deleted file mode 100644
+--- a/ModernLearning/build/tmp/jar/MANIFEST.MF	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,2 +0,0 @@
+-Manifest-Version: 1.0
+-
+Index: src/main/java/modern/learning/modernlearning/Arbeitsblätter.java
+===================================================================
+diff --git a/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java b/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java
+deleted file mode 100644
+--- a/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,8 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-import javax.persistence.EntityManager;
+-import javax.persistence.Persistence;
+-
+-public class Arbeitsblätter {
+-    EntityManager emf= Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
+-}
+Index: src/main/resources/modern/learning/modernlearning/Klasse.fxml
+===================================================================
+diff --git a/src/main/resources/modern/learning/modernlearning/Klasse.fxml b/src/main/resources/modern/learning/modernlearning/Klasse.fxml
+deleted file mode 100644
+--- a/src/main/resources/modern/learning/modernlearning/Klasse.fxml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import java.lang.*?>
+-<?import java.util.*?>
+-<?import javafx.scene.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.layout.*?>
+-
+-<AnchorPane xmlns="http://javafx.com/javafx"
+-            xmlns:fx="http://javafx.com/fxml"
+-            fx:controller="modern.learning.modernlearning.Klasse"
+-            prefHeight="400.0" prefWidth="600.0">
+-
+-</AnchorPane>
+Index: src/main/java/entities/KL_Klasse.java
+===================================================================
+diff --git a/src/main/java/entities/KL_Klasse.java b/src/main/java/entities/KL_Klasse.java
+deleted file mode 100644
+--- a/src/main/java/entities/KL_Klasse.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,37 +0,0 @@
+-package entities;
+-
+-import javax.persistence.*;
+-
+-
+-@Entity(name = "KL_Klasse")
+-@Table(name = "KL_Klasse")
+-public class KL_Klasse {
+-    @Id
+-    @Column(name = "KL_Bez", unique = true, nullable = false)
+-    private String KL_Bez;
+-    @Column(name = "KL_Title")
+-    private String KL_Title;
+-
+-    public KL_Klasse(String KL_Bez, String KL_Title) {
+-        this.KL_Bez = KL_Bez;
+-        this.KL_Title = KL_Title;
+-    }
+-
+-    public KL_Klasse() {}
+-
+-    public String getKL_Bez() {
+-        return KL_Bez;
+-    }
+-
+-    public void setKL_Bez(String KL_Bez) {
+-        this.KL_Bez = KL_Bez;
+-    }
+-
+-    public String getKL_Title() {
+-        return KL_Title;
+-    }
+-
+-    public void setKL_Title(String KL_Title) {
+-        this.KL_Title = KL_Title;
+-    }
+-}
+Index: ModernLearning/src/main/resources/modern/learning/modernlearning/hello-view.fxml
+===================================================================
+diff --git a/ModernLearning/src/main/resources/modern/learning/modernlearning/hello-view.fxml b/ModernLearning/src/main/resources/modern/learning/modernlearning/hello-view.fxml
+deleted file mode 100644
+--- a/ModernLearning/src/main/resources/modern/learning/modernlearning/hello-view.fxml	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,16 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.geometry.Insets?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.layout.VBox?>
+-
+-<?import javafx.scene.control.Button?>
+-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+-      fx:controller="modern.learning.modernlearning.HelloController">
+-    <padding>
+-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+-    </padding>
+-
+-    <Label fx:id="welcomeText"/>
+-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+-</VBox>
+Index: src/main/java/modern/learning/modernlearning/Fach.java
+===================================================================
+diff --git a/src/main/java/modern/learning/modernlearning/Fach.java b/src/main/java/modern/learning/modernlearning/Fach.java
+deleted file mode 100644
+--- a/src/main/java/modern/learning/modernlearning/Fach.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,4 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-public class Fach {
+-}
+Index: src/main/java/modern/learning/modernlearning/Starter.java
+===================================================================
+diff --git a/src/main/java/modern/learning/modernlearning/Starter.java b/src/main/java/modern/learning/modernlearning/Starter.java
+deleted file mode 100644
+--- a/src/main/java/modern/learning/modernlearning/Starter.java	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
++++ /dev/null	(revision 2ba5a111b9400a05dcb8b82958371533ead376a2)
+@@ -1,27 +0,0 @@
+-package modern.learning.modernlearning;
+-
+-import javafx.application.Application;
+-import javafx.fxml.FXMLLoader;
+-import javafx.scene.Scene;
+-import javafx.stage.Stage;
+-
+-import javax.persistence.EntityManager;
+-import javax.persistence.Persistence;
+-import java.io.IOException;
+-
+-public class Starter extends Application {
+-    @Override
+-    public void start(Stage stage) throws IOException {
+-        EntityManager emf= Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
+-
+-//        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("hello-view.fxml"));
+-//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+-//        stage.setTitle("Hello!");
+-//        stage.setScene(scene);
+-//        stage.show();
+-    }
+-
+-    public static void main(String[] args) {
+-        launch();
+-    }
+-}
+\ No newline at end of file
