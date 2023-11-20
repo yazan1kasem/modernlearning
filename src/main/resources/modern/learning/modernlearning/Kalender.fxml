@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="modern.learning.modernlearning.Kalender"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<AnchorPane fx:id="KalenderF" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFAB2F"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Kalender">
+    <children>
+        <HBox fx:id="calendarBox" prefHeight="400.0" prefWidth="600.0">
 
+            <!-- Rechte Leiste -->
+            <VBox fx:id="rightPanel"  style="-fx-background-color: #0048ff; -fx-pref-width: screen.width/2;">
+
+            </VBox>
+
+            <!-- Kalender -->
+            <VBox fx:id="calendarPanel">
+                <!-- Header mit Navigationsbuttons und Jahr/Monat Anzeige -->
+                <HBox spacing="10" alignment="CENTER">
+                    <Button mnemonicParsing="false" text="&lt;" />
+                    <HBox spacing="5" alignment="CENTER">
+                        <Text fx:id = "year" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Text>
+                    </HBox>
+                    <Button mnemonicParsing="false" text="&gt;" />
+                </HBox>
+
+                <!-- Wochentage -->
+
+
+                <!-- Hier können die Kalendertage eingefügt werden -->
+
+
+            </VBox>
+
+        </HBox>
+
+    </children>
 </AnchorPane>
