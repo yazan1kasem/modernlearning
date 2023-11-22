@@ -5,18 +5,20 @@
 
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
-<AnchorPane fx:id="KalenderF" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFAB2F"
+<AnchorPane fx:id="KalenderF" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #FFAB2F"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Kalender">
     <children>
-        <HBox fx:id="calendarBox" prefHeight="400.0" prefWidth="600.0">
+        <HBox fx:id="calendarBox">
 
             <!-- Rechte Leiste -->
-            <VBox fx:id="rightPanel"  style="-fx-background-color: #0048ff; -fx-pref-width: screen.width/2;">
+            <VBox fx:id="rightPanel"  style="-fx-background-color: #0048ff; " prefWidth="${KalenderF.width/4}" prefHeight="${KalenderF.height}">
+                <BorderPane prefWidth="${rightPanel.width/2}" prefHeight="${rightPanel.height/3}" style="-fx-background-color: #8b9fcc; -fx-padding: -10px -500px -30px 0" >
 
+                </BorderPane>
             </VBox>
 
             <!-- Kalender -->
-            <VBox fx:id="calendarPanel">
+            <VBox fx:id="calendarPanel" prefWidth="${KalenderF.width/4*3}"  style="-fx-background-color: #ff0005;-fx-padding: 30 0 0 0">
                 <!-- Header mit Navigationsbuttons und Jahr/Monat Anzeige -->
                 <HBox spacing="10" alignment="CENTER">
                     <Button mnemonicParsing="false" text="&lt;" />
@@ -33,10 +35,18 @@
                         </Text>
                     </HBox>
                     <Button mnemonicParsing="false" text="&gt;" />
+
                 </HBox>
-
+                <HBox style="-fx-padding: -30 10 0 0" spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="day"/>
+                    <Button text="month"/>
+                </HBox>
                 <!-- Wochentage -->
+                <GridPane fx:id="Wt_teil" alignment="CENTER_RIGHT"  prefHeight="${calendarPanel.height/10*8}"  prefWidth="200" style="-fx-background-color: #ff8e8e;" >
 
+                </GridPane>
+
+                <!-- Add more labels for additional texts -->
 
                 <!-- Hier können die Kalendertage eingefügt werden -->
 

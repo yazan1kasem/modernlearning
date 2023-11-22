@@ -1,6 +1,8 @@
 package modern.learning.modernlearning;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -22,12 +24,25 @@ public class Starter extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Modern learning");
         stage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
+        stage.setMinHeight(500);
+        stage.setMinWidth(750);
         stage.setWidth(scene.getWidth());
 
         stage.setScene(scene);
 
         stage.show();
-
+        stage.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println("h: "+newValue);
+            }
+        });
+        stage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println("w: "+newValue);
+            }
+        });
     }
 
     public static void main(String[] args) {
