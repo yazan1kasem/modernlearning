@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.enigmabridge:hibernate4-sqlite-dialect:0.1.2'
     implementation 'com.github.gwenn:sqlite-dialect:0.1.2'
     implementation 'org.jetbrains:annotations:20.1.0'
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
