@@ -1,24 +1,33 @@
 package modern.learning.modernlearning;
 
+
 import javafx.application.Application;
+
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
+
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.YearMonth;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 
 public class Starter extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Kalender.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Modern learning");
@@ -42,6 +51,8 @@ public class Starter extends Application {
                 System.out.println("w: "+newValue);
             }
         });
+
+
 
     }
 

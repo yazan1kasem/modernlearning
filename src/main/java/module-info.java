@@ -11,6 +11,10 @@ module modern.learning.modernlearning {
     requires java.xml.bind;
     requires java.desktop;
     requires org.jetbrains.annotations;
+    requires transitive javafx.graphics;
+    requires org.controlsfx.controls;
+//    requires com.calendarfx.view;
+//    requires fr.brouillard.oss.cssfx;
 
     opens entities to org.hibernate.orm.core, javafx.base;
     opens modern.learning.modernlearning to javafx.fxml;

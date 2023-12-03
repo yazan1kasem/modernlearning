@@ -9,13 +9,18 @@
 
 package modern.learning.modernlearning;
 
+
+import entities.K_Kalender;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,16 +32,25 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.util.Duration;
+import org.controlsfx.control.PopOver;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.List;
 import javafx.scene.layout.GridPane;
 
-
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.xml.stream.Location;
 
 
 public class Kalender implements Initializable {
@@ -44,8 +58,7 @@ public class Kalender implements Initializable {
     // FXML-Komponenten, die verschiedene Teile der Benutzeroberfläche repräsentieren
     @FXML
     private AnchorPane KalenderF;
-    @FXML
-    private VBox rightPanel;
+
     @FXML
     private HBox calendarBox;
     @FXML
@@ -56,13 +69,10 @@ public class Kalender implements Initializable {
     private FlowPane calendar;
     @FXML
     private VBox calendarPanel;
-    @FXML
-    private Pane EigenschaftenPane;
-    @FXML
-    private BorderPane kleinfenster;
+
     // Datumvariablen, um das fokussierte Datum und das aktuelle Datum zu verfolgen
-    ZonedDateTime dateFocus;
-    ZonedDateTime today;
+    private ZonedDateTime dateFocus;
+    private ZonedDateTime today;
 
     // Initialisiert den Controller und zeichnet den anfänglichen Kalender
     @Override
@@ -92,10 +102,6 @@ public class Kalender implements Initializable {
         drawCalendar();
     }
 
-    // Zeichnet den Kalender basierend auf dem fokussierten Datum, einschließlich Aktivitäten und Hervorhebung des heutigen Datums
-    /**
-     * Zeichnet den Kalender für den angegebenen Monat.
-     */
     private void drawCalendar() {
         // Setzt das Jahr und den Monat im UI entsprechend dem Fokusdatum.
         year.setText(String.valueOf(dateFocus.getYear()));
@@ -108,8 +114,6 @@ public class Kalender implements Initializable {
         double spacingH = calendar.getHgap();
         double spacingV = calendar.getVgap();
 
-        // Ruft eine Map mit den Kalenderaktivitäten für den aktuellen Monat ab.
-        Map<Integer, List<CalendarActivity>> calendarActivityMap = getCalendarActivitiesMonth(dateFocus);
 
         // Ermittelt die maximale Anzahl der Tage im Monat und den Wochentag des ersten Tages im Monat.
         int monthMaxDate = dateFocus.getMonth().maxLength();
@@ -154,14 +158,28 @@ public class Kalender implements Initializable {
                 rectangle.setWidth(rectangleWidth);
                 double rectangleHeight = (calendarHeight / 6) - strokeWidth - spacingV;
                 rectangle.setHeight(rectangleHeight);
+
                 // Fügt das Rechteck zur StackPane hinzu.
                 stackPane.getChildren().add(rectangle);
 
 
                 // Berechnet den Tag im Monat für das aktuelle Kästchen im Kalender.
                 int calculatedDate = (j + 1) + (7 * i);
-                rectangle.setOnMouseClicked(event -> Eventerstellen(calculatedDate - dateOffset, dateFocus.getMonthValue(), dateFocus.getYear()));
 
+                try {
+                    rectangle.setOnMouseClicked(event -> {
+                        String formattedDate = String.format(
+                                "%02d.%02d.%d",
+                                calculatedDate - dateOffset,
+                                dateFocus.getMonthValue(),
+                                dateFocus.getYear()
+                        );
+
+                        showCalendarPopover(rectangle, event, formattedDate);
+                    });
+                }catch (Exception e ){
+                    System.out.println(e.getMessage());
+                }
                 // Überprüft, ob das Kästchen im gültigen Bereich des Monats liegt.
                 if (calculatedDate <= dateOffset + monthMaxDate) {
                     if (calculatedDate > dateOffset) {
@@ -172,27 +190,13 @@ public class Kalender implements Initializable {
                         date.setTranslateY(textTranslationY);
                         stackPane.getChildren().add(date);
 
-                        // Ruft die Kalenderaktivitäten für diesen Tag ab und erstellt die Anzeige.
-                        List<CalendarActivity> calendarActivities = calendarActivityMap.get(calculatedDate - dateOffset);
-                        if (calendarActivities != null) {
-                            createCalendarActivity(calendarActivities, rectangleHeight, rectangleWidth, stackPane);
-                        }
+
 
                         // Setzt den Rahmen von Rechtecken, die den heutigen Tag repräsentieren, auf blau.
-                        if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == (calculatedDate - dateOffset)) {
-                            rectangle.setStroke(Color.BLUE);
-                        }
-
-                        // Setzt die Farbe basierend auf dem Monat.
-                        if (calculatedDate - dateOffset == today.getDayOfMonth() && today.getMonth() == dateFocus.getMonth() && today.getYear() == dateFocus.getYear()) {
-                            rectangle.setFill(Color.BLUE); // Farbe für den heutigen Tag
-                        } else {
-                            rectangle.setFill(Color.LIGHTGREEN); // Farbe für den aktuellen Monat
-                        }
+                        selectColor(rectangle, calculatedDate);
 
                         // Setzt die Anfangsfarbe für das Rechteck und fügt Hover-Effekte hinzu.
-                        setInitialBoxColor(rectangle, (Color) rectangle.getFill());
-                        addHoverEffect(rectangle);
+                        addHoverEffect(rectangle, calculatedDate);
                     }
 
                 }
@@ -208,6 +212,77 @@ public class Kalender implements Initializable {
         calendar.getChildren().add(gridPane);
     }
 
+    private void selectColor(Rectangle rectangle,int calculatedDate ){
+        int dateOffset = ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), 1, 0, 0, 0, 0, dateFocus.getZone()).getDayOfWeek().getValue();
+
+        if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == (calculatedDate - dateOffset)) {
+            rectangle.setStroke(Color.BLUE);
+        }
+
+        // Setzt die Farbe basierend auf dem Monat.
+        if (calculatedDate - dateOffset == today.getDayOfMonth() && today.getMonth() == dateFocus.getMonth() && today.getYear() == dateFocus.getYear()) {
+            rectangle.setFill(Color.BLUE); // Farbe für den heutigen Tag
+        } else {
+            rectangle.setFill(Color.LIGHTGREEN); // Farbe für den aktuellen Monat
+        }
+    }
+    private void showCalendarPopover(Rectangle ownerRectangle, MouseEvent event, String datum) {
+        System.out.println("Test 1 true");
+        PopOver popover = new PopOver();
+        popover.setTitle("Termin am: " + datum);
+
+        VBox popoverLayout = new VBox(10);
+        popoverLayout.setPadding(new Insets(10));
+        int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+        int mouseY = MouseInfo.getPointerInfo().getLocation().y;
+// Set the arrow location of the popover at the mouse pointer location
+      // Date and Time Picker
+        DateTimePicker dateTimePicker = new DateTimePicker();
+
+        // TextFields for Title and Description
+        TextField titleField = new TextField();
+        titleField.setPromptText("Title");
+
+        TextArea beschreibung = new TextArea();
+        beschreibung.setPromptText("Description");
+
+        // Save Button
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(event1 -> {
+            EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
+            try  {
+                em.getTransaction().begin();
+                K_Kalender kalender = new K_Kalender();
+                kalender.setK_Title(titleField.getText());
+                kalender.setK_Beschreibung(beschreibung.getText());
+                kalender.setK_vonZeitMinute(dateTimePicker.getVonminuteComboBox().getValue());
+                kalender.setK_vonZeitStunde(dateTimePicker.getVonhourComboBox().getValue());
+                kalender.setK_bisZeitMinute(dateTimePicker.getBisminuteComboBox().getValue());
+                kalender.setK_bisZeitStunde(dateTimePicker.getBishourComboBox().getValue());
+                em.persist(kalender);
+                em.getTransaction().commit();
+                popover.hide();
+
+            } catch (Exception e) {
+                // Handle exceptions, log, or throw them as needed
+                if (em.getTransaction()!= null && em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                e.printStackTrace();
+            }finally {
+                em.close();
+            }
+
+        });
+        Button Termine = new Button("show more");
+        Termine.setStyle("-fx-text-fill: blue; -fx-underline: true");
+        popoverLayout.getChildren().addAll(dateTimePicker, titleField, beschreibung, saveButton, Termine);
+
+
+        popover.setContentNode(popoverLayout);
+        popover.show(ownerRectangle);
+        System.out.println("Test 2 true");
+    }
 
     private @NotNull Label TextV(String text){
         Label label= new Label(text);
@@ -216,57 +291,6 @@ public class Kalender implements Initializable {
         label.setTranslateY(10);
         return label;
     }
-    private void Eventerstellen(int tag, int Monat, int Jahr) {
-        System.out.println("Der zugehoerige Datum ist: " + tag + ", " + Monat + ", " + Jahr);
-
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(20);
-        gridPane.setVgap(10);
-
-        TextField titleField = new TextField();
-        titleField.setId("titlefield");
-        titleField.setPromptText("Title...");
-
-        TextArea Beschreibung = new TextArea();
-        Beschreibung.setPromptText("Beschreibung...");
-        Beschreibung.setId("Beschreibungsfield");
-        Beschreibung.setPrefWidth(rightPanel.getPrefWidth()/0.9);
-
-        DatePicker datePicker = new DatePicker();
-        LocalDate date= LocalDate.of(Jahr,Monat,tag);
-        datePicker.setValue(date);
-
-        Spinner<Integer> hourSpinner = new Spinner<>();
-        SpinnerValueFactory<Integer> hourFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
-        hourSpinner.setValueFactory(hourFactory);
-
-        Spinner<Integer> minuteSpinner = new Spinner<>();
-        SpinnerValueFactory<Integer> minuteFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
-        minuteSpinner.setValueFactory(minuteFactory);
-
-        VBox vBox = new VBox();
-        vBox.getChildren().add(hourSpinner);
-        vBox.getChildren().add(minuteSpinner);
-
-        Button button= new Button("Speichern");
-        button.setOnMouseEntered(event -> {
-            button.setCursor(Cursor.HAND);
-        });
-
-        gridPane.add(Textstring("Title: "), 0, 0);
-        gridPane.add(Textstring("Datum: "), 0, 1);
-        gridPane.add(Textstring("Uhrzeit: "), 0, 2);
-        gridPane.add(Textstring("Beschreibung: "), 0, 3);
-        gridPane.add(titleField, 1 , 0);
-        gridPane.add(datePicker, 1, 1);
-        gridPane.add(vBox,1,2);
-        gridPane.add(Beschreibung, 1, 3);
-        gridPane.add(button, 1, 4);
-
-        EigenschaftenPane.getChildren().add(gridPane);
-
-
-    }
 
     private @NotNull Label Textstring(String text){
         Label label= new Label(text);
@@ -274,20 +298,8 @@ public class Kalender implements Initializable {
         label.setFont(Font.font(30));
         return label;
     }
-    // Set initial color for the box
-    private void setInitialBoxColor(Rectangle rectangle, Color color) {
-        rectangle.setOnMouseEntered(event -> {
-            rectangle.setFill(Color.LIGHTGRAY);
-            drawCalendar();
-        });
-
-        rectangle.setOnMouseExited(event -> {
-            rectangle.setFill(color);
-        });
-    }
-
     // Add hover effect to the box
-    private void addHoverEffect(Rectangle rectangle) {
+    private void addHoverEffect(Rectangle rectangle,int calculatedDate) {
         rectangle.setOnMouseEntered(event -> {
             rectangle.setFill(Color.LIGHTGRAY);
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rectangle);
@@ -295,7 +307,6 @@ public class Kalender implements Initializable {
             scaleTransition.setToY(1.1);
             scaleTransition.play();
             rectangle.setCursor(Cursor.HAND);
-
         });
 
         rectangle.setOnMouseExited(event -> {
@@ -304,155 +315,9 @@ public class Kalender implements Initializable {
             scaleTransition.setToX(1.0);
             scaleTransition.setToY(1.0);
             scaleTransition.play();
-            drawCalendar();
+            selectColor(rectangle, calculatedDate);
 
         });
 
     }
-
-    // Erstellt und zeigt Kalenderaktivitäten innerhalb einer Tageszelle an
-
-    /**
-     * Erstellt eine visuelle Darstellung von Kalenderaktivitäten in JavaFX.
-     *
-     *
-     * @param calendarActivities Eine Liste von Kalenderaktivitäten.
-     * @param rectangleHeight    Die Höhe des Rechtecks für die visuelle Darstellung.
-     * @param rectangleWidth     Die Breite des Rechtecks für die visuelle Darstellung.
-     * @param stackPane          Der StackPane, auf dem die Darstellung platziert wird.
-     *
-     */
-
-    private void createCalendarActivity(List<CalendarActivity> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane) {
-        // Erstellt eine vertikale Box für die Anzeige der Kalenderaktivitäten.
-        VBox calendarActivityBox = new VBox();
-
-        // Schleife durch jede Kalenderaktivität.
-        for (int k = 0; k < calendarActivities.size(); k++) {
-            // Bedingung für mehr als zwei Aktivitäten.
-            if (k >= 2) {
-                // Wenn mehr als zwei Aktivitäten vorhanden sind, zeige "..." an.
-                Text moreActivities = new Text("...");
-                calendarActivityBox.getChildren().add(moreActivities);
-
-                // Füge einen Event-Handler hinzu, um die gesamte Liste anzuzeigen, wenn auf "..." geklickt wird.
-                moreActivities.setOnMouseClicked(mouseEvent -> {
-                    System.out.println(calendarActivities);
-                });
-
-                // Beende die Schleife, da "..." bereits hinzugefügt wurde.
-                break;
-            }
-
-            // Anzeige der Kalenderaktivität.
-            Text text = new Text(calendarActivities.get(k).getClientName() + ", " + calendarActivities.get(k).getDate().toLocalTime());
-            calendarActivityBox.getChildren().add(text);
-
-            // Füge einen Event-Handler hinzu, um den Text der Aktivität anzuzeigen, wenn darauf geklickt wird.
-            text.setOnMouseClicked(mouseEvent -> {
-                System.out.println(text.getText());
-            });
-        }
-
-        // Setze verschiedene Eigenschaften der VBox.
-        calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
-        calendarActivityBox.setMaxWidth(rectangleWidth * 0.8);
-        calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
-        calendarActivityBox.setStyle("-fx-background-color:GRAY");
-
-        // Füge die VBox zur StackPane hinzu.
-        stackPane.getChildren().add(calendarActivityBox);
-    }
-
-    // Erstellt eine Map von Kalenderaktivitäten, gruppiert nach Tag
-    /**
-     * Erstellt eine Map, die Kalenderaktivitäten nach Tag gruppiert.
-     *
-     * @param calendarActivities Eine Liste von Kalenderaktivitäten.
-     * Eine Map, die Kalenderaktivitäten nach Tag gruppiert.
-     */
-    private Map<Integer, List<CalendarActivity>> createCalendarMap(List<CalendarActivity> calendarActivities) {
-        // Erstellt eine leere HashMap, um Kalenderaktivitäten nach Tag zu gruppieren.
-        Map<Integer, List<CalendarActivity>> calendarActivityMap = new HashMap<>();
-
-        // Schleife durch jede Kalenderaktivität.
-        for (CalendarActivity activity : calendarActivities) {
-            // Extrahiere den Tag der Aktivität.
-            int activityDate = activity.getDate().getDayOfMonth();
-
-            // Überprüfe, ob die Map bereits einen Eintrag für diesen Tag hat.
-            if (!calendarActivityMap.containsKey(activityDate)) {
-                // Wenn nicht, füge eine neue Liste mit der Aktivität für diesen Tag hinzu.
-                calendarActivityMap.put(activityDate, List.of(activity));
-            } else {
-                // Wenn bereits Aktivitäten für diesen Tag vorhanden sind, aktualisiere die Liste.
-                List<CalendarActivity> oldListByDate = calendarActivityMap.get(activityDate);
-
-                // Erstelle eine neue Liste, die die vorhandenen Aktivitäten enthält.
-                List<CalendarActivity> newList = new ArrayList<>(oldListByDate);
-
-                // Füge die neue Aktivität zur Liste hinzu.
-                newList.add(activity);
-
-                // Aktualisiere die Map mit der aktualisierten Liste für diesen Tag.
-                calendarActivityMap.put(activityDate, newList);
-            }
-        }
-
-        // Gib die erstellte Map zurück.
-        return calendarActivityMap;
-    }
-
-    // Generiert zufällige Kalenderaktivitäten für den gegebenen Monat und das Jahr
-    /**
-    * @param dateFocus
-    */
-
-    private Map<Integer, List<CalendarActivity>> getCalendarActivitiesMonth(ZonedDateTime dateFocus) {
-        List<CalendarActivity> calendarActivities = new ArrayList<>();
-        int year = dateFocus.getYear();
-        int month = dateFocus.getMonth().getValue();
-        // Hier wird random in jeden Monat einen Termin für Hans um 16 Uhr angelegt
-//        Random random = new Random();
-//        for (int i = 0; i < 50; i++) {
-//            ZonedDateTime time = ZonedDateTime.of(year, month, random.nextInt(27)+1, 16,0,0,0,dateFocus.getZone());
-//            calendarActivities.add(new CalendarActivity(time, "Hans", 111111));
-//        }
-
-        return createCalendarMap(calendarActivities);
-    }
-    @FXML
-    public void animationEnter(MouseEvent mouseEvent) {
-        try {
-            Object source = mouseEvent.getSource();
-            if (source instanceof Button) {
-                Button button = (Button) source;
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-                scaleTransition.setToX(1.1);
-                scaleTransition.setToY(1.1);
-                scaleTransition.playFromStart();
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        };
-    }
-    @FXML
-    public void animationExit(MouseEvent mouseEvent) {
-
-        try {
-            Object source = (Button) mouseEvent.getSource();
-            if (source instanceof Button) {
-                Button button = (Button) source;
-                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-                scaleTransition.setToX(1.0);
-                scaleTransition.setToY(1.0);
-                scaleTransition.playFromStart();
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        };
-
-
-    }
-
 }

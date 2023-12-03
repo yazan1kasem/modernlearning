@@ -10,47 +10,30 @@
 <AnchorPane fx:id="KalenderF" prefHeight="640.0" prefWidth="1000.0" style="-fx-background-color: #FFAB2F"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Kalender">
     <children>
-        <HBox fx:id="calendarBox">
-
-            <!-- Rechte Leiste -->
-            <VBox fx:id="rightPanel"  style="-fx-background-color: #0048ff; " prefWidth="${KalenderF.width/4}" prefHeight="${KalenderF.height}">
-                <BorderPane fx:id="kleinfenster" prefWidth="${rightPanel.width/2}" prefHeight="${rightPanel.height/3}" style="-fx-background-color: #8b9fcc;" >
-
-                </BorderPane>
-                <Pane fx:id="Eigenschaften"  prefWidth="${rightPanel.width}" prefHeight="${rightPanel.height/3*2}">
-                    <Pane fx:id="EigenschaftenPane" prefWidth="${rightPanel.width}" prefHeight="${rightPanel.height/3*2}" style="-fx-background-color: #ffffff; -fx-padding: 30 30 30 30 ">
-
-                    </Pane>
-                </Pane>
+        <ScrollPane>
+            <VBox fx:id="calendarPanel" spacing="30" prefWidth="${KalenderF.width}" prefHeight="${KalenderF.height}" style=" -fx-background-color: #FFAB2F; -fx-padding: 30 0 0 0">
+                <!-- Header mit Navigationsbuttons und Jahr/Monat Anzeige -->
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="419.0" spacing="5.0" style="-fx-cursor: hand; -fx-animated: ex" >
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
+                        <HBox prefWidth="250" spacing="20" alignment="CENTER">
+                            <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                                <font>
+                                    <Font size="22.0" />
+                                </font>
+                            </Text>
+                            <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                                <font>
+                                    <Font size="22.0" />
+                                </font>
+                            </Text>
+                        </HBox>
+                        <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" style="-fx-cursor: hand" />
+                    </children>
+                </HBox>
+                <!-- Füge eine Fade-Transition für das Kalenderpanel hinzu -->
+                <FlowPane fx:id="calendar" hgap="10.0" prefHeight="400" prefWidth="700" vgap="5.0" alignment="CENTER"/>
             </VBox>
-
-            <!-- Kalender -->
-            <ScrollPane>
-                <VBox fx:id="calendarPanel" spacing="30" prefWidth="${KalenderF.width/4*3}" prefHeight="${KalenderF.height}" style=" -fx-background-color: #FFAB2F; -fx-padding: 30 0 0 0">
-                    <!-- Header mit Navigationsbuttons und Jahr/Monat Anzeige -->
-                    <HBox alignment="CENTER" prefHeight="44.0" prefWidth="419.0" spacing="5.0" style="-fx-cursor: hand; -fx-animated: ex" onMouseEntered="#animationEnter" onMouseExited="#animationExit">
-                        <children>
-                            <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
-                            <HBox prefWidth="250" spacing="20" alignment="CENTER">
-                                <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                                    <font>
-                                        <Font size="22.0" />
-                                    </font>
-                                </Text>
-                                <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                                    <font>
-                                        <Font size="22.0" />
-                                    </font>
-                                </Text>
-                            </HBox>
-                            <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" style="-fx-cursor: hand" onMouseEntered="#animationEnter" onMouseExited="#animationExit"/>
-                        </children>
-                    </HBox>
-                    <!-- Füge eine Fade-Transition für das Kalenderpanel hinzu -->
-                    <FlowPane fx:id="calendar" hgap="10.0" prefHeight="400" prefWidth="700" vgap="5.0" alignment="CENTER"/>
-                </VBox>
-            </ScrollPane>
-        </HBox>
-
+        </ScrollPane>
     </children>
 </AnchorPane>
