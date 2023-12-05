@@ -8,25 +8,46 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.hibernate.type.ZonedDateTimeType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
-public class DateTimePicker extends HBox {
-    private ZonedDateTime jetzt= ZonedDateTime.now();
+public class DateTimePicker extends VBox {
+    private LocalDateTime Kastendatum=LocalDateTime.now();
+    private DatePicker vondatepicker;
+    private DatePicker bisdatepicker;
     private final ComboBox<Integer> vonhourComboBox;
     private final ComboBox<Integer> vonminuteComboBox;
     private final ComboBox<Integer> bishourComboBox;
     private final ComboBox<Integer> bisminuteComboBox;
 
     public DateTimePicker() {
-        super(50);
+        super(5);
 
         this.vonhourComboBox = new ComboBox<>();
         this.vonminuteComboBox = new ComboBox<>();
         this.bishourComboBox = new ComboBox<>();
         this.bisminuteComboBox = new ComboBox<>();
-        int stunde= jetzt.getHour();
-        int Minute= jetzt.getMinute();
+        this.vondatepicker= new DatePicker();
+        this.bisdatepicker= new DatePicker();
+
+
+        HBox hBoxvon = new HBox();
+        hBoxvon.setSpacing(10);
+        hBoxvon.setAlignment(Pos.CENTER);
+        HBox hBoxbis = new HBox();
+        hBoxbis.setSpacing(10);
+        hBoxbis.setAlignment(Pos.CENTER);
+
+        // Layout
+        hBoxvon.getChildren().addAll(new Label("von: "),vondatepicker,vonhourComboBox, new Label(":"), vonminuteComboBox);
+        hBoxbis.getChildren().addAll(new Label("bis:  "),bisdatepicker, bishourComboBox, new Label(":"), bisminuteComboBox);
+        this.getChildren().addAll(hBoxvon, hBoxbis);
+
+    }
+    public void setinhalt(){
+        int stunde= Kastendatum.getHour();
+        int Minute= Kastendatum.getMinute();
 
         // Populate hour and minute ComboBoxes
         for (int i = 0; i < 24; i++) {
@@ -37,29 +58,43 @@ public class DateTimePicker extends HBox {
             vonminuteComboBox.getItems().add(i);
             bisminuteComboBox.getItems().add(i);
         }
+        vondatepicker.setValue(LocalDate.of(Kastendatum.getYear(),Kastendatum.getMonth(),Kastendatum.getDayOfMonth()));
+        bisdatepicker.setValue(LocalDate.of(Kastendatum.getYear(),Kastendatum.getMonth(),Kastendatum.getDayOfMonth()));
 
         // Set default values
         vonhourComboBox.setValue(stunde);
         vonminuteComboBox.setValue(Minute);
-        bishourComboBox.setValue(stunde+1);
-        bisminuteComboBox.setValue(0);
-
-        HBox hBoxvon = new HBox();
-        hBoxvon.setSpacing(10);
-        hBoxvon.setAlignment(Pos.CENTER);
-        HBox hBoxbis = new HBox();
-        hBoxbis.setSpacing(10);
-        hBoxbis.setAlignment(Pos.CENTER);
-
-        // Layout
-        hBoxvon.getChildren().addAll(new Label("von: "),vonhourComboBox, new Label(":"), vonminuteComboBox);
-        hBoxbis.getChildren().addAll(new Label("bis: "), bishourComboBox, new Label(":"), bisminuteComboBox);
-        this.getChildren().addAll(hBoxvon, hBoxbis);
+        if(vonhourComboBox.getValue()<23){
+            bishourComboBox.setValue(stunde+1);
+            bisminuteComboBox.setValue(0);
+        }else{
+            bishourComboBox.setValue(stunde);
+            if(vonminuteComboBox.getValue()<59){
+                bisminuteComboBox.setValue(vonminuteComboBox.getValue()+1);
+            }else{
+                bisminuteComboBox.setValue(vonminuteComboBox.getValue());
+            }
+        }
 
     }
+    public void setKastendatum(LocalDateTime kastendatum) {
+        Kastendatum = kastendatum;
+    }
 
-    public ZonedDateTime getJetzt() {
-        return jetzt;
+    public DatePicker getVondatepicker() {
+        return vondatepicker;
+    }
+
+    public void setVondatepicker(DatePicker vondatepicker) {
+        this.vondatepicker = vondatepicker;
+    }
+
+    public DatePicker getBisdatepicker() {
+        return bisdatepicker;
+    }
+
+    public void setBisdatepicker(DatePicker bisdatepicker) {
+        this.bisdatepicker = bisdatepicker;
     }
 
     public ComboBox<Integer> getVonhourComboBox() {

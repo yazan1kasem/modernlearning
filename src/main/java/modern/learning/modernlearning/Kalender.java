@@ -15,6 +15,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -24,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -168,14 +170,10 @@ public class Kalender implements Initializable {
 
                 try {
                     rectangle.setOnMouseClicked(event -> {
-                        String formattedDate = String.format(
-                                "%02d.%02d.%d",
-                                calculatedDate - dateOffset,
-                                dateFocus.getMonthValue(),
-                                dateFocus.getYear()
-                        );
+                        int jahr= dateFocus.getYear();
+                        int monat=dateFocus.getMonthValue();
 
-                        showCalendarPopover(rectangle, event, formattedDate);
+                        showCalendarPopover(rectangle, event, LocalDate.of(jahr,monat,calculatedDate - dateOffset));
                     });
                 }catch (Exception e ){
                     System.out.println(e.getMessage());
@@ -210,6 +208,7 @@ public class Kalender implements Initializable {
         }
         // Fügt die StackPane zum Kalender hinzu.
         calendar.getChildren().add(gridPane);
+
     }
 
     private void selectColor(Rectangle rectangle,int calculatedDate ){
@@ -226,63 +225,14 @@ public class Kalender implements Initializable {
             rectangle.setFill(Color.LIGHTGREEN); // Farbe für den aktuellen Monat
         }
     }
-    private void showCalendarPopover(Rectangle ownerRectangle, MouseEvent event, String datum) {
-        System.out.println("Test 1 true");
-        PopOver popover = new PopOver();
-        popover.setTitle("Termin am: " + datum);
+    private Rectangle oldRectangle;
+    private final EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
-        VBox popoverLayout = new VBox(10);
-        popoverLayout.setPadding(new Insets(10));
-        int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-        int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-// Set the arrow location of the popover at the mouse pointer location
-      // Date and Time Picker
-        DateTimePicker dateTimePicker = new DateTimePicker();
-
-        // TextFields for Title and Description
-        TextField titleField = new TextField();
-        titleField.setPromptText("Title");
-
-        TextArea beschreibung = new TextArea();
-        beschreibung.setPromptText("Description");
-
-        // Save Button
-        Button saveButton = new Button("Save");
-        saveButton.setOnAction(event1 -> {
-            EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
-            try  {
-                em.getTransaction().begin();
-                K_Kalender kalender = new K_Kalender();
-                kalender.setK_Title(titleField.getText());
-                kalender.setK_Beschreibung(beschreibung.getText());
-                kalender.setK_vonZeitMinute(dateTimePicker.getVonminuteComboBox().getValue());
-                kalender.setK_vonZeitStunde(dateTimePicker.getVonhourComboBox().getValue());
-                kalender.setK_bisZeitMinute(dateTimePicker.getBisminuteComboBox().getValue());
-                kalender.setK_bisZeitStunde(dateTimePicker.getBishourComboBox().getValue());
-                em.persist(kalender);
-                em.getTransaction().commit();
-                popover.hide();
-
-            } catch (Exception e) {
-                // Handle exceptions, log, or throw them as needed
-                if (em.getTransaction()!= null && em.getTransaction().isActive()) {
-                    em.getTransaction().rollback();
-                }
-                e.printStackTrace();
-            }finally {
-                em.close();
-            }
-
-        });
-        Button Termine = new Button("show more");
-        Termine.setStyle("-fx-text-fill: blue; -fx-underline: true");
-        popoverLayout.getChildren().addAll(dateTimePicker, titleField, beschreibung, saveButton, Termine);
-
-
-        popover.setContentNode(popoverLayout);
-        popover.show(ownerRectangle);
-        System.out.println("Test 2 true");
+    private void showCalendarPopover(Rectangle ownerRectangle, MouseEvent event, LocalDate datum) {
+        System.out.println("\u001B[32m" + "Test 1 succeeded (PopOver gestartet)" + "\u001B[0m");
+        CalenderPopover calenderPopover = new CalenderPopover(ownerRectangle,datum);
     }
+
 
     private @NotNull Label TextV(String text){
         Label label= new Label(text);
@@ -292,12 +242,7 @@ public class Kalender implements Initializable {
         return label;
     }
 
-    private @NotNull Label Textstring(String text){
-        Label label= new Label(text);
-        label.setStyle("-fx-font-family: Aldhabi");
-        label.setFont(Font.font(30));
-        return label;
-    }
+
     // Add hover effect to the box
     private void addHoverEffect(Rectangle rectangle,int calculatedDate) {
         rectangle.setOnMouseEntered(event -> {
@@ -321,3 +266,276 @@ public class Kalender implements Initializable {
 
     }
 }
+//    private PopOver TerminePopover(PopOver popover, LocalDate datum, Rectangle ownerRectangle){
+//        try {
+//            VBox popoverLayout = new VBox(10);
+//            popoverLayout.setPadding(new Insets(10));
+//            List < K_Kalender > kalenders = em.createQuery(
+//                            "SELECT k FROM K_Kalender k WHERE :datum > k.K_vonDatum AND :datum < k.K_bisDatum or :datum = k.K_bisDatum or :datum = k.K_vonDatum",
+//                            K_Kalender.class)
+//                    .setParameter("datum", LocalDateTime.of(datum, LocalTime.of(0, 0)))
+//                    .getResultList();
+//            VBox v = new VBox();
+//            v.setSpacing(10);
+//            if (!kalenders.isEmpty()) {
+//                for (int i = 0; i < kalenders.size(); i++) {
+//                    kalenders.get(i);
+//                    VBox Terminebox = new VBox();
+//                    Terminebox.setSpacing(10);
+//                    Terminebox.setStyle("-fx-border-radius: 20; -fx-alignment: center; -fx-border-color: black");
+//                    Terminebox.setPrefWidth(200);
+//                    VBox.setMargin(popoverLayout, new Insets(0, 10, 0, 10));
+//                    int finalI = i;
+//                    Terminebox.setOnMouseClicked(UpdateEvent -> {
+//                        //Hier sollte kommen das man es ändern kann
+//                        //also ruf den Popover der dafür zuständig ist das findest du unter bei wenn man auf neu drückt
+//                        UpdatePopover(popover,datum,ownerRectangle,kalenders.get(finalI));
+//                    });
+//                    Terminebox.setOnMouseEntered(transischenevent1 -> {
+//                        addButtonToDelete(Terminebox, kalenders.get(finalI), popover, datum, ownerRectangle);
+//                        applyScaleTransition(Terminebox, 1.05);
+//                        Terminebox.setCursor(Cursor.HAND);
+//                    });
+//
+//                    Terminebox.setOnMouseExited(transischenevent2 -> {
+//                        removeButtonToDelete(Terminebox);
+//                        applyScaleTransition(Terminebox, 1.0);
+//                    });
+//                    StackPane stackPane = new StackPane();
+//                    Terminebox.getChildren().add(new Label(kalenders.get(i).getK_Title() != null ?   kalenders.get(i).getK_Title():"<KEIN TITLE>"));
+//                    Terminebox.getChildren().add(new Label(kalenders.get(i).getK_vonDatum().getDayOfMonth() + "." + kalenders.get(i).getK_vonDatum().getMonthValue() + "." + kalenders.get(i).getK_vonDatum().getYear() + " um: " + kalenders.get(i).getK_vonDatum().getHour() + ":" + kalenders.get(i).getK_vonDatum().getMinute()));
+//                    Terminebox.getChildren().add(new Label(kalenders.get(i).getK_bisDatum().getDayOfMonth() + "." + kalenders.get(i).getK_bisDatum().getMonthValue() + "." + kalenders.get(i).getK_bisDatum().getYear() + " um: " + kalenders.get(i).getK_bisDatum().getHour() + ":" + kalenders.get(i).getK_bisDatum().getMinute()));
+//                    stackPane.getChildren().add(Terminebox);
+//                    v.getChildren().add(stackPane);
+//                }
+//            }
+//            Button b = new Button();
+//            b.setText("neu");
+//
+//            v.getChildren().add(b);
+//
+//            popoverLayout.getChildren().clear();
+//            popoverLayout.getChildren().addAll(v, b);
+//            popover.setContentNode(popoverLayout);
+//            popover.show(ownerRectangle);
+//            b.setOnMouseClicked(Insertevent -> {
+//                InsertPopover(popover,datum,ownerRectangle);
+//            });
+//            System.out.println("\u001B[32m" + "Test 2 succeeded (PopOver erstellt und gezeigt)" + "\u001B[0m");
+//        } catch (Exception e) {
+//            System.out.println("\u001B[31m" + "Test 1.5 failed (PopOver könnte nicht erstellt und gezeigt werden)" + "\u001B[0m");
+//        }
+//
+//
+//        return popover;
+//    }
+//    private PopOver UpdatePopover(PopOver popover, LocalDate datum, Rectangle ownerRectangle, K_Kalender kalender){
+//        VBox popoverLayout = new VBox(10);
+//        popoverLayout.setPadding(new Insets(10));
+//        // Date and Time Picker
+//        DateTimePicker dateTimePicker = new DateTimePicker();
+//        dateTimePicker.setKastendatum(LocalDateTime.of(datum, LocalTime.of(8, 0)));
+//        dateTimePicker.setinhalt();
+//        // TextFields for Title and Description
+//        TextField titleField = new TextField();
+//        titleField.setPromptText("Title");
+//
+//        TextArea beschreibung = new TextArea();
+//        beschreibung.setPromptText("Description");
+//
+//        // Save Button
+//        Button saveButton = new Button("Save");
+//        saveButton.setOnAction(UpdateEvent -> {
+//            try {
+//                dateTimePicker.getVondatepicker().setStyle("-fx-border-color: none;");
+//                em.getTransaction().begin();
+//                kalender.setK_Title(titleField.getText());
+//                kalender.setK_Beschreibung(beschreibung.getText());
+//
+//                kalender.setK_vonDatum(
+//                        LocalDateTime.of(dateTimePicker.getVondatepicker().getValue().getYear(),
+//                                dateTimePicker.getVondatepicker().getValue().getMonth().getValue(),
+//                                dateTimePicker.getVondatepicker().getValue().getDayOfMonth(),
+//                                dateTimePicker.getVonhourComboBox().getValue(),
+//                                dateTimePicker.getVonminuteComboBox().getValue()));
+//                kalender.setK_bisDatum(
+//                        LocalDateTime.of(dateTimePicker.getBisdatepicker().getValue().getYear(),
+//                                dateTimePicker.getBisdatepicker().getValue().getMonth().getValue(),
+//                                dateTimePicker.getBisdatepicker().getValue().getDayOfMonth(),
+//                                dateTimePicker.getBishourComboBox().getValue(),
+//                                dateTimePicker.getBisminuteComboBox().getValue())
+//                );
+//
+//                if (kalender.getK_vonDatum().isBefore(kalender.getK_bisDatum())) {
+//                    if (titleField.getText() != null) {
+//                        em.persist(kalender);
+//                        em.getTransaction().commit();
+//                        popover.hide();
+//                    } else {
+//                        Alert alert = new Alert(Alert.AlertType.ERROR, "Die Eingabe wurde als fehlerhaft erkannt, da Ihr Termin keinen Title hat.");
+//                        alert.setTitle("ungültiger Eintrag");
+//                        alert.setHeaderText("Bitte tragen Sie einen gültigen Title ein");
+//                        alert.setResizable(true);
+//                        alert.show();
+//                        titleField.setStyle("-fx-border-color: red;");
+//                    }
+//                } else {
+//                    if (dateTimePicker.getVondatepicker().getValue().isBefore(dateTimePicker.getBisdatepicker().getValue())) {
+//                        dateTimePicker.getVondatepicker().setStyle("-fx-border-color: red;");
+//                    } else if (dateTimePicker.getVonhourComboBox().getValue() < dateTimePicker.getBishourComboBox().getValue()) {
+//                        dateTimePicker.getVonhourComboBox().setStyle("-fx-border-color: red;");
+//                    } else if (dateTimePicker.getVonminuteComboBox().getValue() < dateTimePicker.getBisminuteComboBox().getValue()) {
+//                        dateTimePicker.getVonminuteComboBox().setStyle("-fx-border-color: red;");
+//                    }
+//
+//                    Alert alert = new Alert(Alert.AlertType.ERROR, "Die Eingabe wurde als fehlerhaft erkannt, da das Anfangsdatum des Ereignisses später im Zeitverlauf liegt als das Enddatum.");
+//                    alert.setTitle("ungültiger Datum");
+//                    alert.setHeaderText("Bitte tragen Sie einen gültigen Termin ein");
+//                    alert.setResizable(true);
+//
+//                    alert.show();
+//                }
+//
+//            } catch (Exception e) {
+//                // Handle exceptions, log, or throw them as needed
+//                if (em.getTransaction() != null && em.getTransaction().isActive()) {
+//                    em.getTransaction().rollback();
+//                }
+//                e.printStackTrace();
+//            }
+//
+//        });
+//        Button Termine = new Button("show more");
+//        Termine.setStyle("-fx-text-fill: blue; -fx-underline: true");
+//        popoverLayout.getChildren().clear();
+//        popoverLayout.getChildren().addAll(dateTimePicker, titleField, beschreibung, saveButton, Termine);
+//        System.out.println("\u001B[32m" + "Test 4 succeeded (Insert Popover)" + "\u001B[0m");
+//        oldRectangle=null;
+//        popover.setContentNode(popoverLayout);
+//        popover.show(ownerRectangle);
+//        return popover;
+//    }
+//    private void configureArrowLocation(PopOver popover, int mouseX, int mouseY) {
+//        if (Toolkit.getDefaultToolkit().getScreenSize().width / 2 > mouseX) {
+//            if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 > mouseY) {
+//                popover.setArrowLocation(PopOver.ArrowLocation.LEFT_TOP);
+//            } else if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 < mouseY) {
+//                popover.setArrowLocation(PopOver.ArrowLocation.LEFT_BOTTOM);
+//            }
+//        } else if (Toolkit.getDefaultToolkit().getScreenSize().width / 2 < mouseX) {
+//            if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 > mouseY) {
+//                popover.setArrowLocation(PopOver.ArrowLocation.RIGHT_TOP);
+//            } else if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 < mouseY) {
+//                popover.setArrowLocation(PopOver.ArrowLocation.RIGHT_BOTTOM);
+//            }
+//        }
+//    }
+//    private PopOver InsertPopover(PopOver popover, LocalDate datum, Rectangle ownerRectangle){
+//        VBox popoverLayout = new VBox(10);
+//        popoverLayout.setPadding(new Insets(10));
+//        // Date and Time Picker
+//        DateTimePicker dateTimePicker = new DateTimePicker();
+//        dateTimePicker.setKastendatum(LocalDateTime.of(datum, LocalTime.of(8, 0)));
+//        dateTimePicker.setinhalt();
+//        // TextFields for Title and Description
+//        TextField titleField = new TextField();
+//        titleField.setPromptText("Title");
+//
+//        TextArea beschreibung = new TextArea();
+//        beschreibung.setPromptText("Description");
+//
+//        // Save Button
+//        Button saveButton = new Button("Save");
+//        saveButton.setOnAction(event2 -> {
+//            try {
+//                dateTimePicker.getVondatepicker().setStyle("-fx-border-color: none;");
+//                em.getTransaction().begin();
+//                K_Kalender kalender = new K_Kalender();
+//                kalender.setK_Title(titleField.getText());
+//                kalender.setK_Beschreibung(beschreibung.getText());
+//
+//                kalender.setK_vonDatum(
+//                        LocalDateTime.of(dateTimePicker.getVondatepicker().getValue().getYear(),
+//                                dateTimePicker.getVondatepicker().getValue().getMonth().getValue(),
+//                                dateTimePicker.getVondatepicker().getValue().getDayOfMonth(),
+//                                dateTimePicker.getVonhourComboBox().getValue(),
+//                                dateTimePicker.getVonminuteComboBox().getValue()));
+//                kalender.setK_bisDatum(
+//                        LocalDateTime.of(dateTimePicker.getBisdatepicker().getValue().getYear(),
+//                                dateTimePicker.getBisdatepicker().getValue().getMonth().getValue(),
+//                                dateTimePicker.getBisdatepicker().getValue().getDayOfMonth(),
+//                                dateTimePicker.getBishourComboBox().getValue(),
+//                                dateTimePicker.getBisminuteComboBox().getValue())
+//                );
+//
+//                if (kalender.getK_vonDatum().isBefore(kalender.getK_bisDatum())) {
+//                    if(titleField.getText()!=null){
+//                        em.persist(kalender);
+//                        em.getTransaction().commit();
+//                        popover.hide();
+//                    }else{
+//                        Alert alert = new Alert(Alert.AlertType.ERROR, "Die Eingabe wurde als fehlerhaft erkannt, da Ihr Termin keinen Title hat.");
+//                        alert.setTitle("ungültiger Eintrag");
+//                        alert.setHeaderText("Bitte tragen Sie einen gültigen Title ein");
+//                        alert.setResizable(true);
+//                        alert.show();
+//                        titleField.setStyle("-fx-border-color: red;");
+//                    }
+//                } else {
+//                    if (dateTimePicker.getVondatepicker().getValue().isBefore(dateTimePicker.getBisdatepicker().getValue())) {
+//                        dateTimePicker.getVondatepicker().setStyle("-fx-border-color: red;");
+//                    } else if (dateTimePicker.getVonhourComboBox().getValue() < dateTimePicker.getBishourComboBox().getValue()) {
+//                        dateTimePicker.getVonhourComboBox().setStyle("-fx-border-color: red;");
+//                    } else if (dateTimePicker.getVonminuteComboBox().getValue() < dateTimePicker.getBisminuteComboBox().getValue()) {
+//                        dateTimePicker.getVonminuteComboBox().setStyle("-fx-border-color: red;");
+//                    }
+//
+//                    Alert alert = new Alert(Alert.AlertType.ERROR, "Die Eingabe wurde als fehlerhaft erkannt, da das Anfangsdatum des Ereignisses später im Zeitverlauf liegt als das Enddatum.");
+//                    alert.setTitle("ungültiger Datum");
+//                    alert.setHeaderText("Bitte tragen Sie einen gültigen Termin ein");
+//                    alert.setResizable(true);
+//
+//                    alert.show();
+//                }
+//
+//            } catch (Exception e) {
+//                // Handle exceptions, log, or throw them as needed
+//                if (em.getTransaction() != null && em.getTransaction().isActive()) {
+//                    em.getTransaction().rollback();
+//                }
+//                e.printStackTrace();
+//            }
+//        });
+//        Button Termine = new Button("show more");
+//        Termine.setStyle("-fx-text-fill: blue; -fx-underline: true");
+//        popoverLayout.getChildren().clear();
+//        popoverLayout.getChildren().addAll(dateTimePicker, titleField, beschreibung, saveButton, Termine);
+//        System.out.println("\u001B[32m" + "Test 4 succeeded (Insert Popover)" + "\u001B[0m");
+//
+//        popover.setContentNode(popoverLayout);
+//        popover.show(ownerRectangle);
+//        return popover;
+//    }
+//    private void addButtonToDelete(VBox terminebox, K_Kalender k,PopOver popover, LocalDate datum, Rectangle ownerRectangle) {
+//        Button delete = new Button("Delete");
+//        delete.setOnMouseClicked(deleteEvent -> {
+//            // Handle delete event
+//            //lösch den Termin der hier verwendet wird
+//            em.getTransaction().begin();
+//            em.remove(k);
+//            em.getTransaction().commit();
+//            TerminePopover(popover, datum, ownerRectangle);
+//        });
+//        terminebox.getChildren().add(delete);
+//    }
+//
+//    private void removeButtonToDelete(VBox terminebox) {
+//        terminebox.getChildren().removeIf(node -> node instanceof Button);
+//    }
+//
+//    private void applyScaleTransition(VBox terminebox, double scaleValue) {
+//        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), terminebox);
+//        scaleTransition.setToX(scaleValue);
+//        scaleTransition.setToY(scaleValue);
+//        scaleTransition.play();
+//    }

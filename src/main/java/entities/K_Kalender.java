@@ -1,5 +1,7 @@
 package entities;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name ="K_Kalender")
@@ -14,23 +16,17 @@ public class K_Kalender {
     private String K_Title;
     @Column(name = "K_Beschreibung")
     private String K_Beschreibung;
-    @Column(name = "K_vonZeitMinute")
-    private int K_vonZeitMinute;
-    @Column(name = "K_vonZeitStunde")
-    private int K_vonZeitStunde;
-    @Column(name = "K_bisZeitMinute")
-    private int K_bisZeitMinute;
-    @Column(name = "K_bisZeitStunde")
-    private int K_bisZeitStunde;
+    @Column(name = "K_vonDatum ")
+    private LocalDateTime K_vonDatum;
+    @Column(name = "K_bisDatum ")
+    private LocalDateTime K_bisDatum;
 
-    public K_Kalender(String k_Title, String k_Beschreibung, int k_vonZeitMinute, int k_vonZeitStunde, int k_bisZeitMinute, int k_bisZeitStunde) {
-
+    public K_Kalender(int k_ID, String k_Title, String k_Beschreibung, LocalDateTime k_vonDatum, LocalDateTime k_bisDatum) {
+        K_ID = k_ID;
         K_Title = k_Title;
         K_Beschreibung = k_Beschreibung;
-        K_vonZeitMinute = k_vonZeitMinute;
-        K_vonZeitStunde = k_vonZeitStunde;
-        K_bisZeitMinute = k_bisZeitMinute;
-        K_bisZeitStunde = k_bisZeitStunde;
+        K_vonDatum = k_vonDatum;
+        K_bisDatum = k_bisDatum;
     }
 
     public K_Kalender() {
@@ -38,10 +34,6 @@ public class K_Kalender {
 
     public int getK_ID() {
         return K_ID;
-    }
-
-    public void setK_ID(int k_ID) {
-        K_ID = k_ID;
     }
 
     public String getK_Title() {
@@ -60,35 +52,30 @@ public class K_Kalender {
         K_Beschreibung = k_Beschreibung;
     }
 
-    public int getK_vonZeitMinute() {
-        return K_vonZeitMinute;
+    public LocalDateTime getK_vonDatum() {
+        return K_vonDatum;
     }
 
-    public void setK_vonZeitMinute(int k_vonZeitMinute) {
-        K_vonZeitMinute = k_vonZeitMinute;
+    public void setK_vonDatum(LocalDateTime k_vonDatum) {
+        K_vonDatum = k_vonDatum;
     }
 
-    public int getK_vonZeitStunde() {
-        return K_vonZeitStunde;
+    public LocalDateTime getK_bisDatum() {
+        return K_bisDatum;
     }
 
-    public void setK_vonZeitStunde(int k_vonZeitStunde) {
-        K_vonZeitStunde = k_vonZeitStunde;
+    public void setK_bisDatum(LocalDateTime k_bisDatum) {
+        K_bisDatum = k_bisDatum;
     }
 
-    public int getK_bisZeitMinute() {
-        return K_bisZeitMinute;
-    }
-
-    public void setK_bisZeitMinute(int k_bisZeitMinute) {
-        K_bisZeitMinute = k_bisZeitMinute;
-    }
-
-    public int getK_bisZeitStunde() {
-        return K_bisZeitStunde;
-    }
-
-    public void setK_bisZeitStunde(int k_bisZeitStunde) {
-        K_bisZeitStunde = k_bisZeitStunde;
+    @Override
+    public String toString() {
+        return "K_Kalender{" +
+                "K_ID=" + K_ID +
+                ", K_Title='" + K_Title + '\'' +
+                ", K_Beschreibung='" + K_Beschreibung + '\'' +
+                ", K_vonDatum=" + K_vonDatum +
+                ", K_bisDatum=" + K_bisDatum +
+                '}';
     }
 }
