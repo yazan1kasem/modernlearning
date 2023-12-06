@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity(name ="K_Kalender")
+@Entity
 @Table(name = "K_Kalender")
 public class K_Kalender {
     @Id
@@ -67,6 +67,8 @@ public class K_Kalender {
     public void setK_bisDatum(LocalDateTime k_bisDatum) {
         K_bisDatum = k_bisDatum;
     }
+
+
 
     @Override
     public String toString() {

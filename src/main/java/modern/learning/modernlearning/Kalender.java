@@ -10,49 +10,32 @@
 package modern.learning.modernlearning;
 
 
-import entities.K_Kalender;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.util.Duration;
-import org.controlsfx.control.PopOver;
+import modern.learning.modernlearning.CalenderClasses.KalenderPopover;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.List;
+
 import javafx.scene.layout.GridPane;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import javax.xml.stream.Location;
 
 
 public class Kalender implements Initializable {
@@ -228,9 +211,23 @@ public class Kalender implements Initializable {
     private Rectangle oldRectangle;
     private final EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
+    private KalenderPopover kalenderPopover; // Declare a class-level variable
+
     private void showCalendarPopover(Rectangle ownerRectangle, MouseEvent event, LocalDate datum) {
         System.out.println("\u001B[32m" + "Test 1 succeeded (PopOver gestartet)" + "\u001B[0m");
-        CalenderPopover calenderPopover = new CalenderPopover(ownerRectangle,datum);
+
+        if (kalenderPopover == null) {
+            // No existing instance, create a new one
+            kalenderPopover = new KalenderPopover(ownerRectangle, datum);
+        } else {
+            // An instance already exists, you can choose to hide it or update its content
+            kalenderPopover.hide(); // Example: hide the existing popover
+            kalenderPopover = new KalenderPopover(ownerRectangle, datum);
+            // You can also update the content if needed
+            // kalenderPopover.updateContent(ownerRectangle, datum);
+        }
+
+        oldRectangle = ownerRectangle;
     }
 
 

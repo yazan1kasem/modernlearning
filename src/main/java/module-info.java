@@ -13,10 +13,13 @@ module modern.learning.modernlearning {
     requires org.jetbrains.annotations;
     requires transitive javafx.graphics;
     requires org.controlsfx.controls;
+    requires lombok;
 //    requires com.calendarfx.view;
 //    requires fr.brouillard.oss.cssfx;
 
     opens entities to org.hibernate.orm.core, javafx.base;
     opens modern.learning.modernlearning to javafx.fxml;
     exports modern.learning.modernlearning;
+    exports modern.learning.modernlearning.CalenderClasses;
+    opens modern.learning.modernlearning.CalenderClasses to javafx.fxml;
 }
