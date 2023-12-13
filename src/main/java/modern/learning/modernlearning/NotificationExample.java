@@ -37,8 +37,8 @@ public class NotificationExample {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
+
                         // Open Google in the default browser
-                        Desktop.getDesktop().browse(new URI("https://www.google.com"));
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

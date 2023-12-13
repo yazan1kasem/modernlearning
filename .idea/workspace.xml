@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="version 1.8">
-      <change afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/NotificationBox.java" afterDir="false" />
+    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="version 1.9">
+      <change afterPath="$PROJECT_DIR$/src/main/Media/pdf_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modernlearning.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/Modernlearning.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/K_Kalender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/K_Kalender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/N_Notifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/N_Notifications.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderPopover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/DateTimePicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/DateTimePicker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Kalender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Kalender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/NotificationBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/NotificationBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/NotificationExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/NotificationExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,15 +99,17 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/yazan/Desktop/ModernLearning/src/main/java/modern/learning/modernlearning&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yazan/Desktop/ModernLearning&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yazan/Desktop/ModernLearning/src/main/Media&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.5855856&quot;,
@@ -264,6 +264,13 @@
       <workItem from="1701888095513" duration="2148000" />
       <workItem from="1701892648591" duration="5071000" />
       <workItem from="1701902290935" duration="3497000" />
+      <workItem from="1701905944383" duration="251000" />
+      <workItem from="1701938174394" duration="2138000" />
+      <workItem from="1701987999696" duration="1738000" />
+      <workItem from="1701989811948" duration="2970000" />
+      <workItem from="1702134404200" duration="37000" />
+      <workItem from="1702291807895" duration="141000" />
+      <workItem from="1702453359728" duration="340000" />
     </task>
     <task id="LOCAL-00001" summary="spring boot firts commit">
       <created>1698429607749</created>
@@ -398,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701819997184</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="version 1.9">
+      <created>1701906033306</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1701906033306</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,6 +511,33 @@
     <MESSAGE value="version 1.6" />
     <MESSAGE value="version 1.7" />
     <MESSAGE value="version 1.8" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.8" />
+    <MESSAGE value="version 1.9" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.9" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
+          <line>205</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
+          <line>207</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
+          <line>209</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
+          <line>212</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

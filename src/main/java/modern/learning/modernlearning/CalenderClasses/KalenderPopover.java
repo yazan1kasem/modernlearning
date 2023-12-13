@@ -48,7 +48,6 @@ public class KalenderPopover extends PopOver {
     //Buttons
     private Button saveButton;
     private Button cancelButton;
-    private Button notificationButton;
     private Button deleteButton;
     //Selected Node
     private Node node;
@@ -65,7 +64,7 @@ public class KalenderPopover extends PopOver {
         beschreibung= new TextArea();
         saveButton=new Button();
         cancelButton= new Button();
-        notificationButton = new Button();
+
         deleteButton= new Button();
         this.datum=datum;
         dateTimePicker= new DateTimePicker();
@@ -75,7 +74,6 @@ public class KalenderPopover extends PopOver {
         beschreibung.setPromptText("Beschreibung");
         saveButton.setText("save");
         cancelButton.setText("cancel");
-        notificationButton.setText("+");
         deleteButton.setId("deleteButton");
 
         configureArrowLocation();
@@ -178,7 +176,7 @@ public class KalenderPopover extends PopOver {
         buttonsBox.setAlignment(Pos.CENTER_RIGHT);
         buttonsBox.setSpacing(20);
         NotificationBox notificationBox=new NotificationBox();
-        notificationBox.setAlignment(Pos.CENTER);
+
         notificationBox.setSpacing(20);
 
         dateAndNot.getChildren().addAll(dateTimePicker);
@@ -187,9 +185,10 @@ public class KalenderPopover extends PopOver {
             this.hide();
         });
 
-        HBox notificationslayout = new HBox();
-        notificationslayout.setSpacing(20);
-        notificationslayout.getChildren().addAll(new Label("Notification"), notificationBox, notificationButton);
+        VBox notificationslayout = new VBox();
+        notificationslayout.setSpacing(2);
+        notificationslayout.getChildren().addAll(new Label("Notification"), notificationBox);
+
         notificationslayout.setAlignment(Pos.CENTER_LEFT);
 
         Layout.getChildren().addAll(dateAndNot,notificationslayout,titleField,beschreibung,buttonsBox);
@@ -243,14 +242,14 @@ public class KalenderPopover extends PopOver {
                 });
 
 
-                TermineBox.getChildren().add((new Label(KalenderListe.get(i).getK_Title() != null ?   KalenderListe.get(i).getK_Title():"<KEIN TITLE>")));
+                TermineBox.getChildren().add((new Label(!KalenderListe.get(i).getK_Title().isEmpty() ?   KalenderListe.get(i).getK_Title():"<KEIN TITLE>")));
                 TermineBox.getChildren().add(new Label(KalenderListe.get(i).getK_vonDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_vonDatum().getMonthValue() + "." + KalenderListe.get(i).getK_vonDatum().getYear() + " um: " + KalenderListe.get(i).getK_vonDatum().getHour() + ":" + KalenderListe.get(i).getK_vonDatum().getMinute()));
                 TermineBox.getChildren().add(new Label(KalenderListe.get(i).getK_bisDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_bisDatum().getMonthValue() + "." + KalenderListe.get(i).getK_bisDatum().getYear() + " um: " + KalenderListe.get(i).getK_bisDatum().getHour() + ":" + KalenderListe.get(i).getK_bisDatum().getMinute()));
                 TerminepopoverLayout.getChildren().addAll(TermineBox);
             }
             scrollPane.setContent(TerminepopoverLayout);
         }else{
-            scrollPane.setContent(new Text("   <Keine Einträge>   "));
+            scrollPane.setContent(new Text("      <Keine Einträge>      "));
         }
 
 
@@ -265,6 +264,7 @@ public class KalenderPopover extends PopOver {
 
         this.setContentNode(Allgemein);
         configureArrowLocation();
+        this.show(node);
     }
     //da wird geschaut, ob alles so gefüllt ist wie es sein sollte
     public boolean isFilledCorrectly() {
@@ -393,13 +393,6 @@ public class KalenderPopover extends PopOver {
         this.cancelButton = cancelButton;
     }
 
-    public Button getNotificationButton() {
-        return this.notificationButton;
-    }
-
-    public void setNotificationButton(Button notificationButton) {
-        this.notificationButton = notificationButton;
-    }
 
     public Button getDeleteButton() {
         return deleteButton;
