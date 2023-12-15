@@ -29,6 +29,7 @@ import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -57,7 +58,7 @@ public class KalenderPopover extends PopOver {
      * Constructor und Initializer
      ******************************************************/
     public KalenderPopover(Node node, LocalDate datum) {
-        this.setTitle("Termin am: " + datum);
+        this.setTitle("Termin am: " + datum.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         this.node=node;
 
         titleField= new TextField();
@@ -75,6 +76,7 @@ public class KalenderPopover extends PopOver {
         saveButton.setText("save");
         cancelButton.setText("cancel");
         deleteButton.setId("deleteButton");
+
 
         configureArrowLocation();
         TerminPopOver();
@@ -216,9 +218,9 @@ public class KalenderPopover extends PopOver {
 
 
 
-        if (!KalenderListe.isEmpty()) {
-            for (int i = 0; i < KalenderListe.size(); i++) {
-                KalenderListe.get(i);
+        if (!filteredList.isEmpty()) {
+            for (int i = 0; i < filteredList.size(); i++) {
+                filteredList.get(i);
                 VBox TermineBox = new VBox();
                 TermineBox.setStyle("-fx-border-radius: 20; -fx-alignment: center; -fx-border-color: black");
                 TermineBox.setPrefWidth(200);
@@ -242,9 +244,9 @@ public class KalenderPopover extends PopOver {
                 });
 
 
-                TermineBox.getChildren().add((new Label(!KalenderListe.get(i).getK_Title().isEmpty() ?   KalenderListe.get(i).getK_Title():"<KEIN TITLE>")));
-                TermineBox.getChildren().add(new Label(KalenderListe.get(i).getK_vonDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_vonDatum().getMonthValue() + "." + KalenderListe.get(i).getK_vonDatum().getYear() + " um: " + KalenderListe.get(i).getK_vonDatum().getHour() + ":" + KalenderListe.get(i).getK_vonDatum().getMinute()));
-                TermineBox.getChildren().add(new Label(KalenderListe.get(i).getK_bisDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_bisDatum().getMonthValue() + "." + KalenderListe.get(i).getK_bisDatum().getYear() + " um: " + KalenderListe.get(i).getK_bisDatum().getHour() + ":" + KalenderListe.get(i).getK_bisDatum().getMinute()));
+                TermineBox.getChildren().add((new Label(!filteredList.get(i).getK_Title().isEmpty() ?   KalenderListe.get(i).getK_Title():"<KEIN TITLE>")));
+                TermineBox.getChildren().add(new Label(filteredList.get(i).getK_vonDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_vonDatum().getMonthValue() + "." + KalenderListe.get(i).getK_vonDatum().getYear() + " um: " + KalenderListe.get(i).getK_vonDatum().getHour() + ":" + KalenderListe.get(i).getK_vonDatum().getMinute()));
+                TermineBox.getChildren().add(new Label(filteredList.get(i).getK_bisDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_bisDatum().getMonthValue() + "." + KalenderListe.get(i).getK_bisDatum().getYear() + " um: " + KalenderListe.get(i).getK_bisDatum().getHour() + ":" + KalenderListe.get(i).getK_bisDatum().getMinute()));
                 TerminepopoverLayout.getChildren().addAll(TermineBox);
             }
             scrollPane.setContent(TerminepopoverLayout);
