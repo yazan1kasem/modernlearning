@@ -30,8 +30,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javafx.scene.layout.GridPane;
 
@@ -125,7 +127,9 @@ public class Kalender implements Initializable {
         gridPane.add(TextV("Freitag"), 5, 0);
         gridPane.add(TextV("Samstag"), 6, 0);
 
-
+        List<K_Kalender> KalenderListe = em.createQuery(
+                        "SELECT k FROM K_Kalender k", K_Kalender.class)
+                .getResultList();
         // Schleife für die Zeilen im Kalender.
         for (int i = 0; i < 6; i++) {
             // Schleife für die Tage in jeder Zeile.
@@ -165,29 +169,34 @@ public class Kalender implements Initializable {
 
                         showCalendarPopover(rectangle, event, LocalDate.of(jahr,monat,calculatedDate - finalErsterTagImMonat));
                     });
+                    // Überprüft, ob das Kästchen im gültigen Bereich des Monats liegt.
+                    if (calculatedDate <= ersterTagImMonat + monthMaxDate) {
+                        if (calculatedDate > ersterTagImMonat) {
+                            List<K_Kalender> filteredList = KalenderListe.stream()
+                                    .filter(k -> k.getK_vonDatum().toLocalDate().compareTo(LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), calculatedDate - finalErsterTagImMonat)) <= 0 &&
+                                            k.getK_bisDatum().toLocalDate().compareTo(LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), calculatedDate - finalErsterTagImMonat)) >= 0)
+                                    .collect(Collectors.toList());
+                            // Zeigt den Tag im Kästchen an.
+                            Text date = new Text(String.valueOf(calculatedDate - ersterTagImMonat));
+                            double textTranslationY = -(rectangleHeight / 2) * 0.75;
+                            date.setTranslateY(textTranslationY);
+                            stackPane.getChildren().add(date);
+                            stackPane.getChildren().add(new Text("("+filteredList.size() + ") Einträge"));
+
+
+                            // Setzt den Rahmen von Rechtecken, die den heutigen Tag repräsentieren, auf blau.
+                            selectColor(rectangle, calculatedDate);
+
+                            // Setzt die Anfangsfarbe für das Rechteck und fügt Hover-Effekte hinzu.
+                            addHoverEffect(rectangle, calculatedDate);
+                        }
+                    }
                 }catch (Exception e ){
                     System.out.println(e.getMessage());
                 }
-                // Überprüft, ob das Kästchen im gültigen Bereich des Monats liegt.
-                if (calculatedDate <= ersterTagImMonat + monthMaxDate) {
-                    if (calculatedDate > ersterTagImMonat) {
-
-                        // Zeigt den Tag im Kästchen an.
-                        Text date = new Text(String.valueOf(calculatedDate - ersterTagImMonat));
-                        double textTranslationY = - (rectangleHeight / 2) * 0.75;
-                        date.setTranslateY(textTranslationY);
-                        stackPane.getChildren().add(date);
 
 
 
-                        // Setzt den Rahmen von Rechtecken, die den heutigen Tag repräsentieren, auf blau.
-                        selectColor(rectangle, calculatedDate);
-
-                        // Setzt die Anfangsfarbe für das Rechteck und fügt Hover-Effekte hinzu.
-                        addHoverEffect(rectangle, calculatedDate);
-                    }
-
-                }
                 gridPane.add(stackPane, j,i+1);
             }
 

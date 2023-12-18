@@ -29,7 +29,6 @@ import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -58,14 +57,13 @@ public class KalenderPopover extends PopOver {
      * Constructor und Initializer
      ******************************************************/
     public KalenderPopover(Node node, LocalDate datum) {
-        this.setTitle("Termin am: " + datum.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        this.setTitle("Termin am: " + datum);
         this.node=node;
 
         titleField= new TextField();
         beschreibung= new TextArea();
         saveButton=new Button();
         cancelButton= new Button();
-
         deleteButton= new Button();
         this.datum=datum;
         dateTimePicker= new DateTimePicker();
@@ -77,10 +75,11 @@ public class KalenderPopover extends PopOver {
         cancelButton.setText("cancel");
         deleteButton.setId("deleteButton");
 
-
         configureArrowLocation();
+
         TerminPopOver();
         this.show(node);
+
     }
 
 
@@ -94,7 +93,6 @@ public class KalenderPopover extends PopOver {
             this.show(node);
             saveButton.setOnMouseClicked(saveEvent->{
                 if(isFilledCorrectly()){
-                    em.getTransaction().begin();
                     K_Kalender kalender = new K_Kalender();
                     kalender.setK_Title(titleField.getText());
                     kalender.setK_Beschreibung(beschreibung.getText());
@@ -178,7 +176,7 @@ public class KalenderPopover extends PopOver {
         buttonsBox.setAlignment(Pos.CENTER_RIGHT);
         buttonsBox.setSpacing(20);
         NotificationBox notificationBox=new NotificationBox();
-
+        notificationBox.setAlignment(Pos.CENTER);
         notificationBox.setSpacing(20);
 
         dateAndNot.getChildren().addAll(dateTimePicker);
@@ -187,10 +185,9 @@ public class KalenderPopover extends PopOver {
             this.hide();
         });
 
-        VBox notificationslayout = new VBox();
-        notificationslayout.setSpacing(2);
+        HBox notificationslayout = new HBox();
+        notificationslayout.setSpacing(20);
         notificationslayout.getChildren().addAll(new Label("Notification"), notificationBox);
-
         notificationslayout.setAlignment(Pos.CENTER_LEFT);
 
         Layout.getChildren().addAll(dateAndNot,notificationslayout,titleField,beschreibung,buttonsBox);
@@ -218,9 +215,9 @@ public class KalenderPopover extends PopOver {
 
 
 
-        if (!filteredList.isEmpty()) {
-            for (int i = 0; i < filteredList.size(); i++) {
-                filteredList.get(i);
+        if (!KalenderListe.isEmpty()) {
+            for (int i = 0; i < KalenderListe.size(); i++) {
+                KalenderListe.get(i);
                 VBox TermineBox = new VBox();
                 TermineBox.setStyle("-fx-border-radius: 20; -fx-alignment: center; -fx-border-color: black");
                 TermineBox.setPrefWidth(200);
@@ -244,14 +241,14 @@ public class KalenderPopover extends PopOver {
                 });
 
 
-                TermineBox.getChildren().add((new Label(!filteredList.get(i).getK_Title().isEmpty() ?   KalenderListe.get(i).getK_Title():"<KEIN TITLE>")));
-                TermineBox.getChildren().add(new Label(filteredList.get(i).getK_vonDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_vonDatum().getMonthValue() + "." + KalenderListe.get(i).getK_vonDatum().getYear() + " um: " + KalenderListe.get(i).getK_vonDatum().getHour() + ":" + KalenderListe.get(i).getK_vonDatum().getMinute()));
-                TermineBox.getChildren().add(new Label(filteredList.get(i).getK_bisDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_bisDatum().getMonthValue() + "." + KalenderListe.get(i).getK_bisDatum().getYear() + " um: " + KalenderListe.get(i).getK_bisDatum().getHour() + ":" + KalenderListe.get(i).getK_bisDatum().getMinute()));
+                TermineBox.getChildren().add((new Label(KalenderListe.get(i).getK_Title() != null ?   KalenderListe.get(i).getK_Title():"<KEIN TITLE>")));
+                TermineBox.getChildren().add(new Label(KalenderListe.get(i).getK_vonDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_vonDatum().getMonthValue() + "." + KalenderListe.get(i).getK_vonDatum().getYear() + " um: " + KalenderListe.get(i).getK_vonDatum().getHour() + ":" + KalenderListe.get(i).getK_vonDatum().getMinute()));
+                TermineBox.getChildren().add(new Label(KalenderListe.get(i).getK_bisDatum().getDayOfMonth() + "." + KalenderListe.get(i).getK_bisDatum().getMonthValue() + "." + KalenderListe.get(i).getK_bisDatum().getYear() + " um: " + KalenderListe.get(i).getK_bisDatum().getHour() + ":" + KalenderListe.get(i).getK_bisDatum().getMinute()));
                 TerminepopoverLayout.getChildren().addAll(TermineBox);
             }
             scrollPane.setContent(TerminepopoverLayout);
         }else{
-            scrollPane.setContent(new Text("      <Keine Einträge>      "));
+            scrollPane.setContent(new Text("   <Keine Einträge>   "));
         }
 
 
@@ -266,13 +263,11 @@ public class KalenderPopover extends PopOver {
 
         this.setContentNode(Allgemein);
         configureArrowLocation();
-        this.show(node);
     }
     //da wird geschaut, ob alles so gefüllt ist wie es sein sollte
     public boolean isFilledCorrectly() {
 
-        if (
-                of(
+        return of(
                 dateTimePicker.getVondatepicker().getValue().getYear(),
                 dateTimePicker.getVondatepicker().getValue().getMonthValue(),
                 dateTimePicker.getVondatepicker().getValue().getDayOfMonth(),
@@ -285,12 +280,7 @@ public class KalenderPopover extends PopOver {
                                 dateTimePicker.getBisdatepicker().getValue().getDayOfMonth(),
                                 dateTimePicker.getBishourComboBox().getValue(),
                                 dateTimePicker.getBisminuteComboBox().getValue()))
-        && titleField.getText()!=null){
-
-            return true;
-        }else{
-            return false;
-        }
+                && titleField.getText() != null;
     }
     private void addButtonToDelete(VBox terminebox, K_Kalender k) {
         //lösch den Termin der hier verwendet wird
