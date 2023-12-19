@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="version 1.5">
-      <change afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalendarActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
+    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="version 1">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Kalender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Kalender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Starter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Starter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Kalender.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Kalender.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Fach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Fach.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
