@@ -1,12 +1,14 @@
 package entities;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity(name ="K_Kalender")
+@Entity
 @Table(name = "K_Kalender")
 public class K_Kalender {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "K_ID", unique = true, nullable = false)
     private int K_ID;
 
@@ -14,17 +16,17 @@ public class K_Kalender {
     private String K_Title;
     @Column(name = "K_Beschreibung")
     private String K_Beschreibung;
-    @Column(name = "K_Termin")
-    private Date K_Termin;
-    @Column(name = "K_Uhrzeit")
-    private String K_Uhrzeit;
+    @Column(name = "K_vonDatum ")
+    private LocalDateTime K_vonDatum;
+    @Column(name = "K_bisDatum ")
+    private LocalDateTime K_bisDatum;
 
-    public K_Kalender(int k_ID, String k_Title, String k_Beschreibung, Date k_Termin, String k_Uhrzeit) {
+    public K_Kalender(int k_ID, String k_Title, String k_Beschreibung, LocalDateTime k_vonDatum, LocalDateTime k_bisDatum) {
         K_ID = k_ID;
         K_Title = k_Title;
         K_Beschreibung = k_Beschreibung;
-        K_Termin = k_Termin;
-        K_Uhrzeit = k_Uhrzeit;
+        K_vonDatum = k_vonDatum;
+        K_bisDatum = k_bisDatum;
     }
 
     public K_Kalender() {
@@ -32,10 +34,6 @@ public class K_Kalender {
 
     public int getK_ID() {
         return K_ID;
-    }
-
-    public void setK_ID(int k_ID) {
-        K_ID = k_ID;
     }
 
     public String getK_Title() {
@@ -54,19 +52,32 @@ public class K_Kalender {
         K_Beschreibung = k_Beschreibung;
     }
 
-    public Date getK_Termin() {
-        return K_Termin;
+    public LocalDateTime getK_vonDatum() {
+        return K_vonDatum;
     }
 
-    public void setK_Termin(Date k_Termin) {
-        K_Termin = k_Termin;
+    public void setK_vonDatum(LocalDateTime k_vonDatum) {
+        K_vonDatum = k_vonDatum;
     }
 
-    public String getK_Uhrzeit() {
-        return K_Uhrzeit;
+    public LocalDateTime getK_bisDatum() {
+        return K_bisDatum;
     }
 
-    public void setK_Uhrzeit(String k_Uhrzeit) {
-        K_Uhrzeit = k_Uhrzeit;
+    public void setK_bisDatum(LocalDateTime k_bisDatum) {
+        K_bisDatum = k_bisDatum;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "K_Kalender{" +
+                "K_ID=" + K_ID +
+                ", K_Title='" + K_Title + '\'' +
+                ", K_Beschreibung='" + K_Beschreibung + '\'' +
+                ", K_vonDatum=" + K_vonDatum +
+                ", K_bisDatum=" + K_bisDatum +
+                '}';
     }
 }
