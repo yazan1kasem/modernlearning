@@ -13,7 +13,6 @@ module modern.learning.modernlearning {
     requires org.jetbrains.annotations;
     requires transitive javafx.graphics;
     requires org.controlsfx.controls;
-    requires lombok;
 //    requires com.calendarfx.view;
 //    requires fr.brouillard.oss.cssfx;
 

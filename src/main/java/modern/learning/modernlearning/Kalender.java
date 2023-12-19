@@ -62,7 +62,6 @@ public class Kalender implements Initializable {
     // Datumvariablen, um das fokussierte Datum und das aktuelle Datum zu verfolgen
     private ZonedDateTime dateFocus;
     private ZonedDateTime today;
-    private Rectangle oldRectangle;
     private final EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
     private KalenderPopover kalenderPopover; // Declare a class-level variable
 
@@ -180,8 +179,11 @@ public class Kalender implements Initializable {
                             Text date = new Text(String.valueOf(calculatedDate - ersterTagImMonat));
                             double textTranslationY = -(rectangleHeight / 2) * 0.75;
                             date.setTranslateY(textTranslationY);
+                            Text eintraegeanzahl=new Text(String.valueOf("("+filteredList.size() + ") Einträge"));
+                            eintraegeanzahl.setTranslateY(-(rectangleHeight / 2) * 0.20);
+                            eintraegeanzahl.setStyle("-fx-text-fill: red");
                             stackPane.getChildren().add(date);
-                            stackPane.getChildren().add(new Text("("+filteredList.size() + ") Einträge"));
+                            stackPane.getChildren().add(eintraegeanzahl);
 
 
                             // Setzt den Rahmen von Rechtecken, die den heutigen Tag repräsentieren, auf blau.
@@ -231,7 +233,6 @@ public class Kalender implements Initializable {
 
         }
 
-        oldRectangle = ownerRectangle;
     }
     private @NotNull Label TextV(String text){
         Label label= new Label(text);

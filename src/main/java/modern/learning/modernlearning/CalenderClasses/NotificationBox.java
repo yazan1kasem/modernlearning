@@ -1,5 +1,7 @@
 package modern.learning.modernlearning.CalenderClasses;
 
+import entities.K_Kalender;
+import entities.N_Notifications;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -62,6 +64,27 @@ public class NotificationBox extends HBox {
 
 
 
+    }
+
+    public N_Notifications GehtDataNotification(K_Kalender kalender){
+        N_Notifications n_notifications = new N_Notifications();
+        if(Zeit.getValue().equals("Minuten")){
+            n_notifications.setN_Vorzeit(kalender.getK_vonDatum().minusMinutes(Integer.parseInt( ZahlenEingabe.getText())));
+        }
+        if(Zeit.getValue().equals("Stunden")){
+            n_notifications.setN_Vorzeit(kalender.getK_vonDatum().minusHours(Integer.parseInt( ZahlenEingabe.getText())));
+
+        }
+        if(Zeit.getValue().equals("Tage")){
+            n_notifications.setN_Vorzeit(kalender.getK_vonDatum().minusDays(Integer.parseInt( ZahlenEingabe.getText())));
+
+        }
+        if(Zeit.getValue().equals("Monate")){
+            n_notifications.setN_Vorzeit(kalender.getK_vonDatum().minusMonths(Integer.parseInt( ZahlenEingabe.getText())));
+
+        }
+        n_notifications.setN_K_ID(kalender);
+        return n_notifications;
     }
 
 
