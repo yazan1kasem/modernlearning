@@ -10,11 +10,12 @@
         <class> entities.N_Notifications</class>
         <class> entities.K_Kalender</class>
         <class> entities.KF_Klassefach</class>
+        <class> entities.F_Fach</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:Modernlearning.sqlite" />
-            <property name="javax.persistence.schema-generation.database.action" value="none" />
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
             <property name="hibernate.show_sql" value="true" />
         </properties>
     </persistence-unit>
