@@ -3,12 +3,17 @@ package modern.learning.modernlearning.CalenderClasses;
 import entities.K_Kalender;
 import entities.N_Notifications;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.ResourceBundle;
 
@@ -16,6 +21,8 @@ public class NotificationBox extends HBox {
     private TextField ZahlenEingabe;
     private ComboBox<String> Zeit;
     private List<String> Zeitnamen;
+    public static ToggleSwitch EinAus;
+
 
 
     public NotificationBox() {
@@ -30,7 +37,15 @@ public class NotificationBox extends HBox {
         EingabeCorrect();
         Zeit.getItems().addAll(Zeitnamen);
         Zeit.setValue(Zeitnamen.get(0));
-        this.getChildren().addAll(ZahlenEingabe,Zeit);
+        EinAus= new ToggleSwitch();
+        EinAus.setAlignment(Pos.CENTER);
+        EinAus.setSelected(true);
+        clicked();
+        EinAus.setOnMouseClicked(ANAUSEVENT -> {
+            clicked();
+        });
+        this.getChildren().addAll(ZahlenEingabe,Zeit,EinAus);
+        this.setAlignment(Pos.CENTER_LEFT);
         Zeit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("SELECTED " + newValue);
             EingabeCorrect();
@@ -83,10 +98,24 @@ public class NotificationBox extends HBox {
             n_notifications.setN_Vorzeit(kalender.getK_vonDatum().minusMonths(Integer.parseInt( ZahlenEingabe.getText())));
 
         }
+
         n_notifications.setN_K_ID(kalender);
+        addBenachrichtigung(n_notifications);
         return n_notifications;
     }
+    private void addBenachrichtigung(N_Notifications Benachrichtigung){
+        Benachrichtigung benachrichtigung = new Benachrichtigung(Benachrichtigung.getN_K_ID().getK_Title(),Benachrichtigung.getN_Vorzeit(),Benachrichtigung.getN_id());
+    }
 
+    public void clicked(){
+        if(!EinAus.isSelected()){
+            ZahlenEingabe.setDisable(true);
+            Zeit.setDisable(true);
+        }else{
+            ZahlenEingabe.setDisable(false);
+            Zeit.setDisable(false);
+        }
+    }
 
 
 
@@ -115,5 +144,13 @@ public class NotificationBox extends HBox {
 
     public void setZeitnamen(List<String> zeitnamen) {
         Zeitnamen = zeitnamen;
+    }
+
+    public ToggleSwitch getEinAus() {
+        return EinAus;
+    }
+
+    public void setEinAus(ToggleSwitch einAus) {
+        EinAus = einAus;
     }
 }

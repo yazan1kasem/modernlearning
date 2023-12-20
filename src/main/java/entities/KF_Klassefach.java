@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 @Entity(name = "KF_Klassefach")
 @Table(name = "KF_Klassefach")
-public class KF_Klassefach implements Serializable {
+public class KF_Klassefach  {
     @Id
     @Column(name = "KF_BEZ", unique = true, nullable = false)
     private String KF_BEZ;

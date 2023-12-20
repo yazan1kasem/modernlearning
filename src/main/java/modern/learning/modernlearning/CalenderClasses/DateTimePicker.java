@@ -1,11 +1,14 @@
 package modern.learning.modernlearning.CalenderClasses;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 import org.hibernate.type.ZonedDateTimeType;
 
 import java.time.LocalDate;
@@ -38,6 +41,7 @@ public class DateTimePicker extends VBox {
         HBox hBoxbis = new HBox();
         hBoxbis.setSpacing(10);
         hBoxbis.setAlignment(Pos.CENTER);
+
 
         // Layout
         hBoxvon.getChildren().addAll(new Label("von: "),vondatepicker,vonhourComboBox, new Label(":"), vonminuteComboBox);
@@ -75,6 +79,71 @@ public class DateTimePicker extends VBox {
                 bisminuteComboBox.setValue(vonminuteComboBox.getValue());
             }
         }
+        vondatepicker.valueProperty().addListener(new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+                if(bisdatepicker.getValue().isBefore(newValue)){
+                    bisdatepicker.setValue(newValue);
+                }
+            }
+        });
+        vonhourComboBox.valueProperty().addListener(new ChangeListener<>(){
+            @Override
+            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                if(newValue>bishourComboBox.getValue()){
+                    if(newValue<23){
+                        bishourComboBox.setValue(newValue+1);
+                    }else{
+                        bishourComboBox.setValue(newValue);
+                        if(vonminuteComboBox.getValue()>bisminuteComboBox.getValue()){
+                            if(vonminuteComboBox.getValue()<59){
+                                bisminuteComboBox.setValue(vonminuteComboBox.getValue()+1);
+                            }else{
+                                bisminuteComboBox.setValue(vonminuteComboBox.getValue());
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        vonminuteComboBox.valueProperty().addListener(new ChangeListener<>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                if(vonhourComboBox.getValue()>=bishourComboBox.getValue()){
+                    if(vonhourComboBox.getValue()<23){
+                        bishourComboBox.setValue(vonhourComboBox.getValue()+1);
+                    }else{
+                        bishourComboBox.setValue(vonhourComboBox.getValue());
+                        if(newValue>bisminuteComboBox.getValue()){
+                            if(newValue<59){
+                                bisminuteComboBox.setValue(newValue+1);
+                            }else{
+                                bisminuteComboBox.setValue(newValue);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        bishourComboBox.valueProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                if(vonhourComboBox.getValue()>1){
+                    vonhourComboBox.setValue(newValue-1);
+                } else if (vonhourComboBox.getValue()<=1) {
+                    bishourComboBox.setValue(vonhourComboBox.getValue()+1);
+                } else{
+                    if(vonminuteComboBox.getValue()>0){
+                        if(vonminuteComboBox.getValue()>bisminuteComboBox.getValue()){
+                            bisminuteComboBox.setValue(newValue);
+                        }else{
+                            bisminuteComboBox.setValue(vonminuteComboBox.getValue()+1);
+                        }
+                    }
+                }
+            }
+        });
 
     }
     public void setKastendatum(LocalDateTime kastendatum) {

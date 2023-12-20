@@ -8,7 +8,7 @@
 <?import java.awt.geom.QuadCurve2D.Double?>
 
 <AnchorPane fx:id="KalenderF" prefHeight="640.0" prefWidth="1000.0" style="-fx-background-color: #FFAB2F"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Kalender">
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.KalenderController">
     <children>
         <ScrollPane>
             <VBox fx:id="calendarPanel" spacing="30" prefWidth="${KalenderF.width}" prefHeight="${KalenderF.height}" style=" -fx-background-color: #FFAB2F; -fx-padding: 30 0 0 0">

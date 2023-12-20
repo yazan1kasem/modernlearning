@@ -1,7 +1,11 @@
 package modern.learning.modernlearning.CalenderClasses;
 
 import entities.K_Kalender;
+import entities.N_Notifications;
 import javafx.animation.ScaleTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,7 +21,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import modern.learning.modernlearning.KalenderController;
 import org.controlsfx.control.PopOver;
 
 import javax.persistence.EntityManager;
@@ -28,6 +34,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -52,7 +59,7 @@ public class KalenderPopover extends PopOver {
     //Selected Node
     private Node node;
     private NotificationBox notificationBox=new NotificationBox();
-
+    private KalenderController kalenderController;
     private final EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
     /******************************************************
@@ -61,7 +68,6 @@ public class KalenderPopover extends PopOver {
     public KalenderPopover(Node node, LocalDate datum) {
         this.setTitle("Termin am: " + datum);
         this.node=node;
-
         titleField= new TextField();
         beschreibung= new TextArea();
         saveButton=new Button();
@@ -81,6 +87,13 @@ public class KalenderPopover extends PopOver {
         configureArrowLocation();
         TerminPopOver();
         this.show(node);
+        if(datum.isBefore(LocalDate.now())){
+            notificationBox.getEinAus().setSelected(false);
+            notificationBox.getZeit().setDisable(true);
+            notificationBox.getZahlenEingabe().setDisable(true);
+            notificationBox.getEinAus().setDisable(true);
+        }
+
     }
 
 
@@ -112,9 +125,16 @@ public class KalenderPopover extends PopOver {
                                     dateTimePicker.getBishourComboBox().getValue(),
                                     dateTimePicker.getBisminuteComboBox().getValue())
                     );
-                    em.persist(notificationBox.GehtDataNotification(kalender));
+                    try {
+                        if(notificationBox.EinAus.isSelected()){
+                            em.persist(notificationBox.GehtDataNotification(kalender));
+                        }
+                    }catch (Exception e){
+                        System.out.println("Keine Benachrichtigung ");
+                    }
                     em.persist(kalender);
                     em.getTransaction().commit();
+                    kalenderController.drawCalendar();
                     this.hide();
                 }else{
                     System.out.println("\u001B[31m" +"save failed"+ "\u001B[0m");
@@ -138,6 +158,25 @@ public class KalenderPopover extends PopOver {
             dateTimePicker.getBisminuteComboBox().setValue(kalender.getK_bisDatum().getMinute());
             titleField.setText(kalender.getK_Title()!=null ? kalender.getK_Title(): null);
             beschreibung.setText(kalender.getK_Beschreibung()!=null ? kalender.getK_Beschreibung():null);
+            LocalDateTime notificationdate= (LocalDateTime) em.createQuery("select n.N_Vorzeit from N_Notifications n where n.N_K_ID=:id").setParameter("id", kalender).getSingleResult();
+            if(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toMinutes()<60){
+                notificationBox.getZeit().setValue("Minuten");
+                notificationBox.getZahlenEingabe().setText(String.valueOf(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toMinutes()));
+            } else if (java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toHours()<24) {
+                notificationBox.getZeit().setValue("Stunden");
+                notificationBox.getZahlenEingabe().setText(String.valueOf(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toHours()  ));
+
+            } else if (java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()<30 ) {
+                notificationBox.getZeit().setValue("Tage");
+                notificationBox.getZahlenEingabe().setText(String.valueOf(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()  ));
+
+            } else if (java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()>30) {
+                notificationBox.getZeit().setValue("Monate");
+                notificationBox.getZahlenEingabe().setText(String.valueOf( java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()/30 ));
+
+            }else{
+                notificationBox.getEinAus().setSelected(false);
+            }
             saveButton.setOnMouseClicked(UpdateEvent->{
                 if(isFilledCorrectly()){
                     em.getTransaction().begin();
@@ -157,7 +196,13 @@ public class KalenderPopover extends PopOver {
                                     dateTimePicker.getBishourComboBox().getValue(),
                                     dateTimePicker.getBisminuteComboBox().getValue())
                     );
-                    em.persist(notificationBox.GehtDataNotification(kalender));
+                    try {
+                        if(notificationBox.EinAus.isSelected()){
+                            em.persist(notificationBox.GehtDataNotification(kalender));
+                        }
+                    }catch (Exception e){
+                        System.out.println("Keine Benachrichtigung ");
+                    }
                     em.persist(kalender);
                     em.getTransaction().commit();
                     this.hide();
@@ -301,6 +346,8 @@ public class KalenderPopover extends PopOver {
                 em.remove(k);
                 em.getTransaction().commit();
                 TerminPopOver();
+                kalenderController.drawCalendar();
+
                 System.out.println("\u001B[32m" + "deleted"+"\u001B[0m");
             }catch (Exception e) {
                 System.out.println("\u001B[31m" +"delete failed"+ "\u001B[0m");
@@ -402,5 +449,13 @@ public class KalenderPopover extends PopOver {
 
     public void setDeleteButton(Button deleteButton) {
         this.deleteButton = deleteButton;
+    }
+
+    public KalenderController getKalenderController() {
+        return kalenderController;
+    }
+
+    public void setKalenderController(KalenderController kalenderController) {
+        this.kalenderController = kalenderController;
     }
 }
