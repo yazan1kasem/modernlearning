@@ -1,12 +1,20 @@
 package modern.learning.modernlearning.CalenderClasses;
 
+import javafx.application.Platform;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 import modern.learning.modernlearning.KalenderController;
+import modern.learning.modernlearning.Starter;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDateTime;
+
 
 public class Benachrichtigung implements Runnable{
     private volatile boolean isRunning = true;
@@ -25,7 +33,6 @@ public class Benachrichtigung implements Runnable{
 
         new Thread(this).start();
 
-
     }
 
     @Override
@@ -37,7 +44,7 @@ public class Benachrichtigung implements Runnable{
                 // Simulate some work
                 if(LocalDateTime.now().equals(BenachrichtigungsZeit) || LocalDateTime.now().isAfter(BenachrichtigungsZeit)){
                     try {
-                        KalenderController.removeNotificationById(em, Notificationsid);
+                        Starter.removeNotificationById(em, Notificationsid);
                     } finally {
                         em.close();
                     }
@@ -56,6 +63,10 @@ public class Benachrichtigung implements Runnable{
                     System.out.println("hallo");
                 }
                 Thread.sleep(1000);
+                Platform.runLater(() -> {
+                    isRunning=false;
+                    System.out.println("Thread Shutdown");
+                });
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -82,6 +93,18 @@ public class Benachrichtigung implements Runnable{
             // Create a TrayIcon
             TrayIcon trayIcon = new TrayIcon(image, "Tray Icon");
 
+
+            trayIcon.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        // Open Google in the default browser
+                       Starter.launch();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
 
 
             // Add the TrayIcon to the SystemTray

@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,11 +29,13 @@ import java.util.EventListener;
 import java.util.List;
 
 public class Starter extends Application {
-
+    public static EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Kalender.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add("file:src/main/resources/style.css");
+
         stage.setTitle("Modern learning");
         stage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
         stage.setMinHeight(640);
@@ -42,6 +45,7 @@ public class Starter extends Application {
         stage.setScene(scene);
 
         stage.show();
+
         stage.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -54,9 +58,23 @@ public class Starter extends Application {
                 System.out.println("w: " + newValue);
             }
         });
+        stage.setOnCloseRequest(closeThreads->{
+            Platform.exit();
+            System.exit(0);
+        });
 
-        // Start the thread
-
+    }
+    public static void removeNotificationById(EntityManager em, int id) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.remove(em.find(N_Notifications.class, id));
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        }
     }
 
 

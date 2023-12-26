@@ -34,10 +34,10 @@ public class NotificationBox extends HBox {
         Zeitnamen.add("Stunden");
         Zeitnamen.add("Tage");
         Zeitnamen.add("Monate");
-        EingabeCorrect();
         Zeit.getItems().addAll(Zeitnamen);
         Zeit.setValue(Zeitnamen.get(0));
         EinAus= new ToggleSwitch();
+        EinAus.getStyleClass().add("selected-button");
         EinAus.setAlignment(Pos.CENTER);
         EinAus.setSelected(true);
         clicked();
@@ -46,38 +46,6 @@ public class NotificationBox extends HBox {
         });
         this.getChildren().addAll(ZahlenEingabe,Zeit,EinAus);
         this.setAlignment(Pos.CENTER_LEFT);
-        Zeit.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("SELECTED " + newValue);
-            EingabeCorrect();
-
-        });
-        ZahlenEingabe.textProperty().addListener((observable, oldValue, newValue) -> {
-            EingabeCorrect();
-        });
-    }
-    private void EingabeCorrect(){
-
-            String selectedZeit = Zeit.getValue();
-
-            try {
-                int value = Integer.parseInt(ZahlenEingabe.getText());
-
-                if ("Minuten".equals(selectedZeit) && value > 59) {
-                    System.out.println("Minutes cannot be greater than 59");
-                } else if ("Stunden".equals(selectedZeit) && value > 23) {
-                    System.out.println("Hours cannot be greater than 23");
-                } else if ("Tage".equals(selectedZeit) && value > 30) {
-                    System.out.println("Days cannot be greater than 30");
-                } else if ("Monate".equals(selectedZeit) && (value < 1 || value > 12)) {
-                    System.out.println("Month should be between 1 and 12");
-                }
-
-            } catch (NumberFormatException e) {
-                // Handle the case where newValue is not a valid integer
-                System.out.println("Invalid input for " + selectedZeit);
-            }
-
-
 
     }
 
