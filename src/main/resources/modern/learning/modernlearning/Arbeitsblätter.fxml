@@ -10,5 +10,8 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="modern.learning.modernlearning.Arbeitsblätter"
             prefHeight="400.0" prefWidth="600.0" >
+            <FlowPane fx:id="Arbeitsblaetter"/>
+
+
 
 </AnchorPane>
