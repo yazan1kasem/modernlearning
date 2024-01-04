@@ -31,7 +31,7 @@ import java.util.List;
 public class Starter2 extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Fach.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Dokumente.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         stage.setTitle("Modern learning");

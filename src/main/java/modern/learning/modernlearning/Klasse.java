@@ -42,5 +42,26 @@ public class Klasse {
 
             currentStage.show();
         }catch (Exception e) {}
+
+    }
+    public void Dokumente(MouseEvent mouseEvent) {
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Klasse.fxml"));
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Dokumente.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            currentStage.setTitle("Modern learning");
+            currentStage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
+            currentStage.setMinHeight(640);
+            currentStage.setMinWidth(1000);
+            currentStage.setWidth(scene.getWidth());
+
+            currentStage.setScene(scene);
+
+            currentStage.show();
+        } catch (Exception e) {
+        }
     }
 }

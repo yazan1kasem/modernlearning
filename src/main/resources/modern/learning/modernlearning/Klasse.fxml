@@ -22,9 +22,11 @@
                     <Button fx:id="class3Button" onAction="#handleClassSelection" text="3. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
                     <Button fx:id="class4Button" onAction="#handleClassSelection" text="4. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
                     <Button fx:id="class5Button" onAction="#handleClassSelection" text="5. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button layoutX="30" layoutY="40" fx:id="DokumentButton" onMouseClicked="#Dokumente" text="DOKUMENTE"  mnemonicParsing="false" style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
                 </FlowPane>
             </VBox>
         </FlowPane>
         <Button layoutX="30" layoutY="10" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false" style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+
     </children>
 </AnchorPane>
