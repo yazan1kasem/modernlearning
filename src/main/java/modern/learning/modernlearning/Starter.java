@@ -11,25 +11,30 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.EventListener;
 import java.util.List;
 
 public class Starter extends Application {
-    public static EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
+    public static boolean geschlossen=false;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Kalender.fxml"));
@@ -38,13 +43,13 @@ public class Starter extends Application {
 
         stage.setTitle("Modern learning");
         stage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
-        stage.setMinHeight(640);
-        stage.setMinWidth(1000);
-        stage.setWidth(scene.getWidth());
+        stage.setMinHeight(615);
+        stage.setMinWidth(Toolkit.getDefaultToolkit().getScreenSize().width / 2);
 
         stage.setScene(scene);
 
         stage.show();
+        stage.setWidth(scene.getWidth());
 
         stage.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -59,23 +64,16 @@ public class Starter extends Application {
             }
         });
         stage.setOnCloseRequest(closeThreads->{
-            Platform.exit();
+            geschlossen=true;
             System.exit(0);
         });
 
+
+
+
     }
-    public static void removeNotificationById(EntityManager em, int id) {
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.remove(em.find(N_Notifications.class, id));
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-        }
-    }
+
+
 
 
 

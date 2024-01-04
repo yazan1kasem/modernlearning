@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -25,15 +27,18 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import modern.learning.modernlearning.KalenderController;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.control.WorldMapView;
 
+import javafx.scene.input.KeyEvent;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.swing.*;
+import javax.xml.stream.Location;
 
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.net.URL;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -62,6 +67,10 @@ public class KalenderPopover extends PopOver {
     private Node node;
     private NotificationBox notificationBox=new NotificationBox();
     private KalenderController kalenderController;
+    N_Notifications notification = null;
+
+    private int mouseX ;
+    private int mouseY ;
     private final EntityManager em = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
     /******************************************************
@@ -70,11 +79,13 @@ public class KalenderPopover extends PopOver {
     public KalenderPopover(Node node, LocalDate datum) {
         this.setTitle("Termin am: " + datum);
         this.node=node;
+
+
         titleField= new TextField();
         beschreibung= new TextArea();
+        beschreibung.setWrapText(true);
         saveButton=new Button();
         cancelButton= new Button();
-
         deleteButton= new Button();
         this.datum=datum;
         dateTimePicker= new DateTimePicker();
@@ -85,10 +96,12 @@ public class KalenderPopover extends PopOver {
         saveButton.setText("save");
         cancelButton.setText("cancel");
         deleteButton.setId("deleteButton");
-
+        mouseX= MouseInfo.getPointerInfo().getLocation().x;
+        mouseY= MouseInfo.getPointerInfo().getLocation().y;
         configureArrowLocation();
         TerminPopOver();
         this.show(node);
+
         if(datum.isBefore(LocalDate.now())){
             notificationBox.getEinAus().setSelected(false);
             notificationBox.getZeit().setDisable(true);
@@ -98,6 +111,47 @@ public class KalenderPopover extends PopOver {
         this.arrowSizeProperty().addListener((observable, oldValue, newValue) -> {
             saveButton.setMinWidth(newValue.floatValue() / 2);
             cancelButton.setMinWidth(newValue.floatValue() / 2);
+        });
+        this.addEventHandler(KeyEvent.KEY_PRESSED,new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    if(isFilledCorrectly()){
+                        em.getTransaction().begin();
+                        K_Kalender kalender = new K_Kalender();
+                        kalender.setK_Title(titleField.getText());
+                        kalender.setK_Beschreibung(beschreibung.getText());
+
+                        kalender.setK_vonDatum(
+                                of(dateTimePicker.getVondatepicker().getValue().getYear(),
+                                        dateTimePicker.getVondatepicker().getValue().getMonth().getValue(),
+                                        dateTimePicker.getVondatepicker().getValue().getDayOfMonth(),
+                                        dateTimePicker.getVonhourComboBox().getValue(),
+                                        dateTimePicker.getVonminuteComboBox().getValue()));
+                        kalender.setK_bisDatum(
+                                of(dateTimePicker.getBisdatepicker().getValue().getYear(),
+                                        dateTimePicker.getBisdatepicker().getValue().getMonth().getValue(),
+                                        dateTimePicker.getBisdatepicker().getValue().getDayOfMonth(),
+                                        dateTimePicker.getBishourComboBox().getValue(),
+                                        dateTimePicker.getBisminuteComboBox().getValue())
+                        );
+                        try {
+                            if(notificationBox.EinAus.isSelected()){
+                                notification=notificationBox.GehtDataNotification(kalender);
+                                em.persist(notification);
+                            }
+                        }catch (Exception e){
+                            System.out.println("Keine Benachrichtigung ");
+                        }
+                        em.persist(kalender);
+                        em.getTransaction().commit();
+                        notificationBox.addBenachrichtigung(notification);
+                        KalenderPopover.this.hide();
+                        saveButton.requestFocus();
+                        kalenderController.drawCalendar();
+                    }
+                }
+            }
         });
 
     }
@@ -109,6 +163,10 @@ public class KalenderPopover extends PopOver {
             dateTimePicker.setinhalt();
             this.setContentNode(PopOverLayout());
             this.show(node);
+            titleField.requestFocus();
+            notificationBox.getEinAus().setSelected(false);
+            notificationBox.getZahlenEingabe().setDisable(true);
+            notificationBox.getZeit().setDisable(true);
             saveButton.setOnMouseClicked(saveEvent->{
                 if(isFilledCorrectly()){
                     em.getTransaction().begin();
@@ -131,7 +189,8 @@ public class KalenderPopover extends PopOver {
                     );
                     try {
                         if(notificationBox.EinAus.isSelected()){
-                            em.persist(notificationBox.GehtDataNotification(kalender));
+                            notification=notificationBox.GehtDataNotification(kalender);
+                            em.persist(notification);
                         }
                     }catch (Exception e){
                         System.out.println("Keine Benachrichtigung ");
@@ -139,6 +198,9 @@ public class KalenderPopover extends PopOver {
                     em.persist(kalender);
                     em.getTransaction().commit();
                     kalenderController.drawCalendar();
+                    if(notificationBox.EinAus.isSelected()) {
+                        notificationBox.addBenachrichtigung(notification);
+                    }
                     this.hide();
                 }else{
                     System.out.println("\u001B[31m" +"save failed"+ "\u001B[0m");
@@ -154,6 +216,8 @@ public class KalenderPopover extends PopOver {
         try {
             this.setContentNode(PopOverLayout());
             this.show(node);
+            titleField.requestFocus();
+            dateTimePicker.setinhalt();
             dateTimePicker.getVondatepicker().setValue(LocalDate.of(kalender.getK_vonDatum().getYear(),kalender.getK_vonDatum().getMonthValue(),kalender.getK_vonDatum().getDayOfMonth()));
             dateTimePicker.getBisdatepicker().setValue(LocalDate.of(kalender.getK_bisDatum().getYear(),kalender.getK_bisDatum().getMonthValue(),kalender.getK_bisDatum().getDayOfMonth()));
             dateTimePicker.getVonhourComboBox().setValue(kalender.getK_vonDatum().getHour());
@@ -169,21 +233,18 @@ public class KalenderPopover extends PopOver {
                 notificationdate=null;
             }
             if(notificationdate!=null){
-                if(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toMinutes()<60){
+                if(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toMinutes()%60!=0){
                     notificationBox.getZeit().setValue("Minuten");
                     notificationBox.getZahlenEingabe().setText(String.valueOf(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toMinutes()));
-                } else if (java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toHours()<24) {
+                } else if (java.time.Duration.between(notificationdate, kalender.getK_vonDatum()).toHours()  % 24!=0) {
                     notificationBox.getZeit().setValue("Stunden");
                     notificationBox.getZahlenEingabe().setText(String.valueOf(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toHours()  ));
-
                 } else if (java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()%30!=0 ) {
                     notificationBox.getZeit().setValue("Tage");
                     notificationBox.getZahlenEingabe().setText(String.valueOf(java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()  ));
-
                 } else if (java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()%30==0 ){
                     notificationBox.getZeit().setValue("Monate");
                     notificationBox.getZahlenEingabe().setText(String.valueOf( java.time.Duration.between(notificationdate,kalender.getK_vonDatum()).toDays()/30 ));
-
                 }
             }
             else{
@@ -212,13 +273,29 @@ public class KalenderPopover extends PopOver {
                     );
                     try {
                         if(notificationBox.EinAus.isSelected()){
-                            em.persist(notificationBox.GehtDataNotification(kalender));
+                            List<N_Notifications> vergleichnotification = em.createQuery("SELECT n FROM N_Notifications n WHERE n.N_K_ID = :kalender", N_Notifications.class)
+                                    .setParameter("kalender", kalender)
+                                    .getResultList();
+
+                            if (vergleichnotification.size() == 0) {
+                                notification = notificationBox.GehtDataNotification(kalender);
+                                em.persist(notification);
+                            }else{
+                                for(int i=0; i < vergleichnotification.size();i++){
+                                    em.remove(vergleichnotification.get(i));
+                                }
+                                notification = notificationBox.GehtDataNotification(kalender);
+                                em.persist(notification);
+                            }
                         }
                     }catch (Exception e){
                         System.out.println("Keine Benachrichtigung ");
                     }
                     em.persist(kalender);
                     em.getTransaction().commit();
+                    if(notificationBox.EinAus.isSelected()) {
+                        notificationBox.addBenachrichtigung(notification);
+                    }
                     this.hide();
                 }
             });
@@ -252,7 +329,7 @@ public class KalenderPopover extends PopOver {
 
         VBox notificationslayout = new VBox();
         notificationslayout.setSpacing(2);
-        notificationslayout.getChildren().addAll(new Label("Notification"), notificationBox);
+        notificationslayout.getChildren().addAll(new Label("erinnere mich"), notificationBox);
 
         notificationslayout.setAlignment(Pos.CENTER_LEFT);
 
@@ -297,9 +374,8 @@ public class KalenderPopover extends PopOver {
 
         return button;
     }
-
-
     public void TerminPopOver(){
+
         VBox Allgemein = new VBox(10);
         Allgemein.setPadding(new Insets(10));
         VBox TerminepopoverLayout = new VBox(10);
@@ -338,7 +414,7 @@ public class KalenderPopover extends PopOver {
                 });
                 //Transitions
                 TerminDelete.setOnMouseEntered(transischeneventEnter -> {
-                    addButtonToDelete(TerminDelete, filteredList.get(finalI));
+                    addButtonToDelete(TerminDelete,TermineBox, filteredList.get(finalI));
                     applyScaleTransition(TerminDelete, 1.05);
                     TerminDelete.setCursor(Cursor.HAND);
                 });
@@ -349,6 +425,7 @@ public class KalenderPopover extends PopOver {
                 TermineBox.getChildren().add((new Label(!filteredList.get(i).getK_Title().isEmpty() ?   filteredList.get(i).getK_Title():"<KEIN TITLE>")));
                 TermineBox.getChildren().add(new Label(filteredList.get(i).getK_vonDatum().getDayOfMonth() + "." + filteredList.get(i).getK_vonDatum().getMonthValue() + "." + filteredList.get(i).getK_vonDatum().getYear() + " um: " + filteredList.get(i).getK_vonDatum().getHour() + ":" + filteredList.get(i).getK_vonDatum().getMinute()));
                 TermineBox.getChildren().add(new Label(filteredList.get(i).getK_bisDatum().getDayOfMonth() + "." + filteredList.get(i).getK_bisDatum().getMonthValue() + "." + filteredList.get(i).getK_bisDatum().getYear() + " um: " + filteredList.get(i).getK_bisDatum().getHour() + ":" + filteredList.get(i).getK_bisDatum().getMinute()));
+                TermineBox.setMaxWidth(120);
                 TerminDelete.getChildren().addAll(TermineBox);
                 TerminepopoverLayout.getChildren().addAll(TerminDelete);
             }
@@ -434,51 +511,52 @@ public class KalenderPopover extends PopOver {
     }
     //da wird geschaut, ob alles so gefüllt ist wie es sein sollte
     public boolean isFilledCorrectly() {
-
-        if (
-                of(
-                        dateTimePicker.getVondatepicker().getValue().getYear(),
-                        dateTimePicker.getVondatepicker().getValue().getMonthValue(),
-                        dateTimePicker.getVondatepicker().getValue().getDayOfMonth(),
-                        dateTimePicker.getVonhourComboBox().getValue(),
-                        dateTimePicker.getVonminuteComboBox().getValue())
-                        .isBefore(
-                                of(
-                                        dateTimePicker.getBisdatepicker().getValue().getYear(),
-                                        dateTimePicker.getBisdatepicker().getValue().getMonthValue(),
-                                        dateTimePicker.getBisdatepicker().getValue().getDayOfMonth(),
-                                        dateTimePicker.getBishourComboBox().getValue(),
-                                        dateTimePicker.getBisminuteComboBox().getValue()))
-                        && titleField.getText()!=null){
-
+        if(dateTimePicker.checkDateValidity()&&notificationBox.CheckNotificationBox()){
             return true;
         }else{
             return false;
         }
     }
-    private void addButtonToDelete(HBox terminebox, K_Kalender k) {
+    private void addButtonToDelete(HBox TerminDelete,VBox terminebox, K_Kalender k) {
         //lösch den Termin der hier verwendet wird
-        deleteButton= DeleteButtonDesign();
-        deleteButton.setTranslateX((terminebox.getWidth()/6.3)-deleteButton.getWidth());
+        deleteButton= DeleteButtonDesign(TerminDelete);
+        double translationInX=(TerminDelete.getWidth()-(terminebox.getWidth()+deleteButton.getPrefWidth()*2))/2;
+
+        deleteButton.setTranslateX(translationInX);
         deleteButton.setOnMouseClicked(deleteEvent -> {
             try {
                 em.getTransaction().begin();
+                N_Notifications notificationToRemove = null;
+
+                try {
+                    notificationToRemove = em.createQuery(
+                                    "SELECT n FROM N_Notifications n WHERE n.N_K_ID = :k", N_Notifications.class)
+                            .setParameter("k", k)
+                            .getSingleResult();
+                    if(notificationToRemove!=null){
+                        em.remove(notificationToRemove);
+                    }
+                } catch (NoResultException e){
+
+                }
                 em.remove(k);
+
                 em.getTransaction().commit();
-                TerminPopOver();
                 kalenderController.drawCalendar();
+
                 System.out.println("\u001B[32m" + "deleted"+"\u001B[0m");
             }catch (Exception e) {
                 System.out.println("\u001B[31m" +"delete failed"+ "\u001B[0m");
             }
         });
-        terminebox.getChildren().add(deleteButton);
+        TerminDelete.getChildren().add(deleteButton);
     }
-    private Button DeleteButtonDesign(){
+    private Button DeleteButtonDesign(HBox targetetNode){
         Button deleteButton = new Button();
         deleteButton.setText("x");
-        String mainstyle="-fx-background-radius: 0 19 19 0; -fx-font-size: 20;-fx-fill-width: bold;";
-        deleteButton.setPrefHeight(53.2);
+        int fontsize=20;
+        String mainstyle="-fx-background-radius: 0 19 19 0; -fx-font-size: "+fontsize+";-fx-fill-width: bold;";
+        deleteButton.setPrefHeight(targetetNode.getHeight());
         deleteButton.setStyle("-fx-background-color: rgba(175,175,175,0.76); -fx-border-color: gray;-fx-border-radius:0 19 19 0;"+mainstyle);
         deleteButton.setOnMouseEntered(makeredEvent->{
             deleteButton.setStyle("-fx-background-color: #ff3636;-fx-border-color: #ff3636;-fx-border-radius:0 19 19 0;-fx-text-fill: white;"+mainstyle );
@@ -486,16 +564,14 @@ public class KalenderPopover extends PopOver {
         deleteButton.setOnMouseExited(makenormalEvent->{
             deleteButton.setStyle("-fx-background-color: rgba(175,175,175,0.76); -fx-border-color: gray;-fx-border-radius:0 19 19 0;"+mainstyle);
         });
-
-
+        deleteButton.setPrefWidth(deleteButton.getText().length()*fontsize);
 
 
         return deleteButton;
     }
-    private void removeButtonToDelete(HBox terminebox) {
-        terminebox.getChildren().removeAll(deleteButton);
+    private void removeButtonToDelete(HBox TerminDelete) {
+        TerminDelete.getChildren().removeAll(deleteButton);
     }
-
     private void applyScaleTransition(Node terminebox, double scaleValue) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), terminebox);
         scaleTransition.setToX(scaleValue);
@@ -503,21 +579,25 @@ public class KalenderPopover extends PopOver {
         scaleTransition.play();
     }
     private void configureArrowLocation() {
-        int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-        int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-        if (Toolkit.getDefaultToolkit().getScreenSize().width / 2 > mouseX) {
-            if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 > mouseY) {
-                this.setArrowLocation(PopOver.ArrowLocation.LEFT_TOP);
-            } else if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 < mouseY) {
-                this.setArrowLocation(PopOver.ArrowLocation.LEFT_BOTTOM);
-            }
-        } else if (Toolkit.getDefaultToolkit().getScreenSize().width / 2 < mouseX) {
-            if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 > mouseY) {
-                this.setArrowLocation(PopOver.ArrowLocation.RIGHT_TOP);
-            } else if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 < mouseY) {
-                this.setArrowLocation(PopOver.ArrowLocation.RIGHT_BOTTOM);
-            }
-        }
+       try {
+
+           if (Toolkit.getDefaultToolkit().getScreenSize().width / 2 > mouseX) {
+               if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 > mouseY) {
+                   this.setArrowLocation(PopOver.ArrowLocation.LEFT_TOP);
+               } else if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 < mouseY) {
+                   this.setArrowLocation(PopOver.ArrowLocation.LEFT_BOTTOM);
+               }
+           } else if (Toolkit.getDefaultToolkit().getScreenSize().width / 2 < mouseX) {
+               if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 > mouseY) {
+                   this.setArrowLocation(PopOver.ArrowLocation.RIGHT_TOP);
+               } else if (Toolkit.getDefaultToolkit().getScreenSize().height / 2 < mouseY) {
+                   this.setArrowLocation(PopOver.ArrowLocation.RIGHT_BOTTOM);
+               }
+           }
+       }catch (Exception e) {
+           this.setArrowLocation(PopOver.ArrowLocation.LEFT_TOP);
+
+       }
     }
 
     /******************************************************

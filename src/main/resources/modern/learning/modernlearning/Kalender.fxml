@@ -15,6 +15,7 @@
                     <!-- Header mit Navigationsbuttons und Jahr/Monat Anzeige -->
                     <HBox alignment="CENTER"   spacing="0" style=" -fx-animated: ex; -fx-padding: 20 0 30 0" >
                         <children>
+
                             <Button fx:id="back" mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" style="-fx-cursor: hand; -fx-padding: -3px 10px 0px 10px;-fx-font-size: 26px; -fx-text-align: center; -fx-background-color: #FFFFFF; -fx-text-decoration: none; -fx-border-width: 2px; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black"/>
                             <HBox prefWidth="250" spacing="20" alignment="CENTER">
                                 <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
@@ -29,6 +30,7 @@
                                 </Text>
                             </HBox>
                             <Button fx:id="forward" mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" style="-fx-cursor: hand; -fx-padding: -3px 10px 0px 10px;-fx-font-size: 26px; -fx-text-align: center; -fx-background-color: #FFFFFF; -fx-text-decoration: none; -fx-border-width: 2px; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black" />
+
                         </children>
                     </HBox>
                     <!-- Füge eine Fade-Transition für das Kalenderpanel hinzu -->

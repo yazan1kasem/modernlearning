@@ -16,9 +16,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.css.converter.ColorConverter;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,20 +33,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import modern.learning.modernlearning.CalenderClasses.Benachrichtigung;
 import modern.learning.modernlearning.CalenderClasses.KalenderPopover;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -57,7 +55,6 @@ import java.util.stream.Collectors;
 import javafx.scene.layout.GridPane;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 
@@ -85,7 +82,7 @@ public class KalenderController implements Initializable {
     private ZonedDateTime dateFocus;
     private ZonedDateTime today;
     private KalenderPopover kalenderPopover; // Declare a class-level variable
-    EntityManager em= Starter.em;
+    EntityManager em= Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
 
 
@@ -106,10 +103,19 @@ public class KalenderController implements Initializable {
 
         // Setzt das Jahr und den Monat im UI entsprechend dem Fokusdatum.
         year.setText(String.valueOf(dateFocus.getYear()));
-        month.setText(String.valueOf(dateFocus.getMonth()));
+        month.setText(getGermanMonthsName());
         addButtonHoverEffect();
 
     }
+    private String getGermanMonthsName(){
+        Locale germanLocale = new Locale("de", "AT");
+        DateTimeFormatter germanFormatter = DateTimeFormatter.ofPattern("MMMM", germanLocale);
+        String germanMonthName = dateFocus.getMonth().getDisplayName(TextStyle.FULL, germanLocale);
+        return germanMonthName;
+    }
+
+
+
     private void addButtonHoverEffect(){
         back.hoverProperty().addListener(enterbackevent->{
             back.setStyle("-fx-cursor: hand; -fx-padding: -3px 10px 0px 10px; -fx-font-size: 26px; -fx-text-align: center; -fx-text-decoration: none; -fx-border-width: 2px; -fx-border-color: #FFA500; -fx-text-fill: #FFFFFF; -fx-background-color: #FFA500; -fx-border-radius: 5px;");
@@ -135,7 +141,7 @@ public class KalenderController implements Initializable {
     void backOneMonth(ActionEvent event) {
         dateFocus = dateFocus.minusMonths(1);
         year.setText(String.valueOf(dateFocus.getYear()));
-        month.setText(String.valueOf(dateFocus.getMonth()));
+        month.setText(getGermanMonthsName());
         calendar.getChildren().clear();
         drawCalendar();
     }
@@ -144,7 +150,7 @@ public class KalenderController implements Initializable {
     void forwardOneMonth(ActionEvent event) {
         dateFocus = dateFocus.plusMonths(1);
         year.setText(String.valueOf(dateFocus.getYear()));
-        month.setText(String.valueOf(dateFocus.getMonth()));
+        month.setText(getGermanMonthsName());
         calendar.getChildren().clear();
         drawCalendar();
     }
@@ -197,7 +203,7 @@ public class KalenderController implements Initializable {
                 }
                 StackPane stackPane= new StackPane();
                 Rectangle rectangle = creatDateRectangleDesign();
-
+//              rectangle.setId(dateFocus.getYear()+"."+dateFocus.getMonthValue()+"."+(calculatedDate - ersterTagImMonat));
                 // Fügt das Rechteck zur StackPane hinzu.
                 stackPane.getChildren().add(rectangle);
                 try {
@@ -265,6 +271,7 @@ public class KalenderController implements Initializable {
                 gridPane.add(stackPane, j,i+1);
             }
         }
+
         // Fügt die StackPane zum KalenderController hinzu.
         calendar.getChildren().add(gridPane);
         KalenderF.heightProperty().addListener(new ChangeListener<Number>() {
@@ -281,6 +288,12 @@ public class KalenderController implements Initializable {
             }
         });
     }
+
+
+
+
+
+
     private Rectangle creatDateRectangleDesign(){
         double calendarWidth = calendarPanel.getWidth();
         double calendarHeight = calendarPanel.getHeight();
@@ -390,21 +403,11 @@ public class KalenderController implements Initializable {
     }
     public void zurück(MouseEvent mouseEvent) {
         Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-        currentStage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Klasse.fxml"));
         try {
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Kalender.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            currentStage.setTitle("Modern learning");
-            currentStage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
-            currentStage.setMinHeight(640);
-            currentStage.setMinWidth(1000);
-            currentStage.setWidth(scene.getWidth());
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Dokumente.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
 
             currentStage.setScene(scene);
-
-            currentStage.show();
         }catch (Exception e) {}
     }
 }

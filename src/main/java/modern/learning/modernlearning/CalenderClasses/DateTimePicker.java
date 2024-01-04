@@ -3,7 +3,9 @@ package modern.learning.modernlearning.CalenderClasses;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -79,72 +81,77 @@ public class DateTimePicker extends VBox {
                 bisminuteComboBox.setValue(vonminuteComboBox.getValue());
             }
         }
-        vondatepicker.valueProperty().addListener(new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
-                if(bisdatepicker.getValue().isBefore(newValue)){
-                    bisdatepicker.setValue(newValue);
-                }
-            }
-        });
-        vonhourComboBox.valueProperty().addListener(new ChangeListener<>(){
-            @Override
-            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-                if(newValue>bishourComboBox.getValue()){
-                    if(newValue<23){
-                        bishourComboBox.setValue(newValue+1);
-                    }else{
-                        bishourComboBox.setValue(newValue);
-                        if(vonminuteComboBox.getValue()>bisminuteComboBox.getValue()){
-                            if(vonminuteComboBox.getValue()<59){
-                                bisminuteComboBox.setValue(vonminuteComboBox.getValue()+1);
-                            }else{
-                                bisminuteComboBox.setValue(vonminuteComboBox.getValue());
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        vonminuteComboBox.valueProperty().addListener(new ChangeListener<>(){
 
-            @Override
-            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-                if(vonhourComboBox.getValue()>=bishourComboBox.getValue()){
-                    if(vonhourComboBox.getValue()<23){
-                        bishourComboBox.setValue(vonhourComboBox.getValue()+1);
-                    }else{
-                        bishourComboBox.setValue(vonhourComboBox.getValue());
-                        if(newValue>bisminuteComboBox.getValue()){
-                            if(newValue<59){
-                                bisminuteComboBox.setValue(newValue+1);
-                            }else{
-                                bisminuteComboBox.setValue(newValue);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        bishourComboBox.valueProperty().addListener(new ChangeListener<Integer>() {
-            @Override
-            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-                if(vonhourComboBox.getValue()>1){
-                    vonhourComboBox.setValue(newValue-1);
-                } else if (vonhourComboBox.getValue()<=1) {
-                    bishourComboBox.setValue(vonhourComboBox.getValue()+1);
-                } else{
-                    if(vonminuteComboBox.getValue()>0){
-                        if(vonminuteComboBox.getValue()>bisminuteComboBox.getValue()){
-                            bisminuteComboBox.setValue(newValue);
-                        }else{
-                            bisminuteComboBox.setValue(vonminuteComboBox.getValue()+1);
-                        }
-                    }
-                }
-            }
+    }
+    private void addChangeListener() {
+        // Überwachen Sie Änderungen am Datum
+        vondatepicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            checkDateValidity();
         });
 
+        bisdatepicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            checkDateValidity();
+        });
+
+        // Überwachen Sie Änderungen an Stunden und Minuten
+        vonhourComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            checkDateValidity();
+        });
+
+        vonminuteComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            checkDateValidity();
+        });
+
+        bishourComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            checkDateValidity();
+        });
+
+        bisminuteComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            checkDateValidity();
+        });
+    }
+
+    public boolean checkDateValidity() {
+        LocalDate vonDate = vondatepicker.getValue();
+        int vonHour = vonhourComboBox.getValue();
+        int vonMinute = vonminuteComboBox.getValue();
+
+        LocalDate bisDate = bisdatepicker.getValue();
+        int bisHour = bishourComboBox.getValue();
+        int bisMinute = bisminuteComboBox.getValue();
+
+        // Überprüfen Sie, ob das Startdatum vor dem Enddatum liegt
+        if (vonDate.isAfter(bisDate) || (vonDate.isEqual(bisDate) && vonHour * 60 + vonMinute >= bisHour * 60 + bisMinute)) {
+            addChangeListener();
+            MarkiereMeinenFehler();
+            return false;
+        } else {
+            // Setzen Sie die normale Farbe zurück
+            resetErrorMarking();
+            return true;
+        }
+    }
+    private void resetErrorMarking() {
+        // Hier können Sie die Markierung zurücksetzen, z.B., den Hintergrund auf den Standardwert setzen
+        String removeStyle="";
+        vondatepicker.setStyle(removeStyle);
+        bisdatepicker.setStyle(removeStyle);
+        vonhourComboBox.setStyle(removeStyle);
+        vonminuteComboBox.setStyle(removeStyle);
+        bishourComboBox.setStyle(removeStyle);
+        bisminuteComboBox.setStyle(removeStyle);
+    }
+    private void MarkiereMeinenFehler() {
+        markiereFalscheDaten(vondatepicker);
+        markiereFalscheDaten(bisdatepicker);
+        markiereFalscheDaten(vonhourComboBox);
+        markiereFalscheDaten(vonminuteComboBox);
+        markiereFalscheDaten(bishourComboBox);
+        markiereFalscheDaten(bisminuteComboBox);
+    }
+
+    private void markiereFalscheDaten(Control control) {
+        control.setStyle("-fx-border-color: #ff1818;");
     }
     public void setKastendatum(LocalDateTime kastendatum) {
         Kastendatum = kastendatum;

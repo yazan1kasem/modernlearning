@@ -2,16 +2,22 @@ package modern.learning.modernlearning.CalenderClasses;
 
 import entities.K_Kalender;
 import entities.N_Notifications;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import modern.learning.modernlearning.Starter;
 import org.controlsfx.control.ToggleSwitch;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -22,7 +28,6 @@ public class NotificationBox extends HBox {
     private ComboBox<String> Zeit;
     private List<String> Zeitnamen;
     public static ToggleSwitch EinAus;
-
 
 
     public NotificationBox() {
@@ -44,7 +49,7 @@ public class NotificationBox extends HBox {
         EinAus.setOnMouseClicked(ANAUSEVENT -> {
             clicked();
         });
-        this.getChildren().addAll(ZahlenEingabe,Zeit,EinAus);
+        this.getChildren().addAll(ZahlenEingabe,Zeit,new Label("davor"),EinAus);
         this.setAlignment(Pos.CENTER_LEFT);
 
     }
@@ -68,11 +73,52 @@ public class NotificationBox extends HBox {
         }
 
         n_notifications.setN_K_ID(kalender);
-        addBenachrichtigung(n_notifications);
+
         return n_notifications;
     }
-    private void addBenachrichtigung(N_Notifications Benachrichtigung){
+    public void addBenachrichtigung(N_Notifications Benachrichtigung){
         Benachrichtigung benachrichtigung = new Benachrichtigung(Benachrichtigung.getN_K_ID().getK_Title(),Benachrichtigung.getN_Vorzeit(),Benachrichtigung.getN_id());
+    }
+    public boolean CheckNotificationBox() {
+        if(ZahlenEingabe.getText()!=""){
+            try {
+                int parsedValue = Integer.parseInt(ZahlenEingabe.getText());
+                ZahlenEingabe.setStyle(""); // Reset style
+
+                return true;
+            } catch (NumberFormatException e) {
+                // Handle the case where the text is not a valid integer
+                // e.g., display an error message or take appropriate action
+                System.err.println("Invalid input. Please enter a valid integer.");
+                ZahlenEingabe.setStyle("-fx-border-color: red");
+
+                // Add a ChangeListener to continuously check for valid input
+                ZahlenEingabe.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+                        if(ZahlenEingabe.getText()!=""){
+                            try {
+                                int parsedValue = Integer.parseInt(newValue);
+                                // Reset style when valid input is entered
+                                ZahlenEingabe.setStyle("");
+                            } catch (NumberFormatException e) {
+                                // Handle the case where the text is not a valid integer
+                                // e.g., display an error message or take appropriate action
+                                System.err.println("Invalid input. Please enter a valid integer.");
+                                ZahlenEingabe.setStyle("-fx-border-color: red");
+                            }
+                        }else {
+                            ZahlenEingabe.setStyle("");
+                        }
+                    }
+                });
+
+                return false;
+            }
+        }else {
+            return true;
+        }
     }
 
     public void clicked(){
