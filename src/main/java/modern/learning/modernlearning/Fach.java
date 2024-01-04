@@ -5,10 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class Fach {
@@ -41,6 +41,19 @@ public class Fach {
 
     public Fach(String klasseId) {
         this.klasseId = klasseId;
+    }
+
+    public void Arbeitsblaetter(MouseEvent mouseEvent) {Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();{
+        try {
+            Node source = (Node) mouseEvent.getSource();
+            String fachid = source.getId();
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Arbeitsblätter.fxml"));
+            Arbeitsblätter arbeitsblätter = new Arbeitsblätter(klasseId, fachid);
+            fxmlLoader.setController(arbeitsblätter);
+            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
+            currentStage.setScene(scene);
+        }catch (Exception e) {}
+    }
     }
 }
 

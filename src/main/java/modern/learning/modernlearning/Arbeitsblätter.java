@@ -91,22 +91,13 @@ public class Arbeitsblätter implements Initializable {
     @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
         Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-        currentStage.close();
-
         try {
+
             FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Fach.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            currentStage.setTitle("Modern learning");
-            currentStage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
-            currentStage.setMinHeight(640);
-            currentStage.setMinWidth(1000);
-            currentStage.setWidth(scene.getWidth());
-
+            Fach fach = new Fach(KlasseID);
+            fxmlLoader.setController(fach);
+            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
             currentStage.setScene(scene);
-
-            currentStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }catch (Exception e) {}
     }
 }

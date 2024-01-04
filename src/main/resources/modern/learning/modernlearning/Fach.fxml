@@ -8,7 +8,7 @@
 <?import java.awt.geom.QuadCurve2D.Double?>
 
 <AnchorPane fx:id="ClassSelection" prefHeight="640.0" prefWidth="1000.0" style="-fx-background-color: #FFAB2F"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Fach" >
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <FlowPane prefWidth="${ClassSelection.width}" prefHeight="${ClassSelection.height}" alignment="CENTER">
             <VBox fx:id="classSelectionPanel" spacing="0" prefWidth="800" prefHeight="550" style=" -fx-background-color: #FFAB2F; -fx-padding: 30 0 0 0" >
@@ -17,10 +17,10 @@
                 </HBox>
                 <!-- Add buttons for subject selection -->
                 <FlowPane fx:id="subjectSelection" hgap="10.0" prefHeight="400" prefWidth="700" vgap="5.0" alignment="TOP_CENTER">
-                    <Button fx:id="mathButton" onAction="#handleSubjectSelection" text="Mathe" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="bmsvButton" onAction="#handleSubjectSelection" text="Bmsv" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="deutschButton" onAction="#handleSubjectSelection" text="Deutsch" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="misButton" onAction="#handleSubjectSelection" text="MIS" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="math" onMouseClicked="#Arbeitsblaetter" text="Mathe" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="bmsv" onMouseClicked="#Arbeitsblaetter" text="Bmsv" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="deutsch" onMouseClicked="#Arbeitsblaetter" text="Deutsch" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="mis" onMouseClicked="#Arbeitsblaetter" text="MIS" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
                 </FlowPane>
             </VBox>
         </FlowPane>

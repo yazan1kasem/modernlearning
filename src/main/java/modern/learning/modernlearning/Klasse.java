@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class Klasse {
     @FXML
     public void handleClassSelection(ActionEvent event) {
@@ -63,5 +65,18 @@ public class Klasse {
             currentStage.show();
         } catch (Exception e) {
         }
+    }
+
+    public void Fach2(MouseEvent mouseEvent)
+    {Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        try {
+            Node source = (Node) mouseEvent.getSource();
+            String klassenid = source.getId();
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Fach.fxml"));
+            Fach fach = new Fach(klassenid);
+            fxmlLoader.setController(fach);
+            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
+            currentStage.setScene(scene);
+        }catch (Exception e) {}
     }
 }
