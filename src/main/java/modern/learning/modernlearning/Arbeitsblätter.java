@@ -58,11 +58,10 @@ public class Arbeitsblätter implements Initializable {
         private String KlasseID = "5AHBGM";
         private String FachID = "Mathematik";
 
-   /* public Arbeitsblätter(String klasseID, String fachID) {
+   public Arbeitsblätter(String klasseID, String fachID) {
         KlasseID = klasseID;
         FachID = fachID;
     }
-    */
    public Arbeitsblätter() {
 
    }

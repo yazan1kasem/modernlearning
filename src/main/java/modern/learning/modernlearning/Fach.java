@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class Fach {
+    private String klasseId;
     @FXML
     public void handleSubjectSelection(javafx.event.ActionEvent actionEvent) {
     }
@@ -37,5 +38,9 @@ public class Fach {
                 e.printStackTrace();
             }
         }
+
+    public Fach(String klasseId) {
+        this.klasseId = klasseId;
+    }
 }
 
