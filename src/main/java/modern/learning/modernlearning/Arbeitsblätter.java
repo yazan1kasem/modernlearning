@@ -36,22 +36,26 @@ public class Arbeitsblätter implements Initializable {
         DrawArbeitsblaetter();
     }
 
-    public BorderPane designBorder(String name) {
-        BorderPane Arbeitsblatt = new BorderPane();
+    private BorderPane createArbeitsblätterPane(A_Arbeitsblatt arbeitsblatt) {
+        BorderPane documentPane = new BorderPane();
+        documentPane.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 10px; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px");
 
         // Bild laden und als ImageView erstellen
-        Image image = new Image("file:src/main/Media/pdf_icon.png");
+        Image image = new Image("file:src/main/Media/dokument_icon.png");
         ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(100); // Hier kannst du die Breite des Icons anpassen
+        imageView.setFitHeight(100); // Hier kannst du die Höhe des Icons anpassen
 
         // Text erstellen
-        Text text = new Text(name);
+        Text text = new Text(arbeitsblatt.getD_Name());
 
         // Bild und Text zur Mitte (Center) der BorderPane hinzufügen
-        Arbeitsblatt.setCenter(imageView);
-        Arbeitsblatt.setBottom(text);
+        documentPane.setCenter(imageView);
+        documentPane.setBottom(text);
         BorderPane.setAlignment(text, Pos.CENTER); // Zentriert den Text am unteren Rand
 
-        return Arbeitsblatt;
+        return documentPane;
+    }
 
 
     }
