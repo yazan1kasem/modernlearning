@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -39,8 +40,10 @@ public class Dokumente implements Initializable {
         documentPane.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 10px; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px");
 
         // Bild laden und als ImageView erstellen
-        Image image = new Image("file:src/main/Media/pdf_icon.png");
+        Image image = new Image("file:src/main/Media/dokument_icon.png");
         ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(100); // Hier kannst du die Breite des Icons anpassen
+        imageView.setFitHeight(100); // Hier kannst du die Höhe des Icons anpassen
 
         // Text erstellen
         Text text = new Text(dokument.getD_Name());
@@ -68,26 +71,16 @@ public class Dokumente implements Initializable {
     }
 
     @FXML
-    private void zurück(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        currentStage.close();
+    public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
+        {
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), currentStage.getWidth(), currentStage.getHeight());
 
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            currentStage.setTitle("Modern learning");
-            currentStage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
-            currentStage.setMinHeight(640);
-            currentStage.setMinWidth(1000);
-            currentStage.setWidth(scene.getWidth());
-
-            currentStage.setScene(scene);
-
-            currentStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+                currentStage.setScene(scene);
+            } catch (Exception e) {
+            }
         }
-
-    }
-
+        }
 }

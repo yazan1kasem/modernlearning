@@ -16,11 +16,7 @@
                 <!-- Header with Navigation buttons and Year/Month display -->
                 <HBox alignment="CENTER" spacing="20" style="-fx-animated: ex; -fx-padding: 20 0 30 0;">
                     <!-- Add your header content here -->
-                    <Button text="Mathematik" fx:id="MathematikButton" disable="true"
-                            style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px;"/>
-                    <Button text="Deutsch" fx:id="DeutschButton" disable="true"
-                            style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px;"/>
-                </HBox>
+                     </HBox>
                 <!-- Add buttons for Arbeitsblätter -->
                 <FlowPane fx:id="Arbeitsblaetter" hgap="10.0" prefHeight="400" prefWidth="700" vgap="5.0" alignment="TOP_CENTER">
                     <!-- You can dynamically add Arbeitsblatt buttons here based on your logic -->
