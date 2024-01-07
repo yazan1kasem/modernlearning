@@ -5,13 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/Files/1BMSV.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/1DEUTSCH.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/1MATHE.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/1MIS.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/2BMSV.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/2DEUTSCH.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/2MATHE.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/2MIS.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/3BMSV.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/3DEUTSCH.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/3MATHE.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/3MIS.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/4BMSV.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/4DEUTSCH.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/4MATHE.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/4MIS.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/5BMSV.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/5DEUTSCH.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/5MATHE.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/5MIS.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Media/pdf_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Dokumente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Dokumente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Starter2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Starter2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Dokumente.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Dokumente.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,14 +120,12 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/yazan/Desktop/ModernLearning/src/main/java/modern/learning/modernlearning&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sinoa/Desktop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yazan/Desktop/ModernLearning/src/main/Media&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.5855856&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
@@ -132,7 +146,8 @@
       <recent name="C:\Users\yazan\Desktop\ModernLearning\src\main\Media" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\sinoa\Desktop\modernlearning\src\main\Media" />
+      <recent name="C:\Users\simon\OneDrive - HTL Spengergasse\Desktop\modernlearning-Modernlearning\src\main\Files" />
+      <recent name="C:\Users\simon\OneDrive - HTL Spengergasse\Desktop\modernlearning-Modernlearning\src\main\Media" />
       <recent name="C:\Users\yazan\Desktop\ModernLearning\src" />
       <recent name="C:\Users\yazan\Desktop\ModernLearning\src\main\resources" />
     </key>
@@ -146,7 +161,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.starter">
     <configuration name="FXSampler (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fxsampler.FXSampler" />
       <extension name="coverage">
@@ -192,6 +207,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.starter" />
+      <item itemvalue="Application.FXSampler" />
+      <item itemvalue="Application.FXSampler (1)" />
+      <item itemvalue="Application.NotificationExample" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.FXSampler (1)" />
@@ -272,9 +293,16 @@
       <workItem from="1701989811948" duration="2970000" />
       <workItem from="1702134404200" duration="37000" />
       <workItem from="1702291807895" duration="141000" />
-      <workItem from="1702453359728" duration="340000" />
-      <workItem from="1702980520783" duration="18714000" />
-      <workItem from="1704373013047" duration="8735000" />
+      <workItem from="1702453359728" duration="4148000" />
+      <workItem from="1702459018690" duration="331000" />
+      <workItem from="1702459381768" duration="654000" />
+      <workItem from="1702460055168" duration="550000" />
+      <workItem from="1702592928544" duration="3615000" />
+      <workItem from="1702638821442" duration="1073000" />
+      <workItem from="1702937306527" duration="4833000" />
+      <workItem from="1702976627150" duration="1758000" />
+      <workItem from="1704373190857" duration="7336000" />
+      <workItem from="1704477796260" duration="2533000" />
     </task>
     <task id="LOCAL-00001" summary="spring boot firts commit">
       <created>1698429607749</created>
@@ -416,21 +444,28 @@
       <option name="project" value="LOCAL" />
       <updated>1701906033306</updated>
     </task>
-    <task id="LOCAL-00021" summary="version 1.17">
-      <created>1704321977676</created>
+    <task id="LOCAL-00021" summary="version 1.10">
+      <created>1702453883575</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1704321977676</updated>
+      <updated>1702453883575</updated>
     </task>
-    <task id="LOCAL-00022" summary="version 1.19">
-      <created>1704372466279</created>
+    <task id="LOCAL-00022" summary="version 1.12">
+      <created>1702908078382</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1704372466279</updated>
+      <updated>1702908078382</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="version 1.20">
+      <created>1704377748608</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1704377748608</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,32 +565,38 @@
     <MESSAGE value="version 1.7" />
     <MESSAGE value="version 1.8" />
     <MESSAGE value="version 1.9" />
-    <MESSAGE value="version 1.17" />
-    <MESSAGE value="version 1.19" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.19" />
+    <MESSAGE value="version 1.10" />
+    <MESSAGE value="version 1.12" />
+    <MESSAGE value="version 1.20" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.20" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
-          <line>388</line>
+          <line>389</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
-          <line>390</line>
+          <line>391</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
-          <line>392</line>
+          <line>393</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/CalenderClasses/KalenderPopover.java</url>
-          <line>395</line>
+          <line>396</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Starter.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

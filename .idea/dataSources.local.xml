@@ -3,6 +3,12 @@
   <component name="dataSourceStorageLocal" created-in="IU-222.3739.54">
     <data-source name="Modernlearning " uuid="22b0f12e-7a16-4b26-97cc-b47cc264eae0">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
+      <auth-provider>no-auth</auth-provider>
+      <schema-mapping />
+    </data-source>
+    <data-source name="Modernlearning" uuid="2a5ce1f2-c27b-4d1b-a43d-28b76afbf56e">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
+      <auth-provider>no-auth</auth-provider>
       <schema-mapping />
     </data-source>
   </component>
