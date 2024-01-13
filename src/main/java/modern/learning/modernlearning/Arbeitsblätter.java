@@ -1,6 +1,7 @@
 package modern.learning.modernlearning;
 
 import entities.A_Arbeitsblatt;
+import entities.KF_Klassefach;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -63,8 +64,8 @@ public class Arbeitsblätter implements Initializable {
 
 
     }
-    private String KlasseID="1" ;
-    private String FachID ="MIS";
+    private String KlasseID;
+    private String FachID ;
 
 
     public Arbeitsblätter() {
@@ -72,15 +73,18 @@ public class Arbeitsblätter implements Initializable {
     }
 
     public void DrawArbeitsblaetter() {
-        List<A_Arbeitsblatt> arbeitsblattList = emf.createQuery("select a From A_Arbeitsblatt a",A_Arbeitsblatt.class).getResultList();
-        List<A_Arbeitsblatt> filter_arbeitsblatt = arbeitsblattList.stream().filter(a -> a.getA_KF_Bez().getKF_F_Bez().equals(FachID) && a.getA_KF_Bez().getKF_KL_Bez().equals(KlasseID)).collect(Collectors.toList());
-        System.out.println(filter_arbeitsblatt.size());
-        VBox container = new VBox();
-        for (A_Arbeitsblatt arbeitsblatt : filter_arbeitsblatt) {
-            BorderPane box = designBorder(arbeitsblatt.getA_Name());
-            container.getChildren().add(box);
+        if(KlasseID!=null&&FachID!=null){
+            List<A_Arbeitsblatt> arbeitsblattList = emf.createQuery("select a From A_Arbeitsblatt a",A_Arbeitsblatt.class).getResultList();
+            List<A_Arbeitsblatt> filter_arbeitsblatt = arbeitsblattList.stream().filter(a -> a.getA_KF_Bez().getKF_F_Bez().equals(KlasseID) && a.getA_KF_Bez().getKF_KL_Bez().equals(FachID)).collect(Collectors.toList());
+
+
+            VBox container = new VBox();
+            for (A_Arbeitsblatt arbeitsblatt : filter_arbeitsblatt) {
+                BorderPane box = designBorder(arbeitsblatt.getA_Name());
+                container.getChildren().add(box);
+            }
+            Arbeitsblaetter.getChildren().add(container);
         }
-        Arbeitsblaetter.getChildren().add(container);
     }
     @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
