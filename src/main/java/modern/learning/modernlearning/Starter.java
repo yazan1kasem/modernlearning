@@ -37,7 +37,7 @@ public class Starter extends Application {
     public static boolean geschlossen=false;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Kalender.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add("file:src/main/resources/style.css");
 

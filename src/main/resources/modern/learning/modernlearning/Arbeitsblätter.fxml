@@ -8,7 +8,7 @@
 <?import java.awt.geom.QuadCurve2D.Double?>
 
 <AnchorPane fx:id="ArbeitsblaetterPane" prefHeight="640.0" prefWidth="1000.0" style="-fx-background-color: #FFAB2F"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Arbeitsblätter">
 
     <children>
         <FlowPane prefWidth="${ArbeitsblaetterPane.width}" prefHeight="${ArbeitsblaetterPane.height}" alignment="CENTER">

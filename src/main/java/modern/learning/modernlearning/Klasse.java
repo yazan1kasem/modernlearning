@@ -12,20 +12,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 
 public class Klasse {
-    @FXML
-    public void handleClassSelection(ActionEvent event) {
-        // Hier kommt der Code, den Sie ausführen möchten,
-        // wenn auf einen Klassen-Button geklickt wird.
-        // Sie können beispielsweise die ausgewählte Klasse erhalten
-        // und entsprechende Aktionen durchführen.
-        // Zum Beispiel:
-        // Object source = event.getSource();
-        // if (source instanceof Button) {
-        //    Button clickedButton = (Button) source;
-        //    String selectedClass = clickedButton.getText();
-        //    // Führen Sie hier Aktionen für die ausgewählte Klasse durch.
-        // }
-    }
+
     public void zurück(MouseEvent mouseEvent) {
         Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
         currentStage.close();
@@ -67,16 +54,19 @@ public class Klasse {
         }
     }
 
-    public void Fach2(MouseEvent mouseEvent)
+    public void Fach(MouseEvent mouseEvent)
     {Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
         try {
             Node source = (Node) mouseEvent.getSource();
             String klassenid = source.getId();
             FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Fach.fxml"));
-            Fach fach = new Fach(klassenid);
-            fxmlLoader.setController(fach);
+
             Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
+            Fach fach = fxmlLoader.getController();
+            fach.setKlasseId(klassenid);
             currentStage.setScene(scene);
-        }catch (Exception e) {}
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

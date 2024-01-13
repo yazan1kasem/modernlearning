@@ -13,9 +13,7 @@ import java.io.IOException;
 
 public class Fach {
     private String klasseId;
-    @FXML
-    public void handleSubjectSelection(javafx.event.ActionEvent actionEvent) {
-    }
+
 
     @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
@@ -39,8 +37,12 @@ public class Fach {
             }
         }
 
-    public Fach(String klasseId) {
+    public void setKlasseId(String klasseId) {
         this.klasseId = klasseId;
+    }
+
+    public Fach() {
+
     }
 
     public void Arbeitsblaetter(MouseEvent mouseEvent) {
@@ -49,13 +51,16 @@ public class Fach {
             Node source = (Node) mouseEvent.getSource();
             String fachid = source.getId();
             FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Arbeitsblätter.fxml"));
-            Arbeitsblätter arbeitsblätter = new Arbeitsblätter(klasseId, fachid);
-            fxmlLoader.setController(arbeitsblätter);
-            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
 
+            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
+            Arbeitsblätter arbeitsblätter = fxmlLoader.getController();
+            arbeitsblätter.setFachID(fachid);
+            arbeitsblätter.setKlasseID(klasseId);
             currentStage.setScene(scene);
 
-        }catch (Exception e) {}
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     }
 }
