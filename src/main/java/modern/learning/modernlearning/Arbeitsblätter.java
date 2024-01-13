@@ -15,6 +15,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -26,7 +32,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class Arbeitsblätter implements Initializable {
-    EntityManager emf= Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
+    EntityManager emf = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
     @FXML
     private FlowPane Arbeitsblaetter;
@@ -55,21 +61,23 @@ public class Arbeitsblätter implements Initializable {
 
 
     }
-        private String KlasseID = "5AHBGM";
-        private String FachID = "Mathematik";
 
-   public Arbeitsblätter(String klasseID, String fachID) {
+    private String KlasseID = "5AHBGM";
+    private String FachID = "Mathematik";
+
+    public Arbeitsblätter(String klasseID, String fachID) {
         KlasseID = klasseID;
         FachID = fachID;
     }
-   public Arbeitsblätter() {
 
-   }
+    public Arbeitsblätter() {
+
+    }
 
     public void DrawArbeitsblaetter() {
         System.out.println("Arbeitsblaetter: " + Arbeitsblaetter); // Debug statement
 
-        List<A_Arbeitsblatt> arbeitsblattList = emf.createQuery("select a From A_Arbeitsblatt a",A_Arbeitsblatt.class).getResultList();
+        List<A_Arbeitsblatt> arbeitsblattList = emf.createQuery("select a From A_Arbeitsblatt a", A_Arbeitsblatt.class).getResultList();
         List<A_Arbeitsblatt> filter_arbeitsblatt = arbeitsblattList.stream().filter(a -> a.getA_KF_Bez().getKF_F_Bez().equals(FachID) && a.getA_KF_Bez().getKF_KL_Bez().equals(KlasseID)).collect(Collectors.toList());
         System.out.println(filter_arbeitsblatt.size());
 
@@ -88,16 +96,21 @@ public class Arbeitsblätter implements Initializable {
 
 
     }
+
     @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Fach.fxml"));
             Fach fach = new Fach(KlasseID);
             fxmlLoader.setController(fach);
-            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
+            Scene scene = new Scene(fxmlLoader.load(), currentStage.getWidth(), currentStage.getHeight());
             currentStage.setScene(scene);
-        }catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
+
+
+
 }
