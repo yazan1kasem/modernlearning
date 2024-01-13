@@ -404,7 +404,7 @@ public class KalenderController implements Initializable {
     public void zurück(MouseEvent mouseEvent) {
         Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Dokumente.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
             Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
 
             currentStage.setScene(scene);
