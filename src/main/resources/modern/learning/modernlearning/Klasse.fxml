@@ -11,22 +11,25 @@
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Klasse" >
     <children>
         <FlowPane prefWidth="${ClassSelection.width}" prefHeight="${ClassSelection.height}" alignment="CENTER">
-            <VBox fx:id="classSelectionPanel" spacing="0" prefWidth="800" prefHeight="550" style=" -fx-background-color: #FFAB2F; -fx-padding: 30 0 0 0" >
-                <!-- Header with Navigation buttons and Year/Month display -->
-                <HBox alignment="CENTER"   spacing="0" style=" -fx-animated: ex; -fx-padding: 20 0 30 0" >
+            <VBox fx:id="classSelectionPanel" spacing="20" prefWidth="800" prefHeight="550" style=" -fx-background-color: #FFAB2F; -fx-padding: 0 0 0 0" >
+                <!-- Title bar with the name "ModernLearning" -->
+                <HBox alignment="CENTER" spacing="0" style="-fx-animated: ex; -fx-padding: 10 0 10 0; -fx-background-color: #FF8C00;">
+                    <Text text="ModernLearning" style="-fx-font-size: 30px; -fx-fill: white;"/>
                 </HBox>
                 <!-- Add buttons for class selection -->
-                <FlowPane fx:id="classSelection" hgap="10.0" prefHeight="400" prefWidth="700" vgap="5.0" alignment="TOP_CENTER">
-                    <Button fx:id="1" onMouseClicked="#handleClassSelection" text="1. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="2" onMouseClicked="#handleClassSelection" text="2. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="3" onMouseClicked="#handleClassSelection" text="3. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="4" onMouseClicked="#handleClassSelection" text="4. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="5" onMouseClicked="#handleClassSelection" text="5. Klasse" style="-fx-cursor: hand; -fx-padding: 10px; -fx-font-size: 18px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button layoutX="30" layoutY="40" fx:id="DokumentButton" onMouseClicked="#Dokumente" text="DOKUMENTE"  mnemonicParsing="false" style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                <FlowPane fx:id="classSelection" hgap="10.0" prefHeight="400" prefWidth="700" vgap="5.0" alignment="CENTER">
+                    <Button fx:id="1" onMouseClicked="#Fach2" text="1. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="2" onMouseClicked="#Fach2" text="2. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="3" onMouseClicked="#Fach2" text="3. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="4" onMouseClicked="#Fach2" text="4. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button fx:id="5" onMouseClicked="#Fach2" text="5. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                </FlowPane>
+                <!-- Add buttons for Kalender and Dokumente -->
+                <FlowPane hgap="10.0" prefHeight="50" prefWidth="700" vgap="5.0" alignment="CENTER">
+                    <Button layoutX="30" layoutY="10" fx:id="KalenderButton" onMouseClicked="#zurück" text="KALENDER"  mnemonicParsing="false" style="-fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button layoutX="30" layoutY="40" fx:id="DokumentButton" onMouseClicked="#Dokumente" text="DOKUMENTE"  mnemonicParsing="false" style="-fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
                 </FlowPane>
             </VBox>
         </FlowPane>
-        <Button layoutX="30" layoutY="10" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false" style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-
     </children>
 </AnchorPane>
