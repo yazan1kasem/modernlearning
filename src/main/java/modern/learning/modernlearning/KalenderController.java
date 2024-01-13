@@ -374,7 +374,6 @@ public class KalenderController implements Initializable {
 
         stackPane.setOnMouseEntered( event -> {
             if (!animated.get()) {
-
                 rectangle.setFill(Color.valueOf("#FFFFFF"));
                 date.setFill(Color.valueOf("#FFA500"));
                 ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), rectangle);
@@ -384,7 +383,6 @@ public class KalenderController implements Initializable {
                 rectangle.setCursor(Cursor.HAND);
                 date.setCursor(Cursor.HAND);
                 eintraegeanzahl.setCursor(Cursor.HAND);
-
                 animated.set(true);
             }
         });
@@ -406,8 +404,12 @@ public class KalenderController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
             Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
-
             currentStage.setScene(scene);
         }catch (Exception e) {}
     }
+
+
+
+
+
 }

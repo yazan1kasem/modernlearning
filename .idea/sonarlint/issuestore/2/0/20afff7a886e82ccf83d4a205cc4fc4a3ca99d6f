@@ -1,0 +1,41 @@
+
+M
+java:S1128"0Remove this unused import 'entities.K_Kalender'.(ĞáÒÖ8¶’ŠÎ1
+R
+java:S1128"5Remove this unused import 'entities.N_Notifications'.(ª¢şš8¶’ŠÎ1
+Z
+java:S1128"8Remove this unused import 'javafx.application.Platform'.(§“óùÿÿÿÿ8¶’ŠÎ1
+[
+java:S1128">Remove this unused import 'javafx.beans.value.ChangeListener'.(¸÷Í8·’ŠÎ1
+\
+java:S1128"?Remove this unused import 'javafx.beans.value.ObservableValue'.(´œ«Å8·’ŠÎ1
+Z
+java:S1128"8Remove this unused import 'javafx.scene.control.Button'.(Ë Í‹øÿÿÿÿ8·’ŠÎ1
+X
+java:S1128";Remove this unused import 'javafx.scene.control.TextField'.(¨¢¤¶8¸’ŠÎ1
+W
+java:S1128"5Remove this unused import 'javafx.scene.layout.VBox'.(íÆáÂùÿÿÿÿ8¸’ŠÎ1
+T
+java:S1128"2Remove this unused import 'javafx.stage.Modality'.(£†üĞüÿÿÿÿ8¸’ŠÎ1
+^
+java:S1128"<Remove this unused import 'javax.persistence.EntityManager'.(ğàËÒıÿÿÿÿ8¹’ŠÎ1
+b
+java:S1128"@Remove this unused import 'javax.persistence.EntityTransaction'.(¶“çğüÿÿÿÿ8¹’ŠÎ1
+\
+java:S1128":Remove this unused import 'javax.persistence.Persistence'.(›²ö¾ıÿÿÿÿ8¹’ŠÎ1
+B
+java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8º’ŠÎ1
+T
+java:S1128"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘8º’ŠÎ1
+W
+java:S1128":Remove this unused import 'java.awt.event.ActionListener'.(Ìä¹8º’ŠÎ1
+F
+java:S1128")Remove this unused import 'java.net.URI'.(Ö¦¨°8»’ŠÎ1
+Q
+java:S1128"/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8»’ŠÎ1
+V
+java:S1128"4Remove this unused import 'java.time.LocalDateTime'.(æÃ§ƒüÿÿÿÿ8»’ŠÎ1
+Q
+java:S1128"4Remove this unused import 'java.util.EventListener'.(óü¬É8»’ŠÎ1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¼’ŠÎ1

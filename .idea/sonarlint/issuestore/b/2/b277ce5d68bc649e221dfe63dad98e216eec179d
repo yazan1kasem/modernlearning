@@ -1,0 +1,29 @@
+
+m	java:S1178"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«á±È8©Š–Ë1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(²¼îF8«Š–Ë1
+w	java:S116"VRename this field "Kastendatum" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰âÙ·üÿÿÿÿ8»Š–Ë1
+I
+java:S1602X",Remove useless curly braces around statement(ü«Ã…8ÈŠ–Ë1
+N
+java:S1602\",Remove useless curly braces around statement(ôš±Öûÿÿÿÿ8ÈŠ–Ë1
+N
+java:S1602a",Remove useless curly braces around statement(¹Ùµıùÿÿÿÿ8ÉŠ–Ë1
+N
+java:S1602e",Remove useless curly braces around statement(íşº‰üÿÿÿÿ8ÉŠ–Ë1
+I
+java:S1602i",Remove useless curly braces around statement(úÍ«­8ÉŠ–Ë1
+N
+java:S1602m",Remove useless curly braces around statement(“üÔşÿÿÿÿ8ÊŠ–Ë1
+j	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×Ûãm8ÌŠ–Ë1
+[
+java:S1128">Remove this unused import 'javafx.beans.value.ChangeListener'.(¸÷Í8ÏŠ–Ë1
+\
+java:S1128"?Remove this unused import 'javafx.beans.value.ObservableValue'.(´œ«Å8ÏŠ–Ë1
+K
+java:S1128".Remove this unused import 'javafx.scene.Node'.(ÑÖ¬ï8ÏŠ–Ë1
+U
+java:S1128"8Remove this unused import 'javafx.util.StringConverter'.(ûóŠ×8ÏŠ–Ë1
+^
+java:S1128"ARemove this unused import 'org.hibernate.type.ZonedDateTimeType'.(Ö°ıõ8ÏŠ–Ë1
+V
+java:S1128"4Remove this unused import 'java.time.ZonedDateTime'.(Å¯Ğ©ûÿÿÿÿ8ÏŠ–Ë1

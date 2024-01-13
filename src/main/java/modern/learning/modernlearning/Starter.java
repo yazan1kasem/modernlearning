@@ -50,7 +50,7 @@ public class Starter extends Application {
 
         stage.show();
         stage.setWidth(scene.getWidth());
-
+        stage.setHeight(scene.getHeight());
         stage.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {

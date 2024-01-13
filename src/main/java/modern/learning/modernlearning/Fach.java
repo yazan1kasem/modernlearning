@@ -43,7 +43,8 @@ public class Fach {
         this.klasseId = klasseId;
     }
 
-    public void Arbeitsblaetter(MouseEvent mouseEvent) {Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();{
+    public void Arbeitsblaetter(MouseEvent mouseEvent) {
+        Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();{
         try {
             Node source = (Node) mouseEvent.getSource();
             String fachid = source.getId();
@@ -51,7 +52,9 @@ public class Fach {
             Arbeitsblätter arbeitsblätter = new Arbeitsblätter(klasseId, fachid);
             fxmlLoader.setController(arbeitsblätter);
             Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
+
             currentStage.setScene(scene);
+
         }catch (Exception e) {}
     }
     }

@@ -1,0 +1,63 @@
+
+r	java:S1171"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€§šÃøÿÿÿÿ8÷èá™Ë1
+m	java:S117:"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã™â†8÷èá™Ë1
+r	java:S117O"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷­ ½ıÿÿÿÿ8÷èá™Ë1
+J
+java:S1604`"(Make this anonymous inner class a lambda(¾ïçşÿÿÿÿ8ùèá™Ë1
+t
+java:S1104"RMake EinAus a static final constant or non-public and provide accessors if needed.(ÄÒ¼ùÿÿÿÿ8ùèá™Ë1
+N
+java:S1444",Make this "public static EinAus" field final(ÄÒ¼ùÿÿÿÿ8ùèá™Ë1
+^
+java:S4973S"<Strings and Boxed types should be compared using "equals()".(âŠ—áşÿÿÿÿ8úèá™Ë1
+^
+java:S4973d"<Strings and Boxed types should be compared using "equals()".(âŠ—áşÿÿÿÿ8—ªä™Ë1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(²¼îF8ûèá™Ë1
+t	java:S116"XRename this field "ZahlenEingabe" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ïİ¢„8‹éá™Ë1
+p	java:S116"ORename this field "Zeit" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ãØûãûÿÿÿÿ8‹éá™Ë1
+o	java:S116"TRename this field "Zeitnamen" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ìğ`8‹éá™Ë1
+s
+java:S3008"QRename this field "EinAus" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÒ¼ùÿÿÿÿ8‹éá™Ë1
+?
+java:S3010,"#Remove this assignment of "EinAus".(şÀÜw8‘éá™Ë1
+N
+java:S16021",Remove useless curly braces around statement(€§šÃøÿÿÿÿ8”éá™Ë1
+j	java:S1009"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İ€¾‡8”éá™Ë1
+a
+java:S1854P"DRemove this useless assignment to local variable "benachrichtigung".(°²ƒ—8—éá™Ë1
+R
+java:S1481P"5Remove this unused "benachrichtigung" local variable.(°²ƒ—8˜éá™Ë1
+o	java:S100R"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«£äÚúÿÿÿÿ8˜éá™Ë1
+\
+java:S1854U"?Remove this useless assignment to local variable "parsedValue".(Õœâê8˜éá™Ë1
+M
+java:S1481U"0Remove this unused "parsedValue" local variable.(Õœâê8™éá™Ë1
+L	java:S106\"+Replace this use of System.err by a logger.(şÅËøøÿÿÿÿ8™éá™Ë1
+a
+java:S1854f"?Remove this useless assignment to local variable "parsedValue".(öûéÃûÿÿÿÿ8šéá™Ë1
+R
+java:S1481f"0Remove this unused "parsedValue" local variable.(öûéÃûÿÿÿÿ8›éá™Ë1
+L	java:S106l"+Replace this use of System.err by a logger.(şÅËøøÿÿÿÿ8›éá™Ë1
+Y
+java:S2696¨"6Make the enclosing method "static" or remove this set.(æØêÿÿÿÿÿ8œéá™Ë1
+S
+java:S1128"6Remove this unused import 'javafx.fxml.Initializable'.(™ÎùÆ8¸·½ùÌ1
+K
+java:S1128	".Remove this unused import 'javafx.scene.Node'.(ÑÖ¬ï8¸·½ùÌ1
+Z
+java:S1128
+"8Remove this unused import 'javafx.scene.control.Button'.(Ë Í‹øÿÿÿÿ8¸·½ùÌ1
+Q
+java:S1128"/Remove this unused import 'javafx.stage.Stage'.(æÄ¸²úÿÿÿÿ8¹·½ùÌ1
+e
+java:S1128"CRemove this unused import 'modern.learning.modernlearning.Starter'.(íÕì ıÿÿÿÿ8¹·½ùÌ1
+^
+java:S1128"<Remove this unused import 'javax.persistence.EntityManager'.(ğàËÒıÿÿÿÿ8¹·½ùÌ1
+\
+java:S1128":Remove this unused import 'javax.persistence.Persistence'.(›²ö¾ıÿÿÿÿ8¹·½ùÌ1
+K
+java:S1128")Remove this unused import 'java.net.URL'.(ñìÁ„üÿÿÿÿ8¹·½ùÌ1
+V
+java:S1128"4Remove this unused import 'java.time.LocalDateTime'.(æÃ§ƒüÿÿÿÿ8¹·½ùÌ1
+W
+java:S1128"5Remove this unused import 'java.util.ResourceBundle'.(ıÆ£¯øÿÿÿÿ8¹·½ùÌ1

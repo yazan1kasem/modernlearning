@@ -116,40 +116,9 @@ public class KalenderPopover extends PopOver {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
-                    if(isFilledCorrectly()){
-                        em.getTransaction().begin();
-                        K_Kalender kalender = new K_Kalender();
-                        kalender.setK_Title(titleField.getText());
-                        kalender.setK_Beschreibung(beschreibung.getText());
+                    saveButton.fire();
+                    saveButton.requestFocus();
 
-                        kalender.setK_vonDatum(
-                                of(dateTimePicker.getVondatepicker().getValue().getYear(),
-                                        dateTimePicker.getVondatepicker().getValue().getMonth().getValue(),
-                                        dateTimePicker.getVondatepicker().getValue().getDayOfMonth(),
-                                        dateTimePicker.getVonhourComboBox().getValue(),
-                                        dateTimePicker.getVonminuteComboBox().getValue()));
-                        kalender.setK_bisDatum(
-                                of(dateTimePicker.getBisdatepicker().getValue().getYear(),
-                                        dateTimePicker.getBisdatepicker().getValue().getMonth().getValue(),
-                                        dateTimePicker.getBisdatepicker().getValue().getDayOfMonth(),
-                                        dateTimePicker.getBishourComboBox().getValue(),
-                                        dateTimePicker.getBisminuteComboBox().getValue())
-                        );
-                        try {
-                            if(notificationBox.EinAus.isSelected()){
-                                notification=notificationBox.GehtDataNotification(kalender);
-                                em.persist(notification);
-                            }
-                        }catch (Exception e){
-                            System.out.println("Keine Benachrichtigung ");
-                        }
-                        em.persist(kalender);
-                        em.getTransaction().commit();
-                        notificationBox.addBenachrichtigung(notification);
-                        KalenderPopover.this.hide();
-                        saveButton.requestFocus();
-                        kalenderController.drawCalendar();
-                    }
                 }
             }
         });
@@ -676,5 +645,7 @@ public class KalenderPopover extends PopOver {
         this.kalenderController = kalenderController;
     }
 
+
+    
 
 }
