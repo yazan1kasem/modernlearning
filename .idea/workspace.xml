@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="version 1.27">
+    <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/Files/4BMSV_v2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v4.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v5.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v6.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v7.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modernlearning.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/Modernlearning.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modernlearning" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modernlearning" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" afterDir="false" />
     </list>
@@ -130,11 +135,11 @@
       <recent name="C:\Users\yazan\Desktop\ModernLearning\src\main\Media" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sinoa\Desktop\modernlearning\src\main\Files" />
       <recent name="C:\Users\sinoa\Desktop\modernlearning\src\main\java\modern\learning\modernlearning\CalenderClasses" />
       <recent name="C:\Users\sinoa\Desktop\modernlearning\src\main\java\modern\learning\modernlearning" />
       <recent name="C:\Users\sinoa\Desktop\modernlearning\src\main\Media" />
       <recent name="C:\Users\yazan\Desktop\ModernLearning\src" />
-      <recent name="C:\Users\yazan\Desktop\ModernLearning\src\main\resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -283,7 +288,8 @@
       <workItem from="1705149750474" duration="6078000" />
       <workItem from="1705157929658" duration="421000" />
       <workItem from="1705158713781" duration="1131000" />
-      <workItem from="1705179907807" duration="15686000" />
+      <workItem from="1705179907807" duration="16727000" />
+      <workItem from="1705247411480" duration="3586000" />
     </task>
     <task id="LOCAL-00001" summary="spring boot firts commit">
       <created>1698429607749</created>
@@ -453,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705152018433</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="version 1.32">
+      <created>1705230521565</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1705230521565</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,6 +550,7 @@
     <MESSAGE value="version 1.9" />
     <MESSAGE value="version 1.17" />
     <MESSAGE value="version 1.19" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.19" />
+    <MESSAGE value="version 1.32" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.32" />
   </component>
 </project>

@@ -5,6 +5,7 @@ import entities.KF_Klassefach;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -15,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -35,7 +37,7 @@ public class Arbeitsblätter implements Initializable {
     EntityManager emf= Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
     @FXML
-    private FlowPane Arbeitsblaetter;
+    private TilePane Arbeitsblaetter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,7 +58,6 @@ public class Arbeitsblätter implements Initializable {
         if(KlasseID!=null&&FachID!=null){
             List<A_Arbeitsblatt> arbeitsblattList = emf.createQuery("select a From A_Arbeitsblatt a",A_Arbeitsblatt.class).getResultList();
             List<A_Arbeitsblatt> filter_arbeitsblatt = arbeitsblattList.stream().filter(a -> a.getA_KF_Bez().getKF_F_Bez().equals(KlasseID) && a.getA_KF_Bez().getKF_KL_Bez().equals(FachID)).collect(Collectors.toList());
-
 
             VBox container = new VBox();
             for (A_Arbeitsblatt arbeitsblatt : filter_arbeitsblatt) {
