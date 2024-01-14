@@ -1,25 +1,36 @@
 package modern.learning.modernlearning;
 
 import entities.D_Dokumente;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -52,10 +63,27 @@ public class Dokumente implements Initializable {
         documentPane.setCenter(imageView);
         documentPane.setBottom(text);
         BorderPane.setAlignment(text, Pos.CENTER); // Zentriert den Text am unteren Rand
-
+        documentPane.setOnMouseClicked(downloadevent->{
+            String pdfUrl = text.getText();
+            try {
+                String savePath = showSaveDialog();
+                if (savePath != null) {
+                    downloadPDF(pdfUrl, savePath);
+                    System.out.println("PDF erfolgreich heruntergeladen!");
+                } else {
+                    System.out.println("Benutzer hat den Speicherpfad nicht ausgewählt.");
+                }
+            } catch (IOException e) {
+                System.err.println("Fehler beim Herunterladen der PDF: " + e.getMessage());
+            }
+        });
+        documentPane.setOnMouseEntered(Documententer->{
+            documentPane.setCursor(Cursor.HAND);
+        });
         return documentPane;
     }
 
+    // ... andere vorhandene Deklarationen ...
     private void drawDokumente() {
         List<D_Dokumente> dokumenteList = emf.createQuery("select d From D_Dokumente d", D_Dokumente.class).getResultList();
         System.out.println(dokumenteList.size());
@@ -70,6 +98,37 @@ public class Dokumente implements Initializable {
         Dokumente.getChildren().add(container);
     }
 
+    public void downloadPDF(String pdfUrl, String savePath) throws IOException {
+        URL url = new URL("file:src/main/Files/"+pdfUrl+".pdf");
+        URLConnection connection = url.openConnection();
+
+        try (BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
+             FileOutputStream fileOutputStream = new FileOutputStream(savePath)) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer, 0, 1024)) != -1) {
+                fileOutputStream.write(buffer, 0, bytesRead);
+            }
+        }catch (IOException e) {
+
+        }
+    }
+
+    public String showSaveDialog() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Speicherort wählen");
+        fileChooser.setInitialFileName("document.pdf");
+
+        File selectedFile = fileChooser.showSaveDialog(null);
+
+        if (selectedFile != null) {
+            return selectedFile.getAbsolutePath();
+        } else {
+            return null;
+        }
+    }
+
     @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
         {
@@ -82,5 +141,5 @@ public class Dokumente implements Initializable {
             } catch (Exception e) {
             }
         }
-        }
+    }
 }
