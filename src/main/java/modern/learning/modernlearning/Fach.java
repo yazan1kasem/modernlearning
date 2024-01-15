@@ -41,12 +41,12 @@ public class Fach {
     public void Arbeitsblaetter(MouseEvent mouseEvent) {
         Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Arbeitsblätter.fxml"));
             Parent root= fxmlLoader.load();
             Arbeitsblätter arbeitsblätter = fxmlLoader.getController();
             Node source=(Node) mouseEvent.getSource();
-            arbeitsblätter.setFachID(klasseId);
-            arbeitsblätter.setKlasseID(source.getId());
+            arbeitsblätter.setFachID(source.getId());
+            arbeitsblätter.setKlasseID(klasseId);
 
             currentStage.getScene().setRoot(root);
         } catch (Exception e) {

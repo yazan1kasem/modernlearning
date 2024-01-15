@@ -159,7 +159,7 @@ public class Arbeitsblätter implements Initializable {
             Parent root= fxmlLoader.load();
 
             Fach fach=fxmlLoader.getController();
-            fach.setKlasseId(getKlasseID());
+            fach.setKlasseId(KlasseID);
             currentStage.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
