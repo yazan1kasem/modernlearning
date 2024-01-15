@@ -9,6 +9,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -121,7 +122,8 @@ public class Arbeitsblätter implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Speicherort wählen");
         fileChooser.setInitialFileName(filename + ".pdf");
-
+        FileChooser.ExtensionFilter fileExtensions =new FileChooser.ExtensionFilter("Datei typ","*.pdf");
+        fileChooser.getExtensionFilters().add(fileExtensions);
         File selectedFile = fileChooser.showSaveDialog(null);
 
         if (selectedFile != null) {
@@ -151,22 +153,16 @@ public class Arbeitsblätter implements Initializable {
     @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
         Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        currentStage.close();
-
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            currentStage.setTitle("Modern learning");
-            currentStage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
-            currentStage.setMinHeight(640);
-            currentStage.setMinWidth(1000);
-            currentStage.setWidth(scene.getWidth());
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Fach.fxml"));
 
-            currentStage.setScene(scene);
+            Parent root= fxmlLoader.load();
 
-            currentStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Fach fach=fxmlLoader.getController();
+            fach.setKlasseId(getKlasseID());
+            currentStage.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

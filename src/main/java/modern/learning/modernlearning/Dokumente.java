@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -119,7 +120,8 @@ public class Dokumente implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Speicherort wählen");
         fileChooser.setInitialFileName("document.pdf");
-
+        FileChooser.ExtensionFilter fileExtensions =new FileChooser.ExtensionFilter("Datei typ","*.pdf");
+        fileChooser.getExtensionFilters().add(fileExtensions);
         File selectedFile = fileChooser.showSaveDialog(null);
 
         if (selectedFile != null) {
@@ -135,10 +137,11 @@ public class Dokumente implements Initializable {
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), currentStage.getWidth(), currentStage.getHeight());
+                Parent root= fxmlLoader.load();
 
-                currentStage.setScene(scene);
+                currentStage.getScene().setRoot(root);
             } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
     }

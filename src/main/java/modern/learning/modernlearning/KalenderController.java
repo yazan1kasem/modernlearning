@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -400,12 +401,15 @@ public class KalenderController implements Initializable {
         });
     }
     public void zurück(MouseEvent mouseEvent) {
-        Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
-            currentStage.setScene(scene);
-        }catch (Exception e) {}
+            Parent root= fxmlLoader.load();
+
+            currentStage.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
