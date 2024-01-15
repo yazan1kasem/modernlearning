@@ -34,10 +34,10 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class Arbeitsblätter implements Initializable {
-    EntityManager emf= Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
+    EntityManager emf = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
 
     @FXML
-    private TilePane Arbeitsblaetter;
+    private FlowPane Arbeitsblaetter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,7 +47,7 @@ public class Arbeitsblätter implements Initializable {
 
 
     private String KlasseID;
-    private String FachID ;
+    private String FachID;
 
 
     public Arbeitsblätter() {
@@ -55,18 +55,18 @@ public class Arbeitsblätter implements Initializable {
     }
 
     public void DrawArbeitsblaetter() {
-        if(KlasseID!=null&&FachID!=null){
-            List<A_Arbeitsblatt> arbeitsblattList = emf.createQuery("select a From A_Arbeitsblatt a",A_Arbeitsblatt.class).getResultList();
+        if (KlasseID != null && FachID != null) {
+            List<A_Arbeitsblatt> arbeitsblattList = emf.createQuery("select a From A_Arbeitsblatt a", A_Arbeitsblatt.class).getResultList();
             List<A_Arbeitsblatt> filter_arbeitsblatt = arbeitsblattList.stream().filter(a -> a.getA_KF_Bez().getKF_F_Bez().equals(KlasseID) && a.getA_KF_Bez().getKF_KL_Bez().equals(FachID)).collect(Collectors.toList());
 
-            VBox container = new VBox();
+
             for (A_Arbeitsblatt arbeitsblatt : filter_arbeitsblatt) {
                 BorderPane box = designBorder(arbeitsblatt.getA_Name());
-                container.getChildren().add(box);
+                Arbeitsblaetter.getChildren().add(box);
             }
-            Arbeitsblaetter.getChildren().add(container);
         }
     }
+
     public BorderPane designBorder(String name) {
         BorderPane Arbeitsblatt = new BorderPane();
 
@@ -79,12 +79,12 @@ public class Arbeitsblätter implements Initializable {
         {
             String savePath = showSaveDialog(name);
             try {
-                downloadPDF(name,savePath);
+                downloadPDF(name, savePath);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        Arbeitsblatt.setOnMouseEntered(enteredBorder->{
+        Arbeitsblatt.setOnMouseEntered(enteredBorder -> {
             Arbeitsblatt.setCursor(Cursor.HAND);
         });
 
@@ -101,7 +101,7 @@ public class Arbeitsblätter implements Initializable {
 
 
     public void downloadPDF(String pdfUrl, String savePath) throws IOException {
-        URL url = new URL("file:src/main/Files/"+pdfUrl+".pdf");
+        URL url = new URL("file:src/main/Files/" + pdfUrl + ".pdf");
         URLConnection connection = url.openConnection();
 
         try (BufferedInputStream in = new BufferedInputStream(connection.getInputStream());
@@ -112,7 +112,7 @@ public class Arbeitsblätter implements Initializable {
             while ((bytesRead = in.read(buffer, 0, 1024)) != -1) {
                 fileOutputStream.write(buffer, 0, bytesRead);
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
 
         }
     }
@@ -120,7 +120,7 @@ public class Arbeitsblätter implements Initializable {
     public String showSaveDialog(String filename) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Speicherort wählen");
-        fileChooser.setInitialFileName(filename+".pdf");
+        fileChooser.setInitialFileName(filename + ".pdf");
 
         File selectedFile = fileChooser.showSaveDialog(null);
 
@@ -131,20 +131,6 @@ public class Arbeitsblätter implements Initializable {
         }
     }
 
-    @FXML
-    public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage currentStage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Fach.fxml"));
-            Fach fach = fxmlLoader.getController();
-            fach.setKlasseId(KlasseID);
-            fxmlLoader.setController(fach);
-            Scene scene = new Scene(fxmlLoader.load(),currentStage.getWidth(),currentStage.getHeight());
-            currentStage.setScene(scene);
-        }catch (Exception e) {
-
-        }
-    }
 
     public String getKlasseID() {
         return KlasseID;
@@ -156,15 +142,33 @@ public class Arbeitsblätter implements Initializable {
     }
 
 
-
     public void setFachID(String fachID) {
         FachID = fachID;
         DrawArbeitsblaetter();
 
     }
 
+    @FXML
+    public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
 
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            currentStage.setTitle("Modern learning");
+            currentStage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
+            currentStage.setMinHeight(640);
+            currentStage.setMinWidth(1000);
+            currentStage.setWidth(scene.getWidth());
 
+            currentStage.setScene(scene);
 
-    //yassin ist ein schwuchtel
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+//yassin ist ein schwuchtel

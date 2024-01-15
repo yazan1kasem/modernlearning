@@ -21,16 +21,14 @@
                 <HBox alignment="CENTER" style="-fx-background-color: #FF8C00; -fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
                     <Text text="Übungsbeispiele" style="-fx-font-size: 30px; -fx-fill: white;"/>
                 </HBox>
+                <FlowPane fx:id="Arbeitsblaetter" hgap="10.0" prefHeight="400" minWidth="${ArbeitsblaetterPane.width}" vgap="5.0" >
 
-                <!-- Fußzeile für SKILLBUILDERS -->
-                <HBox style="-fx-background-color: #FF8C00; -fx-padding: 10; -fx-alignment: bottom-left;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-                    <Text text="SKILLBUILDERS" style="-fx-font-size: 20px; -fx-fill: white;"/>
-                </HBox>
-                <TilePane fx:id="Arbeitsblaetter" hgap="10.0" prefHeight="400" minWidth="${ArbeitsblaetterPane.width}" vgap="5.0" >
-
-                </TilePane>
+                </FlowPane>
             </VBox>
         </FlowPane>
-
-          </children>
+        <Button layoutX="30" layoutY="10" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false" style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+        <HBox style="-fx-background-color: #FF8C00; -fx-padding: 10; -fx-alignment: bottom-left;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+            <Text text="SKILLBUILDERS" style="-fx-font-size: 20px; -fx-fill: white;"/>
+        </HBox>
+    </children>
 </AnchorPane>

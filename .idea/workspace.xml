@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d6dc383-5373-4e7d-898d-e4959666e9d8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/Files/4BMSV_v2.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v3.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v4.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v5.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v6.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Files/BMSV_v7.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modernlearning.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/Modernlearning.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modern/learning/modernlearning/Arbeitsblätter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/modern/learning/modernlearning/Arbeitsblätter.fxml" afterDir="false" />
     </list>
@@ -94,39 +87,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/yazan/Desktop/ModernLearning/src/main/java/modern/learning/modernlearning&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sinoa/Desktop&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5855856&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "last_directory_selection": "C:/Users/yazan/Desktop/ModernLearning/src/main/java/modern/learning/modernlearning",
+    "last_opened_file_path": "C:/Users/sinoa/Downloads/books/books",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5855856",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;module&quot;,
-      &quot;directory&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "module",
+      "directory"
     ],
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;182325aa-99df-4c06-969b-513c57207cc1&quot;
+    "DatabaseDriversLRU": [
+      "182325aa-99df-4c06-969b-513c57207cc1"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="modern.learning.modernlearning" />
@@ -290,6 +283,9 @@
       <workItem from="1705158713781" duration="1131000" />
       <workItem from="1705179907807" duration="16727000" />
       <workItem from="1705247411480" duration="3586000" />
+      <workItem from="1705252493401" duration="196000" />
+      <workItem from="1705252929676" duration="1489000" />
+      <workItem from="1705314554211" duration="710000" />
     </task>
     <task id="LOCAL-00001" summary="spring boot firts commit">
       <created>1698429607749</created>
@@ -466,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705230521565</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="version 1.33">
+      <created>1705252527571</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1705252527571</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,6 +554,7 @@
     <MESSAGE value="version 1.17" />
     <MESSAGE value="version 1.19" />
     <MESSAGE value="version 1.32" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.32" />
+    <MESSAGE value="version 1.33" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.33" />
   </component>
 </project>
