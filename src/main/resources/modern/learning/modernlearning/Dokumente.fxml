@@ -11,29 +11,14 @@
 
     <children>
         <!-- Top Row -->
-        <HBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 20;">
-            <!-- Left side with document boxes -->
-            <VBox fx:id="DokumentePanel" spacing="10" style=" -fx-background-color: #FFAB2F; -fx-border-radius: 10px; -fx-padding: 10px;">
-                <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: white;">Dokumente</Text>
-                <FlowPane fx:id="Dokumente" hgap="15.0" vgap="15.0" alignment="TOP_LEFT">
-                    <!-- Dynamically add Dokument boxes here based on your logic -->
-                </FlowPane>
-            </VBox>
 
-            <!-- Right side with additional content or controls -->
-            <VBox spacing="10" style="-fx-background-color: #FFAB2F; -fx-border-radius: 10px; -fx-padding: 10px;">
-                <!-- Header with Navigation buttons and Year/Month display -->
-                <HBox spacing="20" style="-fx-animated: ex; -fx-padding: 10 0 15 0;">
-                    <!-- Add any header elements specific to Dokumente here -->
-                </HBox>
-                <Button fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false"
-                        style="-fx-font-size: 18px; -fx-padding: 8 15; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 8px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 8px;-fx-border-insets: -1px"/>
-            </VBox>
-        </HBox>
 
         <!-- Bottom Row -->
-        <HBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 20;">
+        <VBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 20;">
             <!-- Left side with document boxes -->
+            <Button fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false"
+                    style="-fx-cursor:hand;-fx-font-size: 18px; -fx-padding: 8 15; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 8px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 8px;-fx-border-insets: -1px"/>
+
             <VBox fx:id="DokumentePanel" spacing="10" style=" -fx-background-color: #FFAB2F; -fx-border-radius: 10px; -fx-padding: 10px;">
                 <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: white;">Dokumente</Text>
                 <FlowPane fx:id="Dokumente" hgap="15.0" vgap="15.0" alignment="TOP_LEFT">
@@ -41,15 +26,6 @@
                 </FlowPane>
             </VBox>
 
-            <!-- Right side with additional content or controls -->
-            <VBox spacing="10" style="-fx-background-color: #FFAB2F; -fx-border-radius: 10px; -fx-padding: 10px;">
-                <!-- Header with Navigation buttons and Year/Month display -->
-                <HBox spacing="20" style="-fx-animated: ex; -fx-padding: 10 0 15 0;">
-                    <!-- Add any header elements specific to Dokumente here -->
-                </HBox>
-                <Button fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false"
-                        style="-fx-font-size: 18px; -fx-padding: 8 15; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 8px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 8px;-fx-border-insets: -1px"/>
-            </VBox>
-        </HBox>
+        </VBox>
     </children>
 </AnchorPane>

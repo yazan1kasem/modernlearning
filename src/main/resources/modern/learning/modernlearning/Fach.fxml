@@ -28,7 +28,7 @@
                 </FlowPane>
             </VBox>
         </FlowPane>
-        <Button layoutX="30" layoutY="10" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false" style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+        <Button layoutX="30" layoutY="10" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false" style="-fx-cursor:hand;-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
     </children>
 </AnchorPane>
 

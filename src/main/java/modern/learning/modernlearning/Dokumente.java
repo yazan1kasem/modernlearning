@@ -89,14 +89,13 @@ public class Dokumente implements Initializable {
         List<D_Dokumente> dokumenteList = emf.createQuery("select d From D_Dokumente d", D_Dokumente.class).getResultList();
         System.out.println(dokumenteList.size());
 
-        VBox container = new VBox();
 
         for (D_Dokumente dokument : dokumenteList) {
             BorderPane documentPane = createDocumentPane(dokument);
-            container.getChildren().add(documentPane);
+            Dokumente.getChildren().add(documentPane);
+
         }
 
-        Dokumente.getChildren().add(container);
     }
 
     public void downloadPDF(String pdfUrl, String savePath) throws IOException {

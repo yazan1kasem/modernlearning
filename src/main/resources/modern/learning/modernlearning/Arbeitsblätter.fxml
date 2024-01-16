@@ -13,8 +13,6 @@
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Arbeitsblätter">
 
     <children>
-        <Button layoutX="30" layoutY="10" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK" mnemonicParsing="false"
-                style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
         <FlowPane  alignment="TOP_LEFT">
             <VBox fx:id="ArbeitsblaetterPanel" spacing="10" prefWidth="800" prefHeight="550" style="-fx-background-color: #FFAB2F; -fx-padding: 30 0 0 0">
                 <!-- Header with Navigation buttons and Year/Month display -->
@@ -26,7 +24,7 @@
                 </FlowPane>
             </VBox>
         </FlowPane>
-        <Button layoutX="30" layoutY="10" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false" style="-fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+        <Button layoutX="30" layoutY="40" fx:id="ZurückButton" onMouseClicked="#zurück" text="ZURÜCK"  mnemonicParsing="false" style="-fx-cursor: hand; -fx-font-size: 16px; -fx-padding: 5 10; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
         <HBox style="-fx-background-color: #FF8C00; -fx-padding: 10; -fx-alignment: bottom-left;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <Text text="SKILLBUILDERS" style="-fx-font-size: 20px; -fx-fill: white;"/>
         </HBox>
