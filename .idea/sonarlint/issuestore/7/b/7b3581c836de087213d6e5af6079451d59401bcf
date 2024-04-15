@@ -1,11 +1,0 @@
-
-m	java:S1174"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õà¥ä8¯Á–ŠÎ1
-O
-java:S1199/"-Extract this nested code block into a method.(Ç¤£Ìùÿÿÿÿ8±Á–ŠÎ1
-£
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÓÔƒÛşÿÿÿÿ8ÏÁ–ŠÎ1
-o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×ëüÿÿÿÿÿ8×Á–ŠÎ1
-j	java:S100."NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“ô¼Ş8‰Â–ŠÎ1
-J	java:S108:")Either remove or fill this block of code.(¬Àáªøÿÿÿÿ8•Â–ŠÎ1
-T
-java:S1128"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘8ÂÂ´ŠÎ1
