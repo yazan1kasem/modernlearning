@@ -1,6 +1,5 @@
 package modern.learning.modernlearning;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -39,9 +38,6 @@ public class EigeneDatein {
     }
 
     @FXML
-    public void onDeleteButtonClicked(ActionEvent actionEvent) {}
-  
-    @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
         {
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -54,6 +50,5 @@ public class EigeneDatein {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 }
