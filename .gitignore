@@ -5,13 +5,16 @@ build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
+Modernlearning.sqlite
 .idea/*
+.idea
 modernlearning-Modernlearning/*
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
 .idea/workspace.xml
+.idea/**
 *.iws
 *.iml
 *.ipr
