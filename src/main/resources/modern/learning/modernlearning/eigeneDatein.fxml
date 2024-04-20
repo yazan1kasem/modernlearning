@@ -9,13 +9,9 @@
             fx:controller="modern.learning.modernlearning.EigeneDatein"
             fx:id="mainPane"
             prefHeight="400.0" prefWidth="600.0"
-
-            style="-fx-background-color: #FFAB2F;"> <!-- Hintergrundfarbe ändern -->
+            style="-fx-background-color: #FFAB2F;">
 
     <children>
-          <StackPane fx:id="Drop down button" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <Button text="+" style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;" />
-    </StackPane>
         <!-- StackPane für den Drop-down-Button -->
         <StackPane fx:id="DropDownButton" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0">
             <Button text="+" style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px; -fx-padding: 8px 12px;" />
