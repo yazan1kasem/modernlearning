@@ -1,7 +1,9 @@
 package modern.learning.modernlearning;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -35,6 +37,22 @@ public class EigeneDatein {
         stage.setY(event.getScreenY() - yOffset);
     }
 
-    public void onDeleteButtonClicked(ActionEvent actionEvent) {
+    @FXML
+    public void onDeleteButtonClicked(ActionEvent actionEvent) {}
+  
+    @FXML
+    public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
+        {
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
+                Parent root= fxmlLoader.load();
+
+                currentStage.getScene().setRoot(root);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
     }
 }
