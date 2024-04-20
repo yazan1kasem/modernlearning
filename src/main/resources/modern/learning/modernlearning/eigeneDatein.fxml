@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Button?>
 <AnchorPane xmlns="http://javafx.com/javafx/8"
@@ -9,7 +8,8 @@
             fx:id="mainPane"
             prefHeight="400.0" prefWidth="600.0"
             style="-fx-background-color: #FFA500;"> <!-- Orange Hintergrund -->
-    <StackPane fx:id="Drop down button" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <StackPane fx:id="Drop down button" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <Button text="+" style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;" />
     </StackPane>
+    <Button text="Delete" onAction="#onDeleteButtonClicked" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0"/>
 </AnchorPane>

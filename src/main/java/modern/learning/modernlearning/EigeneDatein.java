@@ -1,5 +1,6 @@
 package modern.learning.modernlearning;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -32,5 +33,8 @@ public class EigeneDatein {
         Stage stage = (Stage) mainPane.getScene().getWindow();
         stage.setX(event.getScreenX() - xOffset);
         stage.setY(event.getScreenY() - yOffset);
+    }
+
+    public void onDeleteButtonClicked(ActionEvent actionEvent) {
     }
 }
