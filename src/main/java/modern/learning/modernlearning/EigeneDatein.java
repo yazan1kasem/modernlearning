@@ -38,9 +38,6 @@ public class EigeneDatein {
     }
 
     @FXML
-    public void onDeleteButtonClicked(ActionEvent actionEvent) {}
-  
-    @FXML
     public void zurück(javafx.scene.input.MouseEvent mouseEvent) {
         {
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -53,6 +50,5 @@ public class EigeneDatein {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 }
