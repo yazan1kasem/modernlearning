@@ -28,6 +28,7 @@
                 <FlowPane hgap="10.0" prefHeight="50" prefWidth="700" vgap="5.0" alignment="CENTER">
                     <Button layoutX="30" layoutY="10" fx:id="KalenderButton" onMouseClicked="#Kalender" text="KALENDER"  mnemonicParsing="false" style="-fx-cursor:hand;-fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
                     <Button layoutX="30" layoutY="40" fx:id="DokumentButton" onMouseClicked="#Dokumente" text="DOKUMENTE"  mnemonicParsing="false" style="-fx-cursor:hand;-fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+                    <Button layoutX="30" layoutY="70" fx:id="eigeneDateinButton" onMouseClicked="#eigeneDatein" text="EIGENE DATEIN"  mnemonicParsing="false" style="-fx-cursor:hand;-fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: white; -fx-text-fill: #FF8C00;-fx-border-radius: 5px;-fx-border-color: black;-fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
                 </FlowPane>
             </VBox>
         </FlowPane>
