@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Button?>
-<AnchorPane xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.ListView?>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="modern.learning.modernlearning.EigeneDatein"
-            fx:id="mainPane"
-            prefHeight="400.0" prefWidth="600.0"
-            style="-fx-background-color: #FFA500;"> <!-- Orange Hintergrund -->
-    <StackPane fx:id="Drop down button" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <Button text="+" style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;" />
-    </StackPane>
+            fx:id="mainPane" prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color: #FFA500;">
+
+    <!-- StackPane wird hier als Container für den Drag-and-Drop-Bereich und den Button verwendet -->
+    <StackPane fx:id="stackPane" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+
+        <!-- Definieren des Drag-and-Drop-Bereichs unter dem Button -->
+        <Pane fx:id="dragDropArea" onDragOver="#handleDragOver" onDragDropped="#handleDragDropped"
+              StackPane.alignment="CENTER"
+              style="-fx-border-color: black; -fx-border-style: dashed; -fx-background-color: rgba(255, 255, 255, 0.5);"
+              prefWidth="300.0" prefHeight="300.0" />
+
+        <!-- Der Button wird als letztes Element hinzugefügt, damit er oben liegt -->
+        <Button text="+" fx:id="plusButton" onAction="#handleButtonClick"
+                StackPane.alignment="CENTER"
+                style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;"/>
+         </StackPane>
+
 </AnchorPane>
