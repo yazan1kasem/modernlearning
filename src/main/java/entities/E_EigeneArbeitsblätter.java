@@ -1,16 +1,16 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "E_EigeneDatein")
 @Table(name = "E_EigeneDatein")
 public class E_EigeneArbeitsblätter {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "E_id", unique = true, nullable = false)
     private int E_id;
 
@@ -44,4 +44,8 @@ public class E_EigeneArbeitsblätter {
     public void setE_Timestamp(LocalDateTime e_Timestamp) {
         E_Timestamp = e_Timestamp;
     }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="E_U_id", referencedColumnName = "U_id")
+    private U_user u_user;
 }

@@ -2,7 +2,9 @@ package entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "K_Kalender")
@@ -80,4 +82,8 @@ public class K_Kalender {
                 ", K_bisDatum=" + K_bisDatum +
                 '}';
     }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="K_U_id", referencedColumnName = "U_ID")
+    private U_user user;
 }
