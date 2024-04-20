@@ -53,4 +53,20 @@ public class Klasse {
             System.out.println(e.getMessage());
         }
     }
+
+    public void eigeneDatein(MouseEvent mouseEvent) {
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("eigeneDatein.fxml"));
+
+            Parent root= fxmlLoader.load();
+
+            EigeneDatein eigeneDatein=fxmlLoader.getController();
+            Node source=(Node) mouseEvent.getSource();
+
+            currentStage.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

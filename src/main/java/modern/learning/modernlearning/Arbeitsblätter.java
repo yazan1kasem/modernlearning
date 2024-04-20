@@ -166,5 +166,3 @@ public class Arbeitsblätter implements Initializable {
         }
     }
 }
-
-//yassin ist ein schwuchtel
