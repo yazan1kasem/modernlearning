@@ -10,7 +10,7 @@
             fx:id="mainPane"
             prefHeight="400.0" prefWidth="600.0"
 
-            style="-fx-background-color: #FFAB2F;"> <!-- Hintergrundfarbe ändern -->
+            style="-fx-background-color: #FFAB2F;">
 
     <children>
           <StackPane fx:id="Drop down button" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
