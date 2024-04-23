@@ -40,14 +40,11 @@ public class Starter extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add("file:src/main/resources/style.css");
-
         stage.setTitle("Modern learning");
         stage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
         stage.setMinHeight(615);
         stage.setMinWidth(Toolkit.getDefaultToolkit().getScreenSize().width / 2);
-
         stage.setScene(scene);
-
         stage.show();
         stage.setWidth(scene.getWidth());
         stage.setHeight(scene.getHeight());
@@ -67,10 +64,7 @@ public class Starter extends Application {
             geschlossen=true;
             System.exit(0);
         });
-
-
-
-
+        Curentuser.setUsername(System.getProperty("user.name"));
     }
 
 
