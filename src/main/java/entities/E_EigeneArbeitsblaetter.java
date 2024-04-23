@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "E_EigeneDatein")
-@Table(name = "E_EigeneDatein")
-public class E_EigeneArbeitsblätter {
+@Entity
+@Table(name = "E_EigeneArbeitsblaetter")
+public class E_EigeneArbeitsblaetter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
