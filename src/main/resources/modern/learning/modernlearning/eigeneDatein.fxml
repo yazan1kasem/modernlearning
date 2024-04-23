@@ -8,23 +8,26 @@
 <?import javafx.scene.control.ListView?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="modern.learning.modernlearning.EigeneDatein"
-            fx:id="mainPane" prefHeight="400.0" prefWidth="600.0"
+            fx:id="mainPane" prefHeight="600.0" prefWidth="800.0"
             style="-fx-background-color: #FFA500;">
 
-    <!-- StackPane wird hier als Container für den Drag-and-Drop-Bereich und den Button verwendet -->
-    <StackPane fx:id="stackPane" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
-               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-
-        <!-- Definieren des Drag-and-Drop-Bereichs unter dem Button -->
+    <StackPane fx:id="stackPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               AnchorPane.bottomAnchor="0.0" prefHeight="300.0">
         <Pane fx:id="dragDropArea" onDragOver="#handleDragOver" onDragDropped="#handleDragDropped"
-              StackPane.alignment="CENTER"
               style="-fx-border-color: black; -fx-border-style: dashed; -fx-background-color: rgba(255, 255, 255, 0.5);"
-              prefWidth="300.0" prefHeight="300.0" />
+              StackPane.alignment="CENTER">
+        </Pane>
 
-        <!-- Der Button wird als letztes Element hinzugefügt, damit er oben liegt -->
         <Button text="+" fx:id="plusButton" onAction="#handleButtonClick"
                 StackPane.alignment="CENTER"
-                style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;"/>
-         </StackPane>
-
+                style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;">
+        </Button>
+        <Button text="Datei auswählen und löschen" onAction="#handleFileDeletion"
+                StackPane.alignment="BOTTOM_CENTER"
+                style="-fx-font-size: 16px; -fx-background-color: #ff6347; -fx-text-fill: white;">
+        </Button>
+    </StackPane>
+    <FlowPane fx:id="pdfListView" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"
+              AnchorPane.rightAnchor="10.0" prefHeight="200.0">
+    </FlowPane>
 </AnchorPane>
