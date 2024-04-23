@@ -11,6 +11,8 @@
         <class> entities.K_Kalender</class>
         <class> entities.KF_Klassefach</class>
         <class> entities.F_Fach</class>
+        <class> entities.E_EigeneArbeitsblaetter</class>
+        <class> entities.U_user</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />

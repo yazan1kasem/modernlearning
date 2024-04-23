@@ -1,0 +1,115 @@
+
+R
+java:S3740²"/Provide the parametrized type for this generic.(›óÍùÿÿÿÿ8¹Ë„ÄÎ1
+R
+java:S3740Â"/Provide the parametrized type for this generic.(ù¯ŒŞùÿÿÿÿ8ºË„ÄÎ1
+R
+java:S3740Ğ"/Provide the parametrized type for this generic.(€¾±ùÿÿÿÿ8ºË„ÄÎ1
+i
+java:S1192²"KDefine a constant instead of duplicating this literal "\u001B[32m" 3 times.(Ø’Ù8¼Ë„ÄÎ1
+y
+java:S1192½"VDefine a constant instead of duplicating this literal "-fx-border-radius: 5;" 3 times.(ÙÏº×ÿÿÿÿÿ8¼Ë„ÄÎ1
+i
+java:S1192¡"FDefine a constant instead of duplicating this literal "BLACK" 3 times.(¾†¿Éøÿÿÿÿ8½Ë„ÄÎ1
+}
+java:S1192¼"ZDefine a constant instead of duplicating this literal "-fx-background-radius: 5;" 3 times.(½—Ê•üÿÿÿÿ8½Ë„ÄÎ1
+i
+java:S1192¯"KDefine a constant instead of duplicating this literal "\u001B[31m" 4 times.(¶‹Ì‰8½Ë„ÄÎ1
+h
+java:S1192¯"JDefine a constant instead of duplicating this literal "\u001B[0m" 7 times.(¶‹Ì‰8½Ë„ÄÎ1
+s
+java:S1192º"PDefine a constant instead of duplicating this literal "-fx-text-fill: " 3 times.(€£‰¯ûÿÿÿÿ8½Ë„ÄÎ1
+u
+java:S1192¹"WDefine a constant instead of duplicating this literal "-fx-background-color: " 3 times.(Îª•8½Ë„ÄÎ1
+j
+java:S1192¦"GDefine a constant instead of duplicating this literal "orange" 3 times.(ï¤‰·ÿÿÿÿÿ8½Ë„ÄÎ1
+q
+java:S1192»"SDefine a constant instead of duplicating this literal "-fx-border-color: " 3 times.(ÄÒ†ë8¾Ë„ÄÎ1
+X
+java:S1141Ç"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8¿Ë„ÄÎ1
+X
+java:S1141ô"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ÀË„ÄÎ1
+n	java:S117à"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßµ¾°8ÀË„ÄÎ1
+n	java:S117–"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸º€Û8ÀË„ÄÎ1
+m	java:S117Ü"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡Ùœ=8ÀË„ÄÎ1
+s	java:S117Ş"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ïñçùÿÿÿÿ8ÀË„ÄÎ1
+n	java:S117æ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®•‡Õ8ÀË„ÄÎ1
+s	java:S117õ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óàÂıÿÿÿÿ8ÀË„ÄÎ1
+s	java:S117ö"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§Û¨ÿÿÿÿÿ8ÀË„ÄÎ1
+s	java:S117ı"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Úä«ïûÿÿÿÿ8ÀË„ÄÎ1
+s	java:S117²"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›óÍùÿÿÿÿ8ÀË„ÄÎ1
+s	java:S117Â"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù¯ŒŞùÿÿÿÿ8ÁË„ÄÎ1
+s	java:S117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€¾±ùÿÿÿÿ8ÁË„ÄÎ1
+s	java:S117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€¾±ùÿÿÿÿ8ÁË„ÄÎ1
+n	java:S117é"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ò˜Âœ8ÁË„ÄÎ1
+n	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÊô°8ÁË„ÄÎ1
+E
+java:S1604s"(Make this anonymous inner class a lambda(µõÀî8ÁË„ÄÎ1
+k
+java:S2184˜"HCast one of the operands of this multiplication operation to a "double".(›âæ®ûÿÿÿÿ8ÇË„ÄÎ1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(²¼îF8ÈË„ÄÎ1
+S
+java:S2209 "5Change this instance-reference to a static reference.(ôş—¨8£Í„ÄÎ1
+H	java:S106¥"+Replace this use of System.out by a logger.(Š…ß8¥Í„ÄÎ1
+S
+java:S2209ª"5Change this instance-reference to a static reference.(ôş—¨8¦Í„ÄÎ1
+H	java:S106¯"+Replace this use of System.out by a logger.(¶‹Ì‰8§Í„ÄÎ1
+H	java:S106²"+Replace this use of System.out by a logger.(Ø’Ù8§Í„ÄÎ1
+H	java:S106´"+Replace this use of System.out by a logger.(°ô€8¨Í„ÄÎ1
+k	java:S100¸"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â×²Æ8©Í„ÄÎ1
+p
+java:S3776¸"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(Â×²Æ8ªÍ„ÄÎ1
+S
+java:S2209ô"5Change this instance-reference to a static reference.(ôş—¨8ÇÍ„ÄÎ1
+a
+java:S1155ù">Use isEmpty() to check whether the collection is empty or not.(ãòŒ€ıÿÿÿÿ8ÉÍ„ÄÎ1
+H	java:S106…"+Replace this use of System.out by a logger.(Š…ß8ËÍ„ÄÎ1
+S
+java:S2209‰"5Change this instance-reference to a static reference.(ôş—¨8ÌÍ„ÄÎ1
+M	java:S106"+Replace this use of System.out by a logger.(ÖËêúÿÿÿÿ8ÍÍ„ÄÎ1
+G	java:S106‘"+Replace this use of System.out by a logger.(×«ê=8ÎÍ„ÄÎ1
+k	java:S100•"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ş‘é8ÎÍ„ÄÎ1
+J
+java:S1602§",Remove useless curly braces around statement( µÖâ8ÕÍ„ÄÎ1
+O
+java:S1602Í",Remove useless curly braces around statement(ãƒãøÿÿÿÿ8ÙÍ„ÄÎ1
+k	java:S100Ú"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßêÏ8ÛÍ„ÄÎ1
+p
+java:S6204í"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8áÍ„ÄÎ1
+M	java:S106ï"+Replace this use of System.out by a logger.(üşò–ÿÿÿÿÿ8ãÍ„ÄÎ1
+O
+java:S1602ı",Remove useless curly braces around statement(Úä«ïûÿÿÿÿ8èÍ„ÄÎ1
+O
+java:S1602Ğ",Remove useless curly braces around statement(€¾±ùÿÿÿÿ8ŒÎ„ÄÎ1
+d
+java:S1126ã"AReplace this if-then-else statement by a single return statement.(¹ïœãúÿÿÿÿ8Î„ÄÎ1
+K	java:S108ü")Either remove or fill this block of code.(ØçÔ·ÿÿÿÿÿ8“Î„ÄÎ1
+H	java:S106„"+Replace this use of System.out by a logger.(êç¼µ8”Î„ÄÎ1
+H	java:S106†"+Replace this use of System.out by a logger.(‹—8•Î„ÄÎ1
+k	java:S100‹"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü—8•Î„ÄÎ1
+c
+java:S1117Œ"@Rename "deleteButton" which hides the field declared at line 65.(…„´·ÿÿÿÿÿ8–Î„ÄÎ1
+J
+java:S1602’",Remove useless curly braces around statement(„©‰€8˜Î„ÄÎ1
+O
+java:S1602•",Remove useless curly braces around statement(ï•¹ùÿÿÿÿ8˜Î„ÄÎ1
+[
+java:S1128">Remove this unused import 'javafx.beans.value.ChangeListener'.(¸÷Í8§Î„ÄÎ1
+\
+java:S1128"?Remove this unused import 'javafx.beans.value.ObservableValue'.(´œ«Å8§Î„ÄÎ1
+S
+java:S1128	"6Remove this unused import 'javafx.fxml.Initializable'.(™ÎùÆ8§Î„ÄÎ1
+V
+java:S1128"4Remove this unused import 'javafx.geometry.Point2D'.(¦¨–íûÿÿÿÿ8§Î„ÄÎ1
+M
+java:S1128"1Remove this unused import 'javafx.scene.control'.(ßõ8§Î„ÄÎ1
+Q
+java:S1128"5Remove this unused import 'javafx.stage.WindowEvent'.(‚ƒ×r8§Î„ÄÎ1
+]
+java:S1128"@Remove this unused import 'org.controlsfx.control.WorldMapView'.(ñÛâÅ8¨Î„ÄÎ1
+J
+java:S1128$"(Remove this unused import 'javax.swing'.(Ìí¿Üüÿÿÿÿ8¨Î„ÄÎ1
+S
+java:S1128%"6Remove this unused import 'javax.xml.stream.Location'.(İØéñ8¨Î„ÄÎ1
+W
+java:S1128."5Remove this unused import 'java.util.ResourceBundle'.(ıÆ£¯øÿÿÿÿ8¨Î„ÄÎ1
