@@ -35,7 +35,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class Arbeitsblätter implements Initializable {
-    EntityManager emf = Persistence.createEntityManagerFactory("Modernlearning").createEntityManager();
+    EntityManager emf = DatabaseConnection.getConnection();
 
     @FXML
     private FlowPane Arbeitsblaetter;

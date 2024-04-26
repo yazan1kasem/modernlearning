@@ -23,12 +23,17 @@ public class K_Kalender {
     @Column(name = "K_bisDatum ")
     private LocalDateTime K_bisDatum;
 
-    public K_Kalender(int k_ID, String k_Title, String k_Beschreibung, LocalDateTime k_vonDatum, LocalDateTime k_bisDatum) {
+    @ManyToOne
+    @JoinColumn(name="K_U_id", referencedColumnName = "U_ID")
+    private U_user user;
+
+    public K_Kalender(int k_ID, String k_Title, String k_Beschreibung, LocalDateTime k_vonDatum, LocalDateTime k_bisDatum, U_user user) {
         K_ID = k_ID;
         K_Title = k_Title;
         K_Beschreibung = k_Beschreibung;
         K_vonDatum = k_vonDatum;
         K_bisDatum = k_bisDatum;
+        this.user = user;
     }
 
     public K_Kalender() {
@@ -70,7 +75,17 @@ public class K_Kalender {
         K_bisDatum = k_bisDatum;
     }
 
+    public void setK_ID(int k_ID) {
+        K_ID = k_ID;
+    }
 
+    public U_user getUser() {
+        return user;
+    }
+
+    public void setUser(U_user user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
@@ -83,7 +98,5 @@ public class K_Kalender {
                 '}';
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="K_U_id", referencedColumnName = "U_ID")
-    private U_user user;
+
 }

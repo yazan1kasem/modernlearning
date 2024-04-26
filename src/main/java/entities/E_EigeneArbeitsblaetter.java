@@ -19,7 +19,9 @@ public class E_EigeneArbeitsblaetter {
 
     @Column(name="E_Timestamp")
     private LocalDateTime E_Timestamp;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="E_U_id", referencedColumnName = "U_id")
+    private U_user u_user;
 
     public int getE_id() {
         return E_id;
@@ -45,7 +47,11 @@ public class E_EigeneArbeitsblaetter {
         E_Timestamp = e_Timestamp;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="E_U_id", referencedColumnName = "U_id")
-    private U_user u_user;
+    public U_user getU_user() {
+        return u_user;
+    }
+
+    public void setU_user(U_user u_user) {
+        this.u_user = u_user;
+    }
 }
