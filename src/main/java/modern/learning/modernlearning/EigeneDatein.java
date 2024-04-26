@@ -6,9 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import javax.persistence.EntityManager;
@@ -69,7 +66,8 @@ public class EigeneDatein implements Initializable {
                 String fileName = rs.getString("E_DateiName");
                 File file = new File(basePath, fileName);
                 if (file.exists()) {
-                    BorderPane pane = designBorder(file);
+                    String timestamp = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now()); // Zeitstempel generieren
+                    BorderPane pane = designBorder(file, timestamp); // Zeitstempel übergeben
                     pdfListView.getChildren().add(pane);
                     fileList.add(file);
                 } else {
@@ -82,19 +80,27 @@ public class EigeneDatein implements Initializable {
         }
     }
 
-    private BorderPane designBorder(File file) {
+    private BorderPane designBorder(File file, String timestamp) {
         BorderPane pane = new BorderPane();
-        javafx.scene.image.Image image = new javafx.scene.image.Image("file:src/main/Media/pdf_icon.png"); // Pfad zum PDF-Icon anpassen
-        javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
+        Image image = new Image("file:src/main/Media/pdf_icon.png"); // Pfad zum PDF-Icon anpassen
+        ImageView imageView = new ImageView(image);
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
 
         Text text = new Text(file.getName());
-        pane.setCenter(imageView);
-        pane.setBottom(text);
-        BorderPane.setAlignment(text, javafx.geometry.Pos.CENTER);
-        pane.setCursor(javafx.scene.Cursor.HAND);
 
+        
+        LocalDateTime dateTime = LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String formattedTimestamp = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+        Text timestampText = new Text(formattedTimestamp);
+        VBox vbox = new VBox(text, timestampText);
+        vbox.setAlignment(Pos.CENTER);
+
+        pane.setCenter(imageView);
+        pane.setBottom(vbox); // Setzen Sie die VBox mit Texten am unteren Rand
+        BorderPane.setAlignment(vbox, Pos.CENTER);
+        pane.setCursor(Cursor.HAND);
 
         pane.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
@@ -124,6 +130,11 @@ public class EigeneDatein implements Initializable {
     }
 
     private void saveFile(File file) {
+        if (!file.getName().toLowerCase().endsWith(".pdf")) {
+            showAlert(Alert.AlertType.ERROR, "Fehler", "Es können nur PDF-Dateien gespeichert werden.");
+            return;
+        }
+
         try {
             String projectSrcDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "EigeneDatein";
             Path destPath = Paths.get(projectSrcDirectory, file.getName());
