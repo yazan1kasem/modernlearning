@@ -24,10 +24,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -37,7 +35,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import modern.learning.modernlearning.CalenderClasses.Benachrichtigung;
 import modern.learning.modernlearning.CalenderClasses.KalenderPopover;
@@ -96,7 +93,7 @@ public class KalenderController implements Initializable {
         dateFocus = ZonedDateTime.now();
         today = ZonedDateTime.now();
         drawCalendar();
-        List<N_Notifications> notificationsList= em.createQuery("select n from N_Notifications n").getResultList();
+        List<N_Notifications> notificationsList= em.createQuery("select n from N_Notifications n where n.user.U_Name=:username").setParameter("username", Currentuser.getUsername()).getResultList();
         for (N_Notifications n_notification:notificationsList) {
             Benachrichtigung benachrichtigung=new Benachrichtigung( n_notification.getN_K_ID().getK_Title(),n_notification.getN_Vorzeit(),n_notification.getN_id());
         }
@@ -185,7 +182,8 @@ public class KalenderController implements Initializable {
         gridPane.add(TextV("Samstag"), 6, 0);
 
         List<K_Kalender> KalenderListe = em.createQuery(
-                        "SELECT k FROM K_Kalender k", K_Kalender.class)
+                        "SELECT k FROM K_Kalender k where k.user.U_Name=:username", K_Kalender.class)
+                .setParameter("username", Currentuser.getUsername())
                 .getResultList();
         int jahr= dateFocus.getYear();
         int monat=dateFocus.getMonthValue();

@@ -20,6 +20,10 @@ public class N_Notifications {
     @Column(name="N_Vorzeit")
     private LocalDateTime N_Vorzeit;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="K_U_id", referencedColumnName = "U_ID")
+    private U_user user;
+
     public int getN_id() {
         return n_id;
     }
@@ -42,5 +46,13 @@ public class N_Notifications {
 
     public void setN_Vorzeit(LocalDateTime n_Vorzeit) {
         N_Vorzeit = n_Vorzeit;
+    }
+
+    public U_user getUser() {
+        return user;
+    }
+
+    public void setUser(U_user user) {
+        this.user = user;
     }
 }

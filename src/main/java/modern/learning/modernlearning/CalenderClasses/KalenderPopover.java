@@ -2,17 +2,13 @@ package modern.learning.modernlearning.CalenderClasses;
 
 import entities.K_Kalender;
 import entities.N_Notifications;
+import entities.U_user;
 import javafx.animation.ScaleTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -23,18 +19,15 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import modern.learning.modernlearning.Currentuser;
 import modern.learning.modernlearning.KalenderController;
 import org.controlsfx.control.PopOver;
-import org.controlsfx.control.WorldMapView;
 
 import javafx.scene.input.KeyEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-import javax.swing.*;
-import javax.xml.stream.Location;
 
 
 import java.awt.*;
@@ -43,7 +36,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -67,6 +59,7 @@ public class KalenderPopover extends PopOver {
     private Node node;
     private NotificationBox notificationBox=new NotificationBox();
     private KalenderController kalenderController;
+    private U_user user;
     N_Notifications notification = null;
 
     private int mouseX ;
@@ -79,8 +72,8 @@ public class KalenderPopover extends PopOver {
     public KalenderPopover(Node node, LocalDate datum) {
         this.setTitle("Termine am: " + datum);
         this.node=node;
-
-
+        this.user=em.createQuery("SELECT u FROM U_user u WHERE u.U_Name = :username", U_user.class)
+            .setParameter("username", Currentuser.getUsername()).getSingleResult();
         titleField= new TextField();
         beschreibung= new TextArea();
         beschreibung.setWrapText(true);
@@ -156,6 +149,7 @@ public class KalenderPopover extends PopOver {
                                     dateTimePicker.getBishourComboBox().getValue(),
                                     dateTimePicker.getBisminuteComboBox().getValue())
                     );
+                    kalender.setUser(user);
                     try {
                         if(notificationBox.EinAus.isSelected()){
                             notification=notificationBox.GehtDataNotification(kalender);
@@ -164,6 +158,7 @@ public class KalenderPopover extends PopOver {
                     }catch (Exception e){
                         System.out.println("Keine Benachrichtigung ");
                     }
+
                     em.persist(kalender);
                     em.getTransaction().commit();
                     kalenderController.drawCalendar();
@@ -361,7 +356,8 @@ public class KalenderPopover extends PopOver {
 
         List<K_Kalender> filteredList = KalenderListe.stream()
                 .filter(k -> k.getK_vonDatum().toLocalDate().compareTo(datum) <= 0 &&
-                        k.getK_bisDatum().toLocalDate().compareTo(datum) >= 0)
+                        k.getK_bisDatum().toLocalDate().compareTo(datum) >= 0&&
+                        k.getUser()==user)
                 .collect(Collectors.toList());
 
         System.out.println(filteredList.size());

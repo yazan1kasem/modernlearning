@@ -2,9 +2,12 @@ package modern.learning.modernlearning;
 
 
 import entities.E_EigeneArbeitsblaetter;
+import entities.U_user;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -27,6 +30,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 
 import javax.persistence.EntityManager;
@@ -57,19 +61,21 @@ public class EigeneDatein implements Initializable {
     public FlowPane pdfListView;
     @FXML
     private Pane dragDropArea;
-
+    private int userid;
     private ObservableList<File> fileList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadPdfFiles();
     }
-
+    public EigeneDatein() {
+     userid=DatabaseConnection.getConnection().createQuery("SELECT u from U_user u where u.U_Name=:username", U_user.class).setParameter("username", Currentuser.getUsername()).getSingleResult().getU_id();
+    }
     private void loadPdfFiles() {
         String sql = "SELECT E_DateiName FROM E_EigeneArbeitsblaetter WHERE E_U_id = ?";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, 1);
+            pstmt.setInt(1, userid);
             ResultSet rs = pstmt.executeQuery();
 
             String basePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "EigeneDatein";
@@ -85,6 +91,7 @@ public class EigeneDatein implements Initializable {
                     System.out.println("File does not exist: " + file.getAbsolutePath());
                 }
             }
+
         } catch (SQLException e) {
             System.out.println("Database Error: " + e.getMessage());
             e.printStackTrace();
@@ -99,8 +106,8 @@ public class EigeneDatein implements Initializable {
         imageView.setFitHeight(100);
 
         Text text = new Text(file.getName());
-
-        
+        text.setWrappingWidth(100);
+        text.setTextAlignment(TextAlignment.CENTER);
         LocalDateTime dateTime = LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String formattedTimestamp = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
@@ -155,7 +162,7 @@ public class EigeneDatein implements Initializable {
             }
 
             Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
-            saveFileInfoInDatabase(file, 1);
+            saveFileInfoInDatabase(file, userid);
             fileList.add(file);
             refreshView();
         } catch (IOException e) {
@@ -209,6 +216,8 @@ public class EigeneDatein implements Initializable {
         }
         event.setDropCompleted(success);
         event.consume();
+        dragDropArea.visibleProperty().set(true);
+
     }
 
     @FXML
@@ -278,5 +287,15 @@ public class EigeneDatein implements Initializable {
     private void refreshView() {
         pdfListView.getChildren().clear();
         loadPdfFiles();
+    }
+
+    public void handleDragentered(DragEvent dragEvent) {
+        dragDropArea.visibleProperty().set(true);
+
+    }
+
+    public void handleDragexit(DragEvent dragEvent) {
+        dragDropArea.visibleProperty().set(false);
+
     }
 }

@@ -12,10 +12,10 @@
             style="-fx-background-color: #FFA500;">
 
     <StackPane fx:id="stackPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-               AnchorPane.bottomAnchor="0.0" prefHeight="300.0">
-        <Pane fx:id="dragDropArea" onDragOver="#handleDragOver" onDragDropped="#handleDragDropped"
-              style="-fx-border-color: black; -fx-border-style: dashed; -fx-background-color: rgba(255, 255, 255, 0.5);"
-              StackPane.alignment="CENTER">
+               AnchorPane.bottomAnchor="0.0" prefHeight="${mainPane.prefHeight}" onDragEntered="#handleDragentered" onDragExited="#handleDragexit">
+        <Pane fx:id="dragDropArea" onDragOver="#handleDragOver" onDragDropped="#handleDragDropped" visible="false"
+              style="-fx-border-color: black; -fx-border-style: dashed; -fx-background-color: rgba(255, 255, 255, 0.4);"
+              StackPane.alignment="CENTER" onDragExited="#handleDragexit">
         </Pane>
 
         <Button text="+" fx:id="plusButton" onAction="#handleButtonClick"
@@ -26,8 +26,9 @@
                 StackPane.alignment="BOTTOM_CENTER"
                 style="-fx-font-size: 16px; -fx-background-color: #ff6347; -fx-text-fill: white;">
         </Button>
+
     </StackPane>
     <FlowPane fx:id="pdfListView" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"
-              AnchorPane.rightAnchor="10.0" prefHeight="200.0">
+              AnchorPane.rightAnchor="10.0"  hgap="20">
     </FlowPane>
 </AnchorPane>
