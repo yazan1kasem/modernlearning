@@ -17,34 +17,8 @@ public class Starter extends Application {
     public static boolean geschlossen=false;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("eigeneDatein.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        scene.getStylesheets().add("file:src/main/resources/style.css");
-        stage.setTitle("Modern learning");
-        stage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
-        stage.setMinHeight(615);
-        stage.setMinWidth(Toolkit.getDefaultToolkit().getScreenSize().width / 2);
-        stage.setScene(scene);
-        stage.show();
-        stage.setWidth(scene.getWidth());
-        stage.setHeight(scene.getHeight());
-        stage.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println("h: " + newValue);
-            }
-        });
-        stage.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println("w: " + newValue);
-            }
-        });
-        stage.setOnCloseRequest(closeThreads->{
-            geschlossen=true;
-            System.exit(0);
-        });
-        Currentuser.setUsername(System.getProperty("user.name"));
+//        Currentuser.setUsername(System.getProperty("user.name"));
+        Currentuser.setUsername("ahmed");
         EntityManager em = DatabaseConnection.getConnection();
         try {
             // Check if user with the given username already exists
@@ -73,6 +47,34 @@ public class Starter extends Application {
         } catch (Exception e) {
             System.out.println("Fehler beim Abfragen des Benutzers: " + e.getMessage());
         }
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("eigeneDatein.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add("file:src/main/resources/style.css");
+        stage.setTitle("Modern learning");
+        stage.getIcons().add(new Image("file:src/main/Media/SkillBuildersLogo.png"));
+        stage.setMinHeight(615);
+        stage.setMinWidth(Toolkit.getDefaultToolkit().getScreenSize().width / 2);
+        stage.setScene(scene);
+        stage.show();
+        stage.setWidth(scene.getWidth());
+        stage.setHeight(scene.getHeight());
+        stage.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println("h: " + newValue);
+            }
+        });
+        stage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println("w: " + newValue);
+            }
+        });
+        stage.setOnCloseRequest(closeThreads->{
+            geschlossen=true;
+            System.exit(0);
+        });
 
     }
 
