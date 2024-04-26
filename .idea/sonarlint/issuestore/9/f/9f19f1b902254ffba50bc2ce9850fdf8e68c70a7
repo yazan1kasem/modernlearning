@@ -1,10 +1,0 @@
-
-G	java:S106"+Replace this use of System.out by a logger.(ªı±Ú8ÎÒÌ‰Í1
-L	java:S106"+Replace this use of System.out by a logger.(ØóÄøÿÿÿÿ8ĞÒÌ‰Í1
-L	java:S106"+Replace this use of System.out by a logger.(÷‘øÿÿÿÿ8ĞÒÌ‰Í1
-L	java:S106"+Replace this use of System.out by a logger.(ë¾Ì»ùÿÿÿÿ8ĞÒÌ‰Í1
-G	java:S106%"+Replace this use of System.out by a logger.(×•œ²8ÑÒÌ‰Í1
-M
-java:S1874)"0Remove this use of "getMonth"; it is deprecated.(ÿ½ûë8È©Í‰Í1
-G	java:S106+"+Replace this use of System.out by a logger.(×—î8ÒÒÌ‰Í1
-L	java:S1062"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÓÒÌ‰Í1
