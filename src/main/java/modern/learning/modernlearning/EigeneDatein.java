@@ -93,14 +93,14 @@ public class EigeneDatein implements Initializable {
 
     private BorderPane designBorder(File file, String timestamp) {
         BorderPane pane = new BorderPane();
-        Image image = new Image("file:src/main/Media/pdf_icon.png"); // Pfad zum PDF-Icon anpassen
+        Image image = new Image("file:src/main/Media/pdf_icon.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
 
         Text text = new Text(file.getName());
 
-        
+
         LocalDateTime dateTime = LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String formattedTimestamp = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
@@ -109,7 +109,7 @@ public class EigeneDatein implements Initializable {
         vbox.setAlignment(Pos.CENTER);
 
         pane.setCenter(imageView);
-        pane.setBottom(vbox); // Setzen Sie die VBox mit Texten am unteren Rand
+        pane.setBottom(vbox);
         BorderPane.setAlignment(vbox, Pos.CENTER);
         pane.setCursor(Cursor.HAND);
 
