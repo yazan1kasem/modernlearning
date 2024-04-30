@@ -20,11 +20,11 @@
 
         <Button text="+" fx:id="plusButton" onAction="#handleButtonClick"
                 StackPane.alignment="CENTER"
-                style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;">
+                style="-fx-font-size: 24px; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;-fx-cursor: hand">
         </Button>
         <Button text="Datei auswählen und löschen" onAction="#handleFileDeletion"
                 StackPane.alignment="BOTTOM_CENTER"
-                style="-fx-font-size: 16px; -fx-background-color: #ff6347; -fx-text-fill: white;">
+                style="-fx-font-size: 16px; -fx-background-color: #ff6347; -fx-text-fill: white; -fx-cursor: hand">
         </Button>
 
     </StackPane>
