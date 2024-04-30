@@ -92,7 +92,8 @@ public class EigeneDatein implements Initializable {
                 }
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Database Error: " + e.getMessage());
             e.printStackTrace();
         }
@@ -254,6 +255,7 @@ public class EigeneDatein implements Initializable {
                 }
             }
         });
+
     }
 
     private void deleteFileFromDatabase(File file) {
