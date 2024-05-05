@@ -1,6 +1,7 @@
 package modern.learning.modernlearning;
 
 import entities.K_Kalender;
+import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -87,7 +89,10 @@ public class Klasse implements Initializable {
         logo.setFitHeight(50);
         smallkalender();
         kalenderList= DatabaseConnection.getConnection().createQuery("SELECT k FROM K_Kalender k", K_Kalender.class).getResultList();
-
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), classSelectionPanel);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.play();
     }
 
     public void MouseEntered(MouseEvent mouseEvent) {
