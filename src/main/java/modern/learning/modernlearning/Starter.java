@@ -48,7 +48,7 @@ public class Starter extends Application {
             System.out.println("Fehler beim Abfragen des Benutzers: " + e.getMessage());
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("eigeneDatein.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("Klasse.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add("file:src/main/resources/style.css");
         stage.setTitle("Modern learning");
