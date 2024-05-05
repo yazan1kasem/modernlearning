@@ -3,13 +3,17 @@ package modern.learning.modernlearning;
 
 import entities.E_EigeneArbeitsblaetter;
 import entities.U_user;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
@@ -32,6 +36,7 @@ import javafx.scene.text.Text;
 
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -299,5 +304,20 @@ public class EigeneDatein implements Initializable {
     public void handleDragexit(DragEvent dragEvent) {
         dragDropArea.visibleProperty().set(false);
 
+    }
+
+    public void zurück(MouseEvent mouseEvent) {
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource( "Klasse.fxml"));
+
+            Parent root= fxmlLoader.load();
+
+            Node source=(Node) mouseEvent.getSource();
+
+            currentStage.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

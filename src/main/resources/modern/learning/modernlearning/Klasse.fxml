@@ -7,35 +7,49 @@
 <?import javafx.geometry.*?>
 <?import java.awt.geom.QuadCurve2D.Double?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.Box?>
 <AnchorPane fx:id="ClassSelection" prefHeight="640.0" prefWidth="1000.0" style="-fx-background-color: #FFAB2F"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Klasse" >
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modern.learning.modernlearning.Klasse">
     <children>
-        <HBox prefWidth="${ClassSelection.width}" prefHeight="${ClassSelection.height}" >
-            <VBox fx:id="sidebar" style="-fx-background-color: #FFD85B; -fx-spacing: 20px; -fx-padding: 20px;">
-                <Pane fx:id="logobereich" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000; -fx-pref-height: 200px;"></Pane>
+        <HBox fx:id="fenster" prefWidth="${ClassSelection.width}" prefHeight="${ClassSelection.height}">
+            <VBox fx:id="sidebar" prefWidth="${fenster.prefWidth/2.5}" style="-fx-background-color: #FFD85B; -fx-spacing: 20px; -fx-padding: 20px; -fx-pref-width: 400">
+                <FlowPane alignment="CENTER" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000; -fx-pref-height: 100px;">
+                    <ImageView fx:id="logo">
+
+                    </ImageView>
+                    <Text text="Modern Learning" style="-fx-font-size: 20px; -fx-text-fill: #000000;"/>
+                </FlowPane>
                 <VBox spacing="20" VBox.vgrow="ALWAYS">
-                    <Pane fx:id="kalenderbereich" VBox.vgrow="ALWAYS" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000; -fx-padding: 10px;">
-                        <Button fx:id="KalenderButton" onMouseClicked="#Kalender" text="KALENDER" mnemonicParsing="false" style="-fx-cursor: hand; -fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: #ffffff; -fx-text-fill: #FF8C00; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
-                    </Pane>
-                    <Pane fx:id="dokumentebuttonbereich" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000;">
-                        <Button fx:id="DokumentButton" onMouseClicked="#Dokumente" text="DOKUMENTE" mnemonicParsing="false" style="-fx-cursor: hand; -fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: #ffffff; -fx-text-fill: #FF8C00; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
-                    </Pane>
+                    <VBox fx:id="kalenderbereich" alignment="TOP_CENTER" spacing="20" VBox.vgrow="ALWAYS" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000; -fx-padding: 10px;">
+                        <Button fx:id="KalenderButton" onMouseEntered="#MouseEntered" onMouseExited="#MouseExit" onMouseClicked="#Kalender" text="KALENDER" mnemonicParsing="false" style="-fx-cursor: hand; -fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: #ffffff; -fx-text-fill: #FF8C00; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+                        <Pane fx:id="calenderpane"/>
+                    </VBox>
+                    <Button fx:id="DokumentButton" onMouseClicked="#Dokumente" text="DOKUMENTE" onMouseEntered="#MouseEntered" onMouseExited="#MouseExit" mnemonicParsing="false" style="-fx-cursor: hand; -fx-font-size: 20px; -fx-padding: 10 20; -fx-background-color: #ffffff; -fx-text-fill: #FF8C00; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+
                 </VBox>
             </VBox>
-
-            <VBox fx:id="classSelectionPanel" spacing="20" prefWidth="800" prefHeight="550" style=" -fx-background-color: #FFAB2F; -fx-padding: 0 0 0 20px;" >
-                <!-- Title bar with the name "ModernLearning" -->
-
-                <!-- Add buttons for class selection -->
-                <FlowPane fx:id="classSelection" hgap="10.0" prefHeight="400" prefWidth="700" vgap="5.0" alignment="CENTER">
-                    <Button fx:id="1" onMouseClicked="#Fach" text="1. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="2" onMouseClicked="#Fach" text="2. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="3" onMouseClicked="#Fach" text="3. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="4" onMouseClicked="#Fach" text="4. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
-                    <Button fx:id="5" onMouseClicked="#Fach" text="5. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500;-fx-border-radius: 5px;-fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px;-fx-border-insets: -1px"/>
+            <VBox fx:id="classSelectionPanel" spacing="20" alignment="CENTER" style="-fx-padding: 0 40px">
+                <BorderPane prefWidth="40" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000; -fx-pref-height: 100px;">
+                    <center>
+                        <Text text="Klasse auswählen" style="-fx-font-size: 30px; -fx-text-fill: #FF8C00;"/>
+                    </center>
+                </BorderPane>
+                <FlowPane  fx:id="classSelection" prefWidth="${fenster.prefWidth/1.5}" prefHeight="${classSelectionPanel.height/2}" style="-fx-background-radius: 20; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 15, 0, 5,  5); -fx-padding: 20px">
+                    <HBox alignment="TOP_RIGHT" prefWidth="${classSelection.prefWidth}" style="-fx-padding: 0px 0px 20px 0px">
+                        <Button text="eigene Dateien" onMouseClicked="#EigenenDateienFenster" onMouseEntered="#MouseEntered1" onMouseExited="#MouseExit1" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+                    </HBox>
+                    <FlowPane hgap="10.0" vgap="5.0" alignment="CENTER" prefWidth="${classSelection.prefWidth}">
+                        <Button fx:id="1" onMouseEntered="#MouseEntered1" onMouseExited="#MouseExit1" onMouseClicked="#Fach" text="1. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+                        <Button fx:id="2" onMouseEntered="#MouseEntered1" onMouseExited="#MouseExit1" onMouseClicked="#Fach" text="2. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+                        <Button fx:id="3" onMouseEntered="#MouseEntered1" onMouseExited="#MouseExit1" onMouseClicked="#Fach" text="3. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+                        <Button fx:id="4" onMouseEntered="#MouseEntered1" onMouseExited="#MouseExit1" onMouseClicked="#Fach" text="4. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+                        <Button fx:id="5" onMouseEntered="#MouseEntered1" onMouseExited="#MouseExit1" onMouseClicked="#Fach" text="5. Klasse" style="-fx-cursor: hand; -fx-padding: 15px; -fx-font-size: 20px; -fx-background-color: #FFFFFF; -fx-text-fill: #FFA500; -fx-border-radius: 5px; -fx-border-color: black; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-border-insets: -1px"/>
+                    </FlowPane>
                 </FlowPane>
-                <!-- Add buttons for Kalender and Dokumente -->
             </VBox>
         </HBox>
     </children>
 </AnchorPane>
+
