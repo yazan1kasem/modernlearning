@@ -55,6 +55,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -77,18 +78,21 @@ public class EigeneDatein implements Initializable {
      userid=DatabaseConnection.getConnection().createQuery("SELECT u from U_user u where u.U_Name=:username", U_user.class).setParameter("username", Currentuser.getUsername()).getSingleResult().getU_id();
     }
     private void loadPdfFiles() {
-        String sql = "SELECT E_DateiName FROM E_EigeneArbeitsblaetter WHERE E_U_id = ?";
+        String sql = "SELECT E_DateiName, E_Timestamp FROM E_EigeneArbeitsblaetter WHERE E_U_id = ?";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, userid);
             ResultSet rs = pstmt.executeQuery();
 
             String basePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "EigeneDatein";
+            fileList.clear(); // Die Liste aller geladenen Dateien löschen
+            pdfListView.getChildren().clear(); // Die Anzeige leeren, um die neuen Dateien anzuzeigen
+
             while (rs.next()) {
                 String fileName = rs.getString("E_DateiName");
                 File file = new File(basePath, fileName);
                 if (file.exists()) {
-                    String timestamp = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now()); // Zeitstempel generieren
+                    String timestamp = rs.getString("E_Timestamp"); // Zeitstempel als String aus der Datenbank lesen
                     BorderPane pane = designBorder(file, timestamp); // Zeitstempel übergeben
                     pdfListView.getChildren().add(pane);
                     fileList.add(file);
@@ -97,8 +101,7 @@ public class EigeneDatein implements Initializable {
                 }
             }
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Database Error: " + e.getMessage());
             e.printStackTrace();
         }
@@ -152,8 +155,25 @@ public class EigeneDatein implements Initializable {
             showAlert(Alert.AlertType.valueOf("Dateiauswahl"), null, "Keine Datei ausgewählt.");
         }
     }
+    public void SaveFile(File file){
+        if (!file.getName().toLowerCase().endsWith(".pdf")) {
+            showAlert(Alert.AlertType.ERROR, "Fehler", "Es können nur PDF-Dateien gespeichert werden.");
+            return;
+        }
+        try {
+            String projectSrcDirectory = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "EigeneDatein";
+            Path destPath = Paths.get(projectSrcDirectory, file.getName());
 
-    private void saveFile(File file) {
+            if (!Files.exists(destPath.getParent())) {
+                Files.createDirectories(destPath.getParent());
+            }
+
+            Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Fehler", "Fehler beim Speichern der Datei: " + e.getMessage());
+        }
+    }
+    public void saveFile(File file) {
         if (!file.getName().toLowerCase().endsWith(".pdf")) {
             showAlert(Alert.AlertType.ERROR, "Fehler", "Es können nur PDF-Dateien gespeichert werden.");
             return;
@@ -167,9 +187,23 @@ public class EigeneDatein implements Initializable {
                 Files.createDirectories(destPath.getParent());
             }
 
+            // Überprüfen, ob die Datei bereits existiert
+            if (Files.exists(destPath)) {
+                // Dateiname bereits vorhanden, daher Nummer anhängen
+                String baseFileName = file.getName().substring(0, file.getName().lastIndexOf(".pdf"));
+                String fileExtension = ".pdf";
+                int count = 1;
+                String numberedFileName;
+                do {
+                    numberedFileName = baseFileName + "_" + count + fileExtension;
+                    destPath = Paths.get(projectSrcDirectory, numberedFileName);
+                    count++;
+                } while (Files.exists(destPath));
+            }
+
             Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
-            saveFileInfoInDatabase(file, userid);
-            fileList.add(file);
+            saveFileInfoInDatabase(destPath.toFile(), userid); // Verwenden Sie den neuen Dateinamen
+            fileList.add(destPath.toFile()); // Verwenden Sie den neuen Dateinamen
             refreshView();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Fehler", "Fehler beim Speichern der Datei: " + e.getMessage());
@@ -246,20 +280,27 @@ public class EigeneDatein implements Initializable {
             File selectedFile = fileList.stream().filter(file -> file.getName().equals(fileName)).findFirst().orElse(null);
 
             if (selectedFile != null) {
-                boolean deleteConfirmed = showDeleteConfirmation(selectedFile.getName());
-                if (deleteConfirmed) {
-                    boolean deleted = selectedFile.delete();
-                    if (deleted) {
-                        fileList.remove(selectedFile);
-                        deleteFileFromDatabase(selectedFile);
-                        showAlert(Alert.AlertType.INFORMATION, "Erfolg", "Datei erfolgreich gelöscht.");
-                        refreshView();
-                    } else {
-                        showAlert(Alert.AlertType.ERROR, "Fehler", "Die Datei konnte nicht gelöscht werden.");
+                // Überprüfen, ob die ausgewählte Datei im EigeneDatein-Ordner liegt
+                String filePath = selectedFile.getAbsolutePath();
+                if (filePath.contains("EigeneDatein")) {
+                    boolean deleteConfirmed = showDeleteConfirmation(selectedFile.getName());
+                    if (deleteConfirmed) {
+                        boolean deleted = selectedFile.delete();
+                        if (deleted) {
+                            fileList.remove(selectedFile);
+                            deleteFileFromDatabase(selectedFile);
+                            showAlert(Alert.AlertType.INFORMATION, "Erfolg", "Datei erfolgreich gelöscht.");
+                            refreshView();
+                        } else {
+                            showAlert(Alert.AlertType.ERROR, "Fehler", "Die Datei konnte nicht gelöscht werden.");
+                        }
                     }
+                } else {
+                    showAlert(Alert.AlertType.WARNING, "Warnung", "Sie können nur Dateien im EigeneDatein-Ordner löschen.");
                 }
             }
         });
+
 
     }
 

@@ -17,8 +17,7 @@ public class Starter extends Application {
     public static boolean geschlossen=false;
     @Override
     public void start(Stage stage) throws IOException {
-//        Currentuser.setUsername(System.getProperty("user.name"));
-        Currentuser.setUsername("ahmed");
+        Currentuser.setUsername(System.getProperty("user.name"));
         EntityManager em = DatabaseConnection.getConnection();
         try {
             // Check if user with the given username already exists
