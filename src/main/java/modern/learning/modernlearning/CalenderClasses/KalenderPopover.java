@@ -69,6 +69,7 @@ public class KalenderPopover extends PopOver {
     /******************************************************
      * Constructor und Initializer
      ******************************************************/
+    public KalenderPopover(){}
     public KalenderPopover(Node node, LocalDate datum) {
         this.setTitle("Termine am: " + datum);
         this.node=node;
