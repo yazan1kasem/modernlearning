@@ -46,11 +46,14 @@ Die Anwendung bietet grundlegende Funktionen einer digitalen Lernplattform. Lern
 | Datenbank          | SQLite (`Modernlearning.sqlite`) |
 | GUI                | Swing / JavaFX (je nach Ausführung) |
 
----
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/7fce6fcb-e065-4864-af5b-f7c3f182b1eb" alt="Systemarchitektur"/>
 </p>
 *Abbildung: Systemarchitektur*
+
+---
+
 ## Projektstruktur
 
 ```
