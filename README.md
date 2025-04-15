@@ -1,6 +1,8 @@
 # ModernLearning – Interaktive Lernplattform (Java & SQLite)
 
-![SkillBuildersLogo](https://github.com/user-attachments/assets/50e6c142-cfe6-4428-b151-03ec1f9228a4)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/50e6c142-cfe6-4428-b151-03ec1f9228a4" alt="SkillBuildersLogo" width="250"/>
+</p>
 
 
 ModernLearning ist eine Java-basierte Desktop-Anwendung zur Unterstützung von Lernenden durch interaktive Wissensvermittlung. Die Anwendung wurde mit dem Ziel entwickelt, personalisiertes und strukturiertes Lernen digital zu ermöglichen – insbesondere in schulischen oder akademischen Kontexten.
