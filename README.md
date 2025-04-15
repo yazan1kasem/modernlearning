@@ -48,7 +48,7 @@ Die Anwendung bietet grundlegende Funktionen einer digitalen Lernplattform. Lern
 
 ---
 <p align="center">
-  <img src="[https://github.com/user-attachments/assets/50e6c142-cfe6-4428-b151-03ec1f9228a4](https://github.com/user-attachments/assets/80a47002-ef90-49ee-b0eb-41abea027688)" alt="Systemarchitektur"/>
+  <img src="https://github.com/user-attachments/assets/7fce6fcb-e065-4864-af5b-f7c3f182b1eb" alt="Systemarchitektur"/>
 </p>
 *Abbildung: Systemarchitektur*
 ## Projektstruktur
