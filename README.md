@@ -21,7 +21,7 @@ Die Anwendung bietet grundlegende Funktionen einer digitalen Lernplattform. Lern
 
 [Video-Demo ansehen](./Projekt-ansicht.mp4)
 
-*Abbildung: Benutzeroberfläche zur Auswahl der Schulstufe (1. bis 5. Klasse), Kalender und Zugriff auf Dokumente. In der rechten oberen Ecke befindet sich die Option zum Hochladen eigener Dateien.*
+*Video: kurze Projektdemo*
 
 ---
 
